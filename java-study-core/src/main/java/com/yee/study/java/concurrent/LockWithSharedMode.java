@@ -31,15 +31,16 @@ public class LockWithSharedMode implements Lock
 
         public int tryAcquireShared(int reduceCount)
         {
-            int current = getState();
-            int newCount = current - reduceCount;
-
-            if (newCount < 0 || compareAndSetState(current, newCount))
+            for(;;)
             {
-                return newCount;
-            }
+                int current = getState();
+                int newCount = current - reduceCount;
 
-            return -1;
+                if (newCount < 0 || compareAndSetState(current, newCount))
+                {
+                    return newCount;
+                }
+            }
         }
 
         public boolean tryReleaseShared(int returnCount)
