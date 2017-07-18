@@ -11,15 +11,15 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.Assert.*;
+import org.junit.Assert;
 
 /**
  * 缺省RedisTemplate实现类测试类。
  *
- * @author sea.bao
+ * @author Roger.Yi
  */
 public class DefaultRedisTemplateTest
 {
-
     protected RedisConnectionFactory initRedisConnectionFactory() throws Exception
     {
         // single
@@ -34,11 +34,17 @@ public class DefaultRedisTemplateTest
     {
         final DefaultRedisTemplate template = new DefaultRedisTemplate();
         template.setConnectionFactory(initRedisConnectionFactory());
-        template.setDbIndex(1); // select-db
-        template.flushDb();
+        template.setDbIndex(1); // 选择数据库
+        template.flushDb(); // 清空数据库
 
         String key = "ti-lnk:session";
+
         // 测试原子值设置
+        String setValueExResult = template.setValue(key, "xxx", 5); // 5秒过期
+        SleepUtil.sleep(6000);
+        String getValueResult = template.getValue(key);
+        assertNull(getValueResult);
+
         boolean setKeyResult = template.setNxValue(key, "xxx", 30);
         assertTrue(setKeyResult);
         setKeyResult = template.setNxValue(key, "xxx", 30);

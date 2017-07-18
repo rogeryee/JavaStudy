@@ -15,6 +15,9 @@
     <artifactId>java-study-util</artifactId>
     <name>Utilities Module</name>
 
-    <dependencies/>
+    <dependencies>
+
+    </dependencies>
+
 
 </project>
