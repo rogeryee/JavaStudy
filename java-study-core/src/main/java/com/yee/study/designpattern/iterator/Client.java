@@ -14,7 +14,7 @@ public class Client
         list.add("No.4");
         list.add("No.5");
 
-        for(Iterator iterator = list.iterator();iterator.hasNext();)
+        for(Iterator<String> iterator = list.iterator();iterator.hasNext();)
         {
             System.out.println(iterator.next());
         }

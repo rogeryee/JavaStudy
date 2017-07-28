@@ -29,5 +29,5 @@ public interface List<E>
      * 获取迭代器
      * @return
      */
-    Iterator iterator();
+    Iterator<E> iterator();
 }

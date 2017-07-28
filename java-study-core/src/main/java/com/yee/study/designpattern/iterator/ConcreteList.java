@@ -35,8 +35,8 @@ public class ConcreteList<E> implements List<E>
     }
 
     @Override
-    public Iterator iterator()
+    public Iterator<E> iterator()
     {
-        return new ListIterator(this);
+        return new ListIterator<>(this);
     }
 }

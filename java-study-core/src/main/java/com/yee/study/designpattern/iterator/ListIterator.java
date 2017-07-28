@@ -5,13 +5,13 @@ package com.yee.study.designpattern.iterator;
  *
  * @author Roger.Yi
  */
-public class ListIterator implements Iterator
+public class ListIterator<E> implements Iterator<E>
 {
-    private List list;
+    private List<E> list;
 
     private int index;
 
-    public ListIterator(List list)
+    public ListIterator(List<E> list)
     {
         this.list = list;
     }
@@ -26,10 +26,10 @@ public class ListIterator implements Iterator
     }
 
     @Override
-    public Object next()
+    public E next()
     {
-        Object obj = list.get(index);
+        E e = list.get(index);
         index++;
-        return obj;
+        return e;
     }
 }
