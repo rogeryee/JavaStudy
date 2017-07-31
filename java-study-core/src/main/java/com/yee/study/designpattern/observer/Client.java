@@ -8,7 +8,7 @@ public class Client
     public static void main(String[] args)
     {
         Subscriber sub1 = new SubscriberA();
-        Subscriber sub2 = new SubscriberA();
+        Subscriber sub2 = new SubscriberB();
 
         Publisher publisher = new MessagePublisher();
         publisher.subscribe(sub1);
