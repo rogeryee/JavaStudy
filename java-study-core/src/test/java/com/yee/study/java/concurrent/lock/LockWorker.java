@@ -1,4 +1,4 @@
-package com.yee.study.java.concurrent;
+package com.yee.study.java.concurrent.lock;
 
 import java.util.concurrent.locks.Lock;
 

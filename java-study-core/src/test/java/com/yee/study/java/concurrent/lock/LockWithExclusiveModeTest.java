@@ -1,21 +1,21 @@
-package com.yee.study.java.concurrent;
+package com.yee.study.java.concurrent.lock;
 
 import org.junit.Test;
 
 import java.util.concurrent.locks.Lock;
 
 /**
- * 针对LockWithSharedMode的测试类
+ * 针对LockWithExclusiveMode的测试类
  *
  * @author: RogerYee
  */
-public class LockWithSharedModeTest
+public class LockWithExclusiveModeTest
 {
     @Test
     public void test()
     {
-        // 产生一个同时支持3个线程访问的共享锁
-        Lock lock = new LockWithSharedMode(3);
+        // 产生一个排他锁
+        Lock lock = new LockWithExclusiveMode();
         long start = System.currentTimeMillis();
 
         // 创建10个线程,观察它们的执行情况
