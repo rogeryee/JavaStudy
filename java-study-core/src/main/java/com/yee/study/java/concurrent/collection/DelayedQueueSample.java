@@ -120,12 +120,7 @@ class CachedItem<T> implements Delayed
     {
         this.setT(t);
         this.duration = duration;
-
-        long now = System.nanoTime();
-        this.expiredTime = TimeUnit.NANOSECONDS.convert(duration, TimeUnit.MILLISECONDS) + now;
-
-        System.out.println("T start = " + now + ", expired = " + this.expiredTime + ", duration = " + (this
-                .expiredTime - now));
+        this.expiredTime = TimeUnit.NANOSECONDS.convert(duration, TimeUnit.MILLISECONDS) + System.nanoTime();
     }
 
     @Override
