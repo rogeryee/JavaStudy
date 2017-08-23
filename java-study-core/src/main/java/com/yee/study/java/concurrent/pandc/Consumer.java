@@ -21,10 +21,9 @@ public class Consumer implements Runnable
     {
         for (;;)
         {
-            this.storage.consume(this.name);
-
             try
             {
+                this.storage.consume(this.name);
                 Thread.sleep(1000L);
             }
             catch (InterruptedException e)

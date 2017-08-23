@@ -12,11 +12,11 @@ public interface Storage
      * @param producer
      * @param product
      */
-    void produce(String producer, Product product);
+    void produce(String producer, Product product) throws InterruptedException;
 
     /**
      * 消费产品
      * @param consumer
      */
-    void consume(String consumer);
+    void consume(String consumer) throws InterruptedException;
 }

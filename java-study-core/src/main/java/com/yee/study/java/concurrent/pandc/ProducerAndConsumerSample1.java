@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * 生产者/消费者模式 示例1
- *
+ * <p>
  * 本例使用了 wait()和notify()方法实现了多个线程之间的同步
  * wait()方法：当缓冲区已满/空时，生产者/消费者线程停止自己的执行，放弃锁，使自己处于等等状态，让其他线程执行。
  * notify()方法：当生产者/消费者向缓冲区放入/取出一个产品时，向其他等待的线程发出可执行的通知，同时放弃锁，使自己处于等待状态。
@@ -60,21 +60,15 @@ class StorageWithWaitAndNotify implements Storage
         this.products = new LinkedList<>();
     }
 
-    public void produce(String producer, Product product)
+    @Override
+    public void produce(String producer, Product product) throws InterruptedException
     {
         synchronized (this.products)
         {
             while (this.products.size() == capacity)
             {
-                try
-                {
-                    logger.info("{} produce failed due to reach the capacity, and current storage is [{}]", producer, this.products.size());
-                    this.products.wait();
-                }
-                catch (InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
+                logger.info("{} produce failed due to reach the capacity, and current storage is [{}]", producer, this.products.size());
+                this.products.wait();
             }
 
             this.products.add(product);
@@ -83,21 +77,15 @@ class StorageWithWaitAndNotify implements Storage
         }
     }
 
-    public void consume(String consumer)
+    @Override
+    public void consume(String consumer) throws InterruptedException
     {
         synchronized (this.products)
         {
             while (this.products.size() == 0)
             {
-                try
-                {
-                    logger.info("{} consume failed, and current storage is [{}]", consumer, this.products.size());
-                    this.products.wait();
-                }
-                catch (InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
+                logger.info("{} consume failed, and current storage is [{}]", consumer, this.products.size());
+                this.products.wait();
             }
 
             this.products.remove(this.products.size() - 1);

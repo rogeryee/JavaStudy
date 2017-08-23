@@ -21,10 +21,9 @@ public class Producer implements Runnable
     {
         for (;;)
         {
-            this.storage.produce(this.name, new Product());
-
             try
             {
+                this.storage.produce(this.name, new Product());
                 Thread.sleep(1000L);
             }
             catch (InterruptedException e)

@@ -71,21 +71,14 @@ class StorageWithLock implements Storage
     }
 
     @Override
-    public void consume(String consumer)
+    public void consume(String consumer) throws InterruptedException
     {
         lock.lock();
 
         while (this.products.size() == 0)
         {
-            try
-            {
-                logger.info("{} consume failed, and current storage is [{}]", consumer, this.products.size());
-                empty.await();
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
+            logger.info("{} consume failed, and current storage is [{}]", consumer, this.products.size());
+            empty.await();
         }
 
         this.products.remove(this.products.size() - 1);
@@ -98,21 +91,14 @@ class StorageWithLock implements Storage
     }
 
     @Override
-    public void produce(String producer, Product product)
+    public void produce(String producer, Product product) throws InterruptedException
     {
         lock.lock();
 
         while (this.products.size() == capacity)
         {
-            try
-            {
-                logger.info("{} produce failed due to reach the capacity, and current storage is [{}]", producer, this.products.size());
-                full.await();
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
+            logger.info("{} produce failed due to reach the capacity, and current storage is [{}]", producer, this.products.size());
+            full.await();
         }
 
         this.products.add(product);
