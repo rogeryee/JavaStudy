@@ -9,6 +9,8 @@ import java.util.concurrent.locks.Lock;
  * 基于AbstractQueuedSynchronizer的共享锁的实现,
  * 该共享锁根据构造器传入的count表示在同一时刻，只能有数量为count个线程能够并行访问，超过限制的其他线程进入阻塞状态。
  *
+ * 测试类 {@link com.yee.study.java.concurrent.lock.LockWithSharedModeTest}
+ *
  * @author RogerYee
  */
 public class LockWithSharedMode implements Lock

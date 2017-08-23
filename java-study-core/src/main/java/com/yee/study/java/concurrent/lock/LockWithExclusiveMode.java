@@ -8,6 +8,8 @@ import java.util.concurrent.locks.Lock;
 /**
  * 基于AbstractQueuedSynchronizer的排他锁的实现
  *
+ * 测试类 {@link com.yee.study.java.concurrent.lock.LockWithExclusiveModeTest}
+ *
  * @author RogerYee
  */
 public class LockWithExclusiveMode implements Lock
