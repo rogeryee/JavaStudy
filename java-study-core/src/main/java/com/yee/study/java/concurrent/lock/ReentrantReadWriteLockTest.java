@@ -106,8 +106,6 @@ class DataWithLock
         rwl.readLock().lock();// 获取锁
         try
         {
-
-            System.out.println(Thread.currentThread().getName() + " is ready to read data");
             try
             {
                 String threadName = Thread.currentThread().getName();
