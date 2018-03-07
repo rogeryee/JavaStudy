@@ -3,6 +3,7 @@ package com.yee.study;
 import com.yee.study.util.MapUtil;
 import com.yee.study.util.StringUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -55,6 +56,7 @@ public class Test
 
     public static void main(String[] args)
     {
+        ArrayList a;
         String content = "Hi ${name}, welcome to ${city}. Hey ${name}!";
         Map<String, String> params = new HashMap<String, String>();
         params.put("name", "Roger");

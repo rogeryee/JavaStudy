@@ -4,12 +4,10 @@ import org.junit.Test;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.cert.X509Certificate;
-import java.util.List;
 
 import static com.yee.study.java.security.KeystoreUtil.*;
 
@@ -26,8 +24,7 @@ public class KeystoreTest
     private static final String CERT_TYPE = "X.509";
     
     private static final String PLAIN_TEXT = "MANUTD is the most greatest club in the world.";
-
-
+    
     /**
      * 假设现在有这样一个场景 。A机器上的数据，需要加密导出，然后将导出文件放到B机器上导入。
      * 在这个场景中，A相当于服务器，B相当于客户端
