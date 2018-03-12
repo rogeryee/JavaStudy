@@ -16,11 +16,11 @@ import static com.yee.study.java.security.KeystoreUtil.*;
  */
 public class KeystoreTest
 {
-    private static final String KEYSTORE_PATH = "classpath:security/keystore/myKeystore1.keystore";
-    private static final String CERT_PATH = "classpath:security/keystore/myCert1.cer";
+    private static final String KEYSTORE_PATH = "classpath:security/keystore/myKeystore.jks";
+    private static final String CERT_PATH = "classpath:security/keystore/myCer.cer";
 
     private static final String KEYSTORE_PWD = "123456";
-    private static final String ALIAS = "myCert1";
+    private static final String ALIAS = "myCertificate";
     private static final String CERT_TYPE = "X.509";
     
     private static final String PLAIN_TEXT = "MANUTD is the most greatest club in the world.";
