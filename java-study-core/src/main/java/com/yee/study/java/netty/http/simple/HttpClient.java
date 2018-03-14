@@ -25,8 +25,9 @@ public class HttpClient
     public static void main(String[] args) throws Exception
     {
         HttpClient client = new HttpClient();
-//        client.submit(buildPostRequest());
-        client.submit(buildGetRequest());
+        client.submit(buildPostRequest());
+//        client.submit(buildGetRequest());
+//        client.submit(buildChunkedRequest());
     }
 
     /**
@@ -39,10 +40,33 @@ public class HttpClient
         URI uri = new URI("http://127.0.0.1:8089/getform/");
         String msg = "Are you ok?";
         DefaultFullHttpRequest request = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.POST, uri.toASCIIString(), Unpooled
-                .wrappedBuffer(msg.getBytes("UTF-8")));
+                .wrappedBuffer(msg.toString().getBytes("UTF-8")));
         request.headers().set(HttpHeaderNames.HOST, DEFAULT_HOST);
         request.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderNames.CONNECTION);
         request.headers().set(HttpHeaderNames.CONTENT_LENGTH, request.content().readableBytes());
+        return request;
+    }
+
+    /**
+     * 构建HTTP.POST请求
+     * @return
+     * @throws Exception
+     */
+    private static HttpRequest buildChunkedRequest() throws Exception
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("25\r\n");
+        sb.append("This is the data in the first chunk\r\n"); // 37 bytes
+        sb.append("\r\n1A\r\n");
+        sb.append("and this is the second one"); // 26 bytes
+        sb.append("\r\n0\r\n\r\n");
+        
+        URI uri = new URI("http://127.0.0.1:8089/getform/");
+        DefaultFullHttpRequest request = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.POST, uri.toASCIIString(), Unpooled
+                .wrappedBuffer(sb.toString().getBytes("UTF-8")));
+        request.headers().set(HttpHeaderNames.HOST, DEFAULT_HOST);
+        request.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderNames.CONNECTION);
+        request.headers().set(HttpHeaderNames.TRANSFER_ENCODING, HttpHeaderValues.CHUNKED);
         return request;
     }
 

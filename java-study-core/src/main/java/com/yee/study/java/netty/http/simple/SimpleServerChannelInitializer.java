@@ -4,6 +4,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.http.HttpRequestDecoder;
 import io.netty.handler.codec.http.HttpResponseEncoder;
+import io.netty.handler.stream.ChunkedWriteHandler;
 
 /**
  * 通道初始化类
@@ -21,5 +22,6 @@ public class SimpleServerChannelInitializer extends ChannelInitializer<SocketCha
         // server端发送的是httpResponse，所以要使用HttpResponseEncoder进行编码
         channel.pipeline().addLast(new HttpResponseEncoder());
         channel.pipeline().addLast(new SimpleServerHandler());
+//        channel.pipeline().addLast(new ChunkChannelHandler());
     }
 }
