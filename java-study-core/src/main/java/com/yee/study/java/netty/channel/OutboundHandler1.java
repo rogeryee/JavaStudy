@@ -20,12 +20,16 @@ public class OutboundHandler1 extends ChannelOutboundHandlerAdapter
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception
     {
         logger.info("OutboundHandler1.write");
-//        ByteBuf buffer = (ByteBuf)msg;
-//        buffer.writeBytes(" [Write by Outbound1]".getBytes());
+        ByteBuf buffer = (ByteBuf) msg;
+        buffer.writeBytes(" [Write by Outbound1]".getBytes());
+        ctx.writeAndFlush(buffer);
+    }
 
-        String response = "Msg from Server : I am Ok.";
-        ByteBuf buffer = ChannelUtil.writeContent(response);
-        ctx.write(buffer);
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception
+    {
+        logger.info("OutboundHandler1.exception");
+        cause.printStackTrace();
         ctx.flush();
     }
 }
