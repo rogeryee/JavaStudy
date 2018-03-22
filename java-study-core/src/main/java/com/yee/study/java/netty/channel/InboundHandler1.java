@@ -1,5 +1,6 @@
 package com.yee.study.java.netty.channel;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
@@ -18,6 +19,8 @@ public class InboundHandler1 extends ChannelInboundHandlerAdapter
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception
     {
         logger.info("InboundHandler1.channelRead: ctx :" + ctx);
+        ByteBuf buffer = (ByteBuf)msg;
+        buffer.writeBytes(" [Read by Inbound1]".getBytes());
         ctx.fireChannelRead(msg); // 通知执行下一个InboundHandler
     }
 

@@ -1,5 +1,6 @@
 package com.yee.study.java.netty.channel;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelOutboundHandlerAdapter;
 import io.netty.channel.ChannelPromise;
@@ -19,8 +20,12 @@ public class OutboundHandler1 extends ChannelOutboundHandlerAdapter
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception
     {
         logger.info("OutboundHandler1.write");
-        String response = "Msg from Server : I am ok!";
-        ctx.write(ChannelUtil.writeContent(response));
+//        ByteBuf buffer = (ByteBuf)msg;
+//        buffer.writeBytes(" [Write by Outbound1]".getBytes());
+
+        String response = "Msg from Server : I am Ok.";
+        ByteBuf buffer = ChannelUtil.writeContent(response);
+        ctx.write(buffer);
         ctx.flush();
     }
 }

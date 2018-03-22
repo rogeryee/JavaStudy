@@ -20,7 +20,7 @@ public class InboundHandler2 extends ChannelInboundHandlerAdapter
     {
         logger.info("InboundHandler2.channelRead: ctx :" + ctx);
         String content = ChannelUtil.readContent((ByteBuf) msg);
-        System.out.println(content);
+        System.out.println(content + " [Read by Inbound2]");
         ctx.write(msg);
     }
 
