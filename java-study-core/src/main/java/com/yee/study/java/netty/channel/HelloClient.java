@@ -10,6 +10,9 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 /**
+ * Netty客户端
+ * 本例展示了如何使用多个OutboundChannelHandler、InboundChannelHandler处理消息
+ *
  * @author Roger.Yi
  */
 public class HelloClient
@@ -32,8 +35,7 @@ public class HelloClient
                     ch.pipeline().addLast(new HelloClientIntHandler());
                 }
             });
-
-            // Start the client.
+            
             ChannelFuture f = b.connect(host, port).sync();
             f.channel().closeFuture().sync();
         }
@@ -46,6 +48,6 @@ public class HelloClient
     public static void main(String[] args) throws Exception
     {
         HelloClient client = new HelloClient();
-        client.connect("127.0.0.1", 8000);
+        client.connect("127.0.0.1", 8089);
     }
 }

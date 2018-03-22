@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * 服务端Inbound处理器
+ * 
  * @author Roger.Yi
  */
 public class InboundHandler1 extends ChannelInboundHandlerAdapter
@@ -16,8 +18,7 @@ public class InboundHandler1 extends ChannelInboundHandlerAdapter
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception
     {
         logger.info("InboundHandler1.channelRead: ctx :" + ctx);
-        // 通知执行下一个InboundHandler
-        ctx.fireChannelRead(msg);
+        ctx.fireChannelRead(msg); // 通知执行下一个InboundHandler
     }
 
     @Override

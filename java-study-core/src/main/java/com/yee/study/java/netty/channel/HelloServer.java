@@ -10,6 +10,11 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 /**
+ * Netty服务端
+ * 本例展示了如何使用多个OutboundChannelHandler、InboundChannelHandler处理消息
+ * <p>
+ * 本例中一共有2个Outbound处理器，2个Inbound处理器，通过示例可以了解处理器处理的顺序
+ * 
  * @author Roger.Yi
  */
 public class HelloServer
@@ -31,6 +36,7 @@ public class HelloServer
                             // 注册两个OutboundHandler，执行顺序为注册顺序的逆序，所以应该是OutboundHandler2 OutboundHandler1
                             ch.pipeline().addLast(new OutboundHandler1());
                             ch.pipeline().addLast(new OutboundHandler2());
+
                             // 注册两个InboundHandler，执行顺序为注册顺序，所以应该是InboundHandler1 InboundHandler2
                             ch.pipeline().addLast(new InboundHandler1());
                             ch.pipeline().addLast(new InboundHandler2());
@@ -53,6 +59,6 @@ public class HelloServer
     public static void main(String[] args) throws Exception
     {
         HelloServer server = new HelloServer();
-        server.start(8000);
+        server.start(8089);
     }
 }
