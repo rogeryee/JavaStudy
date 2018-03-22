@@ -66,7 +66,7 @@ public class Server
          * 
          * 与Client{@link Client#startClient4DelimiterCodec()} ()} 配合使用
          */
-        startServerWithDelimiterCodec();
+//        startServerWithDelimiterCodec();
 
         /**
          * 采用定长的编码器
@@ -90,7 +90,7 @@ public class Server
          *
          * 与Client{@link Client#startClient4LengthFieldCodec()} 配合使用
          */
-//        startServerWithLengthFieldCodec();
+        startServerWithLengthFieldCodec();
     }
 
     public static void startServerWithDelimiterCodec() throws Exception
@@ -107,10 +107,10 @@ public class Server
     public static void startServerWithLengthFieldCodec() throws Exception
     {
         int maxFrameLength = 1024 * 1024 * 100;
-        int lengthFieldOffset = 2;
-        int lengthFieldLength = 3;
+        int lengthFieldOffset = 0;
+        int lengthFieldLength = 2;
         int lengthAdjustment = 0;
-        int initialBytesToStrip = 0;
+        int initialBytesToStrip = 2;
         new Server(ChannelInitializerFactory.newLengthFieldDecoderInitializer(maxFrameLength, lengthFieldOffset, lengthFieldLength, lengthAdjustment, initialBytesToStrip)).start();
     }
 }

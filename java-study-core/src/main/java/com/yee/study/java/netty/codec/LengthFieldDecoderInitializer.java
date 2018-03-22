@@ -145,7 +145,7 @@ public class LengthFieldDecoderInitializer extends ChannelInitializer<SocketChan
     {
         channel.pipeline()
                 .addLast(new LengthFieldBasedFrameDecoder(maxFrameLength, lengthFieldOffset, lengthFieldLength, lengthAdjustment, initialBytesToStrip));
-        channel.pipeline().addLast(new StringDecoder());
+//        channel.pipeline().addLast(new StringDecoder());
         channel.pipeline().addLast(new SimpleServerHandler());
     }
 }
