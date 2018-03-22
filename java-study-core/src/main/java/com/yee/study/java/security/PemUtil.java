@@ -1,6 +1,7 @@
 package com.yee.study.java.security;
 
 import com.yee.study.util.IOUtil;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Decoder;
@@ -19,15 +20,13 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.List;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-
 /**
  * @author Roger.Yi
  */
 public class PemUtil
 {
     private static Logger logger = LoggerFactory.getLogger(PemUtil.class);
-    
+
     /**
      * 字节数据转字符串专用集合
      */
@@ -46,7 +45,7 @@ public class PemUtil
             InputStream inputStream = new FileInputStream(file);
             List<String> content = IOUtil.readLines(inputStream);
             StringBuffer sb = new StringBuffer("");
-            for(String line : content)
+            for (String line : content)
             {
                 if (line.charAt(0) == '-')
                 {
@@ -58,7 +57,7 @@ public class PemUtil
                     sb.append('\r');
                 }
             }
-            
+
             return getPublicKey(sb.toString());
         }
         catch (IOException e)
@@ -106,7 +105,7 @@ public class PemUtil
             InputStream inputStream = new FileInputStream(file);
             List<String> content = IOUtil.readLines(inputStream);
             StringBuffer sb = new StringBuffer("");
-            for(String line : content)
+            for (String line : content)
             {
                 if (line.charAt(0) == '-')
                 {
@@ -148,17 +147,17 @@ public class PemUtil
     /**
      * 加密过程
      *
-     * @param publicKey     公钥
+     * @param key           密钥
      * @param plainTextData 明文数据
      * @return
      * @throws Exception 加密过程中的异常信息
      */
-    public static byte[] encrypt(PublicKey publicKey, byte[] plainTextData) throws Exception
+    public static byte[] encrypt(Key key, byte[] plainTextData) throws Exception
     {
         try
         {
-            Cipher cipher = Cipher.getInstance(publicKey.getAlgorithm(), new BouncyCastleProvider());
-            cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+            Cipher cipher = Cipher.getInstance(key.getAlgorithm(), new BouncyCastleProvider());
+            cipher.init(Cipher.ENCRYPT_MODE, key);
             byte[] output = cipher.doFinal(plainTextData);
             return output;
         }
@@ -171,17 +170,17 @@ public class PemUtil
     /**
      * 解密过程
      *
-     * @param privateKey 私钥
+     * @param key        密钥
      * @param cipherData 密文数据
      * @return 明文
      * @throws Exception 解密过程中的异常信息
      */
-    public static byte[] decrypt(PrivateKey privateKey, byte[] cipherData) throws Exception
+    public static byte[] decrypt(Key key, byte[] cipherData) throws Exception
     {
         try
         {
-            Cipher cipher = Cipher.getInstance(privateKey.getAlgorithm(), new BouncyCastleProvider());
-            cipher.init(Cipher.DECRYPT_MODE, privateKey);
+            Cipher cipher = Cipher.getInstance(key.getAlgorithm(), new BouncyCastleProvider());
+            cipher.init(Cipher.DECRYPT_MODE, key);
             byte[] output = cipher.doFinal(cipherData);
             return output;
         }
@@ -190,7 +189,6 @@ public class PemUtil
             throw new Exception("无此解密算法");
         }
     }
-
 
     /**
      * 字节数据转十六进制字符串
