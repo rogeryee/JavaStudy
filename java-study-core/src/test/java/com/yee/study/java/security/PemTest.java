@@ -76,16 +76,8 @@ public class PemTest
         byte[] cipherTextArray = Base64.decodeBase64(cipherTextBase64);
         System.out.println("After encrypt, binary data length = " + cipherTextArray.length);
 
-        //解密，按照128位进行分片解密
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < cipherTextArray.length; i += 128)
-        {
-            byte[] temp = ArrayUtils.subarray(cipherTextArray, i, i + 128);
-            byte[] cipher = PemUtil.decrypt(publicKey, temp);
-            sb.append(new String(cipher));
-        }
-
-        String decryptText = sb.toString();
+        //解密
+        String decryptText = new String(PemUtil.decrypt(publicKey, cipherTextArray));
         System.out.println("After decrypt text = [" + decryptText + "], length = " + decryptText.length());
     }
 }
