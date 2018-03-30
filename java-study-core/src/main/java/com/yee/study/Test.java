@@ -1,11 +1,10 @@
 package com.yee.study;
 
+import com.yee.study.util.DateUtil;
 import com.yee.study.util.MapUtil;
 import com.yee.study.util.StringUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,6 +55,9 @@ public class Test
 
     public static void main(String[] args)
     {
+        Date date = DateUtil.rollDate(new Date(), Calendar.DATE, 180);
+        System.out.println("date = " + date);
+
         ArrayList a;
         String content = "Hi ${name}, welcome to ${city}. Hey ${name}!";
         Map<String, String> params = new HashMap<String, String>();
