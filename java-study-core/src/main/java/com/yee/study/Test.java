@@ -3,6 +3,7 @@ package com.yee.study;
 import com.yee.study.util.DateUtil;
 import com.yee.study.util.MapUtil;
 import com.yee.study.util.StringUtil;
+import org.bouncycastle.util.encoders.Hex;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -55,6 +56,16 @@ public class Test
 
     public static void main(String[] args)
     {
+        String s1 = (String)null;
+        Integer s2 = (Integer)null;
+
+        String aa = "Hello World";
+        byte[] bytes = aa.getBytes();
+        
+        System.out.println("[" + byteToHexString(bytes) + "]");
+        System.out.println("[" + org.apache.commons.codec.binary.Hex.encodeHexString(bytes) + "]");
+        System.out.println("[" + new String(Hex.decode(org.apache.commons.codec.binary.Hex.encodeHexString(bytes))) + "]");
+
         Date date = DateUtil.rollDate(new Date(), Calendar.DATE, 180);
         System.out.println("date = " + date);
 
@@ -91,5 +102,47 @@ public class Test
             return origin;
 
         return origin = origin.replaceAll("[\\.\\·]", "");
+    }
+
+    /**
+     * 二进制转16进制
+     *
+     * @param bytes
+     * @return
+     */
+    public static String byteToHexString(byte[] bytes) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < bytes.length; i++) {
+            String strHex = Integer.toHexString(bytes[i]);
+            if (strHex.length() > 3) {
+                sb.append(strHex.substring(6));
+            } else {
+                if (strHex.length() < 2) {
+                    sb.append("0" + strHex);
+                } else {
+                    sb.append(strHex);
+                }
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 十六进制转二进制
+     *
+     * @param s
+     * @return
+     */
+    public static byte[] hexStringToByte(String s) {
+        byte[] baKeyword = new byte[s.length() / 2];
+        for (int i = 0; i < baKeyword.length; i++) {
+            try {
+                baKeyword[i] = (byte) (0xff & Integer.parseInt(s.substring(i * 2, i * 2 + 2), 16));
+            } catch (Exception e) {
+                System.out.println("十六进制转byte发生错误！！！");
+                e.printStackTrace();
+            }
+        }
+        return baKeyword;
     }
 }
