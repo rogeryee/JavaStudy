@@ -27,6 +27,7 @@
     </build>
 
     <dependencies>
+        
         <dependency>
             <groupId>com.yee</groupId>
             <artifactId>java-study-util</artifactId>
@@ -45,13 +46,13 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>4.3.14.RELEASE</version>
+            <version>4.3.16.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>4.3.14.RELEASE</version>
+            <version>4.3.16.RELEASE</version>
         </dependency>
 
         <dependency>
@@ -60,32 +61,18 @@
             <version>1.8.2</version>
         </dependency>
 
-        <!-- SLF4J -->
+        <!-- Slf4j + Logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.7.21</version>
         </dependency>
-
-        <!-- Logback -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
+            <version>1.1.7</version>
         </dependency>
-
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>1.2.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-access</artifactId>
-            <version>1.2.3</version>
-        </dependency>
-
+        
         <!-- JsonPath -->
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>

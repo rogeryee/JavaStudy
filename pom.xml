@@ -13,6 +13,8 @@
     <modules>
         <module>java-study-util</module>
         <module>java-study-core</module>
+        <module>java-study-spring-core</module>
+        <module>java-study-spring-boot</module>
     </modules>
 
     <dependencies>
