@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 使Spring的Annotation生效 -->
+    <context:annotation-config/>
+
+    <!-- 用SampleBean的默认构造器来生成SampleBean -->
+    <bean id="init-sampleBeanByConstructor"
+          class="com.yee.study.spring.framework.ioc.SampleBean"/>
+
+    <!-- 用SampleBeanFactory中的静态方法createSampleBean来生成Bean -->
+    <bean id="init-sampleBeanByStaticFactoryMethod"
+          class="com.yee.study.spring.framework.ioc.SampleBeanFactory"
+          factory-method="createSampleBean"/>
+
+    <!-- 用SampleBeanFactory中的非静态方法createSampleBeanInstance来生成Bean -->
+    <bean id="init-sampleBeanFactory"
+          class="com.yee.study.spring.framework.ioc.SampleBeanFactory"/>
+
+    <bean id="init-sampleBeanByFactoryMethod"
+          factory-bean="init-sampleBeanFactory"
+          factory-method="createSampleBeanInstance"/>
+
+    <!-- 定义构建SampleBeanAttr -->
+    <bean id="dep-sampleBeanName" class="com.yee.study.spring.framework.ioc.xml.SampleBeanAttr">
+        <property name="name" value="My New Name"/>
+    </bean>
+
+    <!-- 使用构造函数注入SampleBeanAttr -->
+    <bean id="dep-sampleBean" class="com.yee.study.spring.framework.ioc.SampleBean">
+        <constructor-arg ref="dep-sampleBeanName"/>
+    </bean>
+
+    <!-- 循环依赖示例 -->
+    <!--<bean id="circular-dep-BeanA" class="com.yee.study.spring.framework.ioc.xml.CircularDepBeanA">-->
+        <!--<constructor-arg ref="circular-dep-BeanB"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="circular-dep-BeanB" class="com.yee.study.spring.framework.ioc.xml.CircularDepBeanB">-->
+        <!--<constructor-arg ref="circular-dep-BeanA"/>-->
+    <!--</bean>-->
+
+    <!-- String Object -->
+    <bean id="stringBean-1" class="java.lang.String">
+        <constructor-arg index="0" value="Hello world"/>
+    </bean>
+
+    <bean id="stringBean-2" class="java.lang.String">
+        <constructor-arg index="0" value="Hey baby"/>
+    </bean>
+
+    <!-- idref/ref 示例 -->
+    <bean id="di-bean-BeanWithProps" class="com.yee.study.spring.framework.ioc.SampleBeanWithProps">
+        <property name="attr1">
+            <idref bean="stringBean-1"/>
+        </property>
+        <property name="attr2" ref="stringBean-2"/>
+    </bean>
+
+    <!-- scope 示例 -->
+    <bean id="di-bean-SingletonBeanA" class="com.yee.study.spring.framework.ioc.SingletonBeanA"/>
+    
+    <bean id="di-bean-NonSingletonBeanB" class="com.yee.study.spring.framework.ioc.xml.NonSingletonBeanB" scope="prototype"/>
+
+    <!--&lt;!&ndash; 使用了@Required标示了stringBean属性 &ndash;&gt;-->
+    <!--<bean id="beanWithRequiredAnnotation" class="com.yee.study.spring.ioc.BeanWithRequiredAnnotation">-->
+        <!--<property name="stringBean" ref="stringBean"/>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 使用了@Autowired标示了stringBean属性 &ndash;&gt;-->
+    <!--<bean id="beanWithAutowiredAnnotation" class="com.yee.study.spring.ioc.BeanWithAutowiredAnnotation"/>-->
+
+    <!--<bean id="testBean" class="com.yee.study.spring.ioc.TestBean">-->
+        <!--<property name="name" value="Roger"/>-->
+        <!--<property name="age" value="10"/>-->
+    <!--</bean>-->
+
+</beans>

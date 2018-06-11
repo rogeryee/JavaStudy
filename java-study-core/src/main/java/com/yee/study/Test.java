@@ -56,6 +56,20 @@ public class Test
 
     public static void main(String[] args)
     {
+        List<String> list = new ArrayList<>();
+        list.add("0");
+
+        List<String> list1 = new ArrayList<>();
+        list1.add("1");
+        list1.add("2");
+        list1.add("3");
+
+        list.retainAll(list1);
+        System.out.println(list);
+
+        String s = "-3032829814";
+        System.out.println(Integer.parseInt(s));
+
         String s1 = (String)null;
         Integer s2 = (Integer)null;
 
