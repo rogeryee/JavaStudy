@@ -29,7 +29,7 @@
           factory-method="createSampleBeanInstance"/>
 
     <!-- 定义构建SampleBeanAttr -->
-    <bean id="dep-sampleBeanName" class="com.yee.study.spring.framework.ioc.xml.SampleBeanAttr">
+    <bean id="dep-sampleBeanName" class="com.yee.study.spring.framework.ioc.SampleBeanAttr">
         <property name="name" value="My New Name"/>
     </bean>
 
@@ -67,7 +67,13 @@
     <!-- scope 示例 -->
     <bean id="di-bean-SingletonBeanA" class="com.yee.study.spring.framework.ioc.SingletonBeanA"/>
     
-    <bean id="di-bean-NonSingletonBeanB" class="com.yee.study.spring.framework.ioc.xml.NonSingletonBeanB" scope="prototype"/>
+    <bean id="di-bean-NonSingletonBeanB" class="com.yee.study.spring.framework.ioc.NonSingletonBeanB" scope="prototype"/>
+
+    <!-- 自定义初始化Bean 示例 -->
+    <bean id="di-bean-SampleBeanWithInit" class="com.yee.study.spring.framework.ioc.SampleBeanWithInit"/>
+
+    <bean id="di-bean-SampleBeanWithInitMethod" class="com.yee.study.spring.framework.ioc.SampleBeanWithInitMethod" init-method="init"/>
+
 
     <!--&lt;!&ndash; 使用了@Required标示了stringBean属性 &ndash;&gt;-->
     <!--<bean id="beanWithRequiredAnnotation" class="com.yee.study.spring.ioc.BeanWithRequiredAnnotation">-->

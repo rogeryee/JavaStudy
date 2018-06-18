@@ -35,7 +35,7 @@ public class Sample
         SampleBeanWithProps sampleBean4 = context.getBean("di-bean-BeanWithProps", SampleBeanWithProps.class);
         System.out.println("sampleBean4 = " + sampleBean4.toString());
 
-        // 2.2
+        // 2.2 scope 示例
         SingletonBeanA singletonBeanA1 = context.getBean("di-bean-SingletonBeanA", SingletonBeanA.class);
         SingletonBeanA singletonBeanA2 = context.getBean("di-bean-SingletonBeanA", SingletonBeanA.class);
         System.out.println("singletonBeanA1 == singletonBeanA2 is " + (singletonBeanA1 == singletonBeanA2)); // true，因为是单例
@@ -43,5 +43,12 @@ public class Sample
         NonSingletonBeanB nonSingletonBeanB1 = context.getBean("di-bean-NonSingletonBeanB", NonSingletonBeanB.class);
         NonSingletonBeanB nonSingletonBeanB2 = context.getBean("di-bean-NonSingletonBeanB", NonSingletonBeanB.class);
         System.out.println("nonSingletonBeanB1 == nonSingletonBeanB2 is " + (nonSingletonBeanB1 == nonSingletonBeanB2)); // false，因为是多例
+
+        // 2.3 初始化Bean 示例
+        SampleBeanWithInit sampleBeanWithInit = context.getBean("di-bean-SampleBeanWithInit", SampleBeanWithInit.class);
+        SampleBeanWithInitMethod sampleBeanWithInitMethod = context.getBean("di-bean-SampleBeanWithInitMethod", SampleBeanWithInitMethod.class);
+        System.out.println("sampleBeanWithInit.title = " + sampleBeanWithInit.getTitle());
+        System.out.println("sampleBeanWithInitMethod.title = " + sampleBeanWithInitMethod.getTitle());
+
     }
 }
