@@ -3,6 +3,8 @@ package com.yee.study.spring.boot.helloworld.aop;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
@@ -16,6 +18,8 @@ import java.util.Arrays;
 @Aspect
 public class HelloWorldAopConfig {
 
+    private static final Logger logger = LoggerFactory.getLogger(HelloWorldAopConfig.class);
+
     /**
      * 针对包 com.yee.study.spring.boot.helloworld.controller下的所有类的方法进行切面处理
      * @param pjp
@@ -26,10 +30,10 @@ public class HelloWorldAopConfig {
     public Object simpleAop(final ProceedingJoinPoint pjp) throws Throwable {
         try {
             Object[] args = pjp.getArgs();
-            System.out.println("args : " + Arrays.asList(args));
+            logger.info("args : " + Arrays.asList(args));
 
             Object ret = pjp.proceed();
-            System.out.println("ret = " + ret);
+            logger.info("ret = " + ret);
             return ret;
         } catch (Throwable t) {
             throw t;
