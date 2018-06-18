@@ -17,6 +17,11 @@
         <module>java-study-spring-boot</module>
     </modules>
 
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
     <dependencies>
         <!-- Junit -->
         <dependency>
