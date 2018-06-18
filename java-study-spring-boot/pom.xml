@@ -46,6 +46,13 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         
         <!-- 使用Jetty作为Web容器 -->
         <dependency>

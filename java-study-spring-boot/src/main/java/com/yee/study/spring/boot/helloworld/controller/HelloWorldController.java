@@ -17,7 +17,7 @@ import java.util.List;
  * 注意 @RestController = @Controller + @ResponseBody
  * @author Roger.Yi
  */
-@RequestMapping("helloworld")
+@RequestMapping("/helloworld")
 @RestController
 public class HelloWorldController {
 
