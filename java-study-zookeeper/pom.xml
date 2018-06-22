@@ -6,8 +6,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.yee</groupId>
-    <artifactId>java-study-spring-core</artifactId>
-    <name>Spring Framework Study Module</name>
+    <artifactId>java-study-zookeeper</artifactId>
+    <name>Zookeeper Study Module</name>
 
     <parent>
         <groupId>com.yee</groupId>
@@ -16,13 +16,6 @@
     </parent>
 
     <dependencies>
-
-        <!-- Spring Context -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>4.3.16.RELEASE</version>
-        </dependency>
 
         <!-- Slf4j + Logback -->
         <dependency>
@@ -36,6 +29,13 @@
             <version>1.1.7</version>
         </dependency>
 
+        <!-- Zookeeper -->
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.12</version>
+        </dependency>
+        
     </dependencies>
 
 </project>
