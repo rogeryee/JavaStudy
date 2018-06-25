@@ -28,7 +28,7 @@ public class ZkDemo implements Watcher {
     private static Stat stat = new Stat();
 
     public static void main(String[] args) throws Exception {
-        zk = new ZooKeeper("localhost:2181", 5000, new ZkDemo());
+        zk = new ZooKeeper("127.0.0.1:2181", 5000, new ZkDemo());
         cdl.await();
 
         doCreateData("/zk-test-");
