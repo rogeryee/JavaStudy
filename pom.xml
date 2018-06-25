@@ -15,6 +15,7 @@
         <module>java-study-core</module>
         <module>java-study-spring-core</module>
         <module>java-study-spring-boot</module>
+        <module>java-study-spring-cloud</module>
         <module>java-study-zookeeper</module>
     </modules>
 
