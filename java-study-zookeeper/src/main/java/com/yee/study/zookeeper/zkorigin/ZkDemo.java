@@ -1,4 +1,4 @@
-package com.yee.study.zookeeper.zk;
+package com.yee.study.zookeeper.zkorigin;
 
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
