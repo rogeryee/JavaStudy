@@ -1,12 +1,12 @@
-package com.yee.study.spring.cloud.demo.provider.controller;
+package com.yee.study.spring.cloud.demo.consumer.controller;
 
-import com.yee.study.spring.cloud.demo.provider.model.User;
-import com.yee.study.spring.cloud.demo.provider.service.UserService;
+import com.yee.study.spring.cloud.demo.consumer.model.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * @author Roger.Yi
@@ -16,15 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @Autowired
-    private UserService userService;
-    
+    private RestTemplate restTemplate;
+
     /**
-     * curl 'http://localhost:8082/user/get/1'
+     * curl 'http://localhost:8083/user/get/1'
      * @param id
      * @return
      */
     @GetMapping(value = "/get/{id}")
-    public User get(@PathVariable Long id) {
-        return userService.getUser(id);
+    public UserInfo get(@PathVariable Long id) {
+        String url = "http://localhost:8082/user/get/" + id;
+        return restTemplate.getForObject(url, UserInfo.class);
     }
 }
