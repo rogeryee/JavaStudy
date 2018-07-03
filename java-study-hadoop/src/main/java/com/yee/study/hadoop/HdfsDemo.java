@@ -46,7 +46,7 @@ public class HdfsDemo {
 //        upload(fs);
 
         // 删除文件
-        delete(fs);
+        delete(fs);  
     }
 
     /**
