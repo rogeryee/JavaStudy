@@ -17,6 +17,7 @@
         <module>java-study-spring-boot</module>
         <module>java-study-spring-cloud</module>
         <module>java-study-zookeeper</module>
+        <module>java-study-hadoop</module>
     </modules>
 
     <properties>
