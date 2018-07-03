@@ -4,6 +4,8 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -12,6 +14,8 @@ import java.io.IOException;
  * @author Roger.Yi
  */
 public class HdfsDemo {
+
+    private static final Logger logger = LoggerFactory.getLogger(HdfsDemo.class);
 
     /**
      * $HADOOP_HOME/etc/hadoop/core.xml中HDFS的配置
@@ -36,9 +40,20 @@ public class HdfsDemo {
 //        openFile(fs);
 
         // 下载文件
-        download(fs);
+//        download(fs);
+
+        // 上传文件
+//        upload(fs);
+
+        // 删除文件
+        delete(fs);
     }
 
+    /**
+     * 打开文件
+     * @param fs
+     * @throws Exception
+     */
     private static void openFile(FileSystem fs) throws Exception {
         String filePath = "/tfiles/a.txt";
         FSDataInputStream is = fs.open(new Path(filePath));
@@ -46,13 +61,39 @@ public class HdfsDemo {
         byte[] buff = new byte[1024];
         int length = 0;
         while ((length = is.read(buff)) != -1) {
-            System.out.println(new String(buff, 0, length));
+            logger.info(new String(buff, 0, length));
         }
     }
 
+    /**
+     * 下载文件
+     * @param fs
+     * @throws Exception
+     */
     private static void download(FileSystem fs) throws Exception {
         String filePath = "/tfiles/a.txt";
         String localPath = "/Users/RogerYee/";
         fs.copyToLocalFile(new Path(filePath),new Path(localPath));
+    }
+
+    /**
+     * 上传文件
+     * @param fs
+     * @throws Exception
+     */
+    private static void upload(FileSystem fs) throws Exception {
+        String filePath = "/tfiles";
+        String localPath = "/Users/RogerYee/c.txt";
+        fs.copyFromLocalFile(new Path(localPath),new Path(filePath));
+    }
+
+    /**
+     * 删除文件
+     * @param fs
+     * @throws Exception
+     */
+    private static void delete(FileSystem fs) throws Exception {
+        String filePath = "/tfiles/c.txt";
+        fs.delete(new Path(filePath));
     }
 }
