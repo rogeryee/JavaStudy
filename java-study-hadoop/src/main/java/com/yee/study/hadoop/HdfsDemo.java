@@ -2,12 +2,14 @@ package com.yee.study.hadoop;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
+import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * HDFS 操作示例
@@ -46,7 +48,9 @@ public class HdfsDemo {
 //        upload(fs);
 
         // 删除文件
-        delete(fs);  
+//        delete(fs);
+
+        listDir(fs);
     }
 
     /**
@@ -95,5 +99,18 @@ public class HdfsDemo {
     private static void delete(FileSystem fs) throws Exception {
         String filePath = "/tfiles/c.txt";
         fs.delete(new Path(filePath));
+    }
+
+    /**
+     * 删除文件
+     * @param fs
+     * @throws Exception
+     */
+    private static void listDir(FileSystem fs) throws Exception {
+        String path = "/tfiles";
+        FileStatus[] statuses = fs.listStatus(new Path(path));
+        for(FileStatus status : statuses) {
+            logger.info("path:" + status.getPath());
+        }
     }
 }
