@@ -22,6 +22,6 @@ public class MasterSlaveDemo {
         SimulatedServer server1 = new SimulatedServer(serverName, connectStr, path);
         server1.start();
 
-        Thread.sleep(Integer.MAX_VALUE);
+        Thread.sleep(Integer.MAX_VALUE); 
     }
 }
