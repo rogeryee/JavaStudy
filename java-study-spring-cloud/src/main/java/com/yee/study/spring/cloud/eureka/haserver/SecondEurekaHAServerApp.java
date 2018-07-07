@@ -1,4 +1,4 @@
-package com.yee.study.spring.cloud.eureka.server;
+package com.yee.study.spring.cloud.eureka.haserver;
 
 import com.yee.study.spring.cloud.util.PropertiesUtil;
 import org.springframework.boot.SpringApplication;
@@ -8,17 +8,20 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import java.util.Properties;
 
 /**
- * 单节点的Eureka Server示例
- * 
+ * Eureka Server 2 - HA (集群示例)
+ *
+ * 会和FirstEurekaHAServerApp组成一个集群，保证高可用
+ * @see FirstEurekaHAServerApp
+ *
  * @author Roger.Yi
  */
 @SpringBootApplication
 @EnableEurekaServer
-public class EurekaServerApp {
+public class SecondEurekaHAServerApp {
 
     public static void main(String[] args) throws Exception {
-        Properties properties = PropertiesUtil.loadProperties("eureka/eureka-server.properties");
-        SpringApplication application = new SpringApplication(EurekaServerApp.class);
+        Properties properties = PropertiesUtil.loadProperties("eureka/eureka-server-ha-second.properties");
+        SpringApplication application = new SpringApplication(SecondEurekaHAServerApp.class);
         application.setDefaultProperties(properties);
         application.run(args);
     }

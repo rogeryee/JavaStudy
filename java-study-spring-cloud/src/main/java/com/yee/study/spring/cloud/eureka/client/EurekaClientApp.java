@@ -8,6 +8,10 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import java.util.Properties;
 
 /**
+ * Eureka Client示例
+ *
+ * 会注册到相应的Eureka Server
+ * 
  * @author Roger.Yi
  */
 @SpringBootApplication
