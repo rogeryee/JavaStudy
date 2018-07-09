@@ -10,7 +10,7 @@ import java.util.Properties;
 /**
  * Eureka Client示例
  *
- * 会注册到相应的Eureka Server
+ * 将服务注册到相应的Eureka Server
  * 
  * @author Roger.Yi
  */
