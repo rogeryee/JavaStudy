@@ -77,6 +77,19 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+
+        <!-- Ribbon -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+        </dependency>
+
+        <!-- Util -->
+        <dependency>
+            <groupId>com.yee</groupId>
+            <artifactId>java-study-util</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         
     </dependencies>
 
