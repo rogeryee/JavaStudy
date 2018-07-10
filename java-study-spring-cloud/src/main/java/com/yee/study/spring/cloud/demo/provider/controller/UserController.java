@@ -19,7 +19,7 @@ public class UserController {
     private UserService userService;
     
     /**
-     * curl 'http://localhost:8082/user/get/1'
+     * curl 'http://localhost:8081/user/get/1'
      * @param id
      * @return
      */

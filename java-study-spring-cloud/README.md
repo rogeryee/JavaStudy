@@ -4,6 +4,12 @@
     provider：服务提供方
 
     consumer：服务消费方
+    
+    注意：
+    1）demo中的ProviderApp和ConsumerApp都没用到Eureka，但是由于pom中引用了Eureka相关的依赖，所以需要启动是增加对EurekaConfiguration的排除；
+    2）由于每个项目有自己的yml文件，而不能配置全局的bootstrap.yml文件，所以可以在启动的JVM Args中添加 "-Dspring.cloud.bootstrap.enabled=false"， 这样可以避免程序在启动阶段会去localhost
+    :8888 获取默认配置的问题。
+    
 
 2.  Eureka注册示例：
     包com.yee.study.spring.cloud.eureka

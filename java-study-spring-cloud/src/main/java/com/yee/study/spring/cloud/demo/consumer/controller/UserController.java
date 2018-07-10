@@ -19,13 +19,13 @@ public class UserController {
     private RestTemplate restTemplate;
 
     /**
-     * curl 'http://localhost:8083/user/get/1'
+     * curl 'http://localhost:8082/user/get/1'
      * @param id
      * @return
      */
     @GetMapping(value = "/get/{id}")
     public UserInfo get(@PathVariable Long id) {
-        String url = "http://localhost:8082/user/get/" + id;
+        String url = "http://localhost:8081/user/get/" + id;
         return restTemplate.getForObject(url, UserInfo.class);
     }
 }

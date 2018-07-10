@@ -1,22 +1,30 @@
 package com.yee.study.spring.cloud.demo.provider;
 
-import com.yee.study.spring.cloud.util.PropertiesUtil;
+import com.yee.study.spring.cloud.util.YamlUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
-import java.io.InputStream;
-import java.util.Properties;
+import java.io.IOException;
 
 /**
  * 示例中服务提供者（Provider）引用入口
+ *
+ * 本例中没有使用到 Eureka的注册方式
+ *
  * @author Roger.Yi
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = EurekaClientAutoConfiguration.class)
 public class ProviderApp {
+
+    @Bean
+    public PropertySourcesPlaceholderConfigurer loadYml() throws IOException {
+        return YamlUtil.loadYaml("demo/provider.yml");
+    }
+
     public static void main(String[] args) throws Exception {
-        Properties properties = PropertiesUtil.loadProperties("demo/provider.properties");
-        SpringApplication application = new SpringApplication(ProviderApp.class);
-        application.setDefaultProperties(properties);
-        application.run(args);
+        SpringApplication.run(ProviderApp.class, args);
     }
 }
