@@ -22,7 +22,7 @@ import java.util.List;
 public class HelloWorldController {
 
     /**
-     * http://localhost:8080/helloworld/sayhello/Roger
+     * http://localhost:8081/helloworld/sayhello/Roger
      * @param name
      * @return
      */
@@ -32,7 +32,7 @@ public class HelloWorldController {
     }
 
     /**
-     * http://localhost:8080/helloworld/list
+     * http://localhost:8081/helloworld/list
      * @param name
      * @return
      */
