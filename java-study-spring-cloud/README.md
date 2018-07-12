@@ -19,6 +19,9 @@
     haserver：多节点Eureka服务，需要启动FirstEurekaHAServerApp、SecondEurekaHAServerApp，可以看到两个EurekaServer互为备份
 
     client：Eureka Client程序，实现了向单节点或者多节点EurekaServer注册（区别在于eureka-client.properties文件中的注册URL）。
+    
+    注意：自出没有使用yml的加载方式，因为发现自定义yml加载是在 EurekaInstanceConfigBean初始化之后，所以会导致Eureka初始化时会优先使用eureka.instance.appname (即使配置了spring.application.name)，
+    否者会出现服务名为 UNKNOWN的问题。   
 
 
 3.  Ribbon负载示例：
