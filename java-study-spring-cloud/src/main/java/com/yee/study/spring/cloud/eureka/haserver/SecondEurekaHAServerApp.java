@@ -10,8 +10,7 @@ import java.util.Properties;
 /**
  * Eureka Server 2 - HA (集群示例)
  *
- * 会和FirstEurekaHAServerApp组成一个集群，保证高可用
- * @see FirstEurekaHAServerApp
+ * 会和 {@link FirstEurekaHAServerApp} 组成一个集群，保证高可用
  *
  * @author Roger.Yi
  */
