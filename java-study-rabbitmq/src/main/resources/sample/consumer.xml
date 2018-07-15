@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-2.0.xsd">
+
+    <context:annotation-config/>
+
+    <!-- Connection Factory -->
+    <bean id="connectionFactory" class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory">
+        <property name="host" value="localhost"/>
+        <property name="username" value="guest"/>
+        <property name="password" value="guest"/>
+        <property name="channelCacheSize" value="8"/>
+        <property name="port" value="5672"/>
+    </bean>
+
+    <!-- Rabbit Admin -->
+    <rabbit:admin connection-factory="connectionFactory"/>
+
+    <!-- Consumer Queue -->
+    <rabbit:queue name="h1_queue" durable="false"/>
+    <rabbit:queue name="h2_queue" durable="false"/>
+    <rabbit:queue name="h3_queue" durable="false"/>
+
+    <!-- Fanout Exchange -->
+    <rabbit:fanout-exchange name="fanout-ex" durable="false">
+        <rabbit:bindings>
+            <rabbit:binding queue="h1_queue"/>
+            <rabbit:binding queue="h2_queue"/>
+            <rabbit:binding queue="h3_queue"/>
+        </rabbit:bindings>
+    </rabbit:fanout-exchange>
+
+    <!-- Consumer Beans -->
+    <bean id="H1Consumer" class="com.yee.study.rabbitmq.spring.sample.H1Consumer"/>
+    <bean id="H2Consumer" class="com.yee.study.rabbitmq.spring.sample.H2Consumer"/>
+    <bean id="H3Consumer" class="com.yee.study.rabbitmq.spring.sample.H3Consumer"/>
+
+    <!-- Listener Container -->
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener ref="H1Consumer" queues="h1_queue" method="onMessage"/>
+        <rabbit:listener ref="H2Consumer" queues="h2_queue" method="onMessage"/>
+        <rabbit:listener ref="H3Consumer" queues="h3_queue" method="onMessage"/>
+    </rabbit:listener-container>
+
+</beans>

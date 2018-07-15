@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-2.0.xsd">
+
+    <context:annotation-config/>
+
+    <!-- Connection Factory -->
+    <bean id="connectionFactory" class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory">
+        <property name="host" value="localhost"/>
+        <property name="username" value="guest"/>
+        <property name="password" value="guest"/>
+        <property name="channelCacheSize" value="8"/>
+        <property name="port" value="5672"/>
+    </bean>
+
+    <!-- Rabbit Admin -->
+    <rabbit:admin connection-factory="connectionFactory"/>
+
+    <!-- Producer Queue
+    声明了4个队列，其中前3个队列已经绑定了消费者，而第四个无绑定任何消费者
+    -->
+    <rabbit:queue name="h1_queue" durable="false"/>
+    <rabbit:queue name="h2_queue" durable="false"/>
+    <rabbit:queue name="h3_queue" durable="false"/>
+    <rabbit:queue name="h4_queue" durable="false"/>
+
+    <!-- Fanout Exchange -->
+    <rabbit:fanout-exchange name="fanout-ex" durable="false">
+        <rabbit:bindings>
+            <rabbit:binding queue="h4_queue"/>
+        </rabbit:bindings>
+    </rabbit:fanout-exchange>
+
+    <!-- RabbitTemplate -->
+    <bean id="rabbitTemplate" class="org.springframework.amqp.rabbit.core.RabbitTemplate">
+        <constructor-arg ref="connectionFactory"/>
+    </bean>
+
+</beans>
