@@ -1,0 +1,14 @@
+#### 项目说明 ####
+本项目是一个基于RabbitMQ 3.5.4的学习项目
+
+#### 项目结构 ####
+
+1.  helloworld：展示了一个简单的采用RabbitMQ进行消息通讯（生产、消费）的示例
+    包com.yee.study.rabbitmq.helloworld
+
+2.  workqueue : 展现了一个工作队列（单点发送，多点接受）
+
+3.  fanout: 分发示例
+
+4.  direct:
+
