@@ -27,7 +27,7 @@
 3.  Ribbon负载示例：
     包com.yee.study.spring.cloud.ribbon
     
-    eureka/EurekaServerApp：Eureka服务
+    Eureka服务（注册中心）: 启动 com.yee.study.spring.cloud.eureka.server.EurekaServerApp 作为单节点服务。
     
     provider/ServiceProviderApp：应用服务提供者（启动2个，在启动的Program Agrs中用1，2来分别表示加载service-provider-{args[0]}.properties）
     
@@ -35,5 +35,12 @@
     我们可以有两种方式来配置Ribbon，1）通过RibbonConfig类；2）通过配置文件中对Ribbon的配置
 
 
-
+4.  Feign示例：
+    包com.yee.study.spring.cloud.feign
+    
+    Eureka服务（注册中心）: 启动 com.yee.study.spring.cloud.eureka.server.EurekaServerApp 作为单节点服务。
+    
+    provider/ServiceProviderApp：应用服务提供者
+    
+    consumer/ServiceConsumerApp：应用服务消费者（本例中实现了Get、Post方式的交互）
     
