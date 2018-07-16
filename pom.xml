@@ -19,6 +19,7 @@
         <module>java-study-zookeeper</module>
         <module>java-study-hadoop</module>
         <module>java-study-rabbitmq</module>
+        <module>java-study-dubbo</module>
     </modules>
 
     <properties>

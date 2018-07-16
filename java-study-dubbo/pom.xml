@@ -6,8 +6,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.yee</groupId>
-    <artifactId>java-study-spring-core</artifactId>
-    <name>Spring Framework Study Module</name>
+    <artifactId>java-study-dubbo</artifactId>
+    <name>Dubbo Study Module</name>
 
     <parent>
         <groupId>com.yee</groupId>
@@ -22,13 +22,6 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.1.7</version>
-        </dependency>
-        
-        <!-- Spring Context -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>5.0.7.RELEASE</version>
         </dependency>
 
     </dependencies>
