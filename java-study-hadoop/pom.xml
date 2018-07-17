@@ -17,18 +17,34 @@
 
     <dependencies>
 
-        <!-- Slf4j + Logback -->
+        <!-- Util -->
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.1.7</version>
+            <groupId>com.yee</groupId>
+            <artifactId>java-study-util</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>com.yee</groupId>
+            <artifactId>java-study-dep-test</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>pom</type>
+        </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>com.yee</groupId>
+            <artifactId>java-study-dep-log</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>pom</type>
         </dependency>
 
         <!-- hadoop-common -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
-            <version>2.7.3</version>
+            <version>${hadoop.verison}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>slf4j-api</artifactId>
@@ -45,14 +61,14 @@
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-hdfs</artifactId>
-            <version>2.7.3</version>
+            <version>${hadoop.verison}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-mapreduce-client-core -->
+        <!-- MapReduce Client -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-mapreduce-client-core</artifactId>
-            <version>2.7.3</version>
+            <version>${hadoop.verison}</version>
         </dependency>
 
 

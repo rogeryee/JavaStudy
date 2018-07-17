@@ -27,6 +27,30 @@
     </build>
 
     <dependencies>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>com.yee</groupId>
+            <artifactId>java-study-dep-test</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>pom</type>
+        </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>com.yee</groupId>
+            <artifactId>java-study-dep-log</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>pom</type>
+        </dependency>
+
+        <!-- Spring Framework -->
+        <dependency>
+            <groupId>com.yee</groupId>
+            <artifactId>java-study-dep-spring</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>pom</type>
+        </dependency>
         
         <dependency>
             <groupId>com.yee</groupId>
@@ -41,25 +65,6 @@
             <version>2.8.0</version>
             <type>jar</type>
         </dependency>
-
-        <!-- Spring Framework -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>4.3.16.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>4.3.16.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.8.2</version>
-        </dependency>
         
         <!-- JsonPath -->
         <dependency>
@@ -73,14 +78,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>23.2-jre</version>
-        </dependency>
-
-        <!-- Mockito -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>2.13.0</version>
-            <scope>test</scope>
         </dependency>
 
         <!-- Bouncy Castle Crypto -->

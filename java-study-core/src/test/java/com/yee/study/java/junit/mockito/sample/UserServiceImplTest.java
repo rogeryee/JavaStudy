@@ -61,7 +61,7 @@ public class UserServiceImplTest
         User rtnUser = new User();
         rtnUser.setId("001");
         rtnUser.setName("admin");
-        when(userDao.findByName("admin")).thenReturn(rtnUser);
+//        when(userDao.findByName("admin")).thenReturn(rtnUser);
         when(userDao.save(any())).thenReturn("002");
 
         // 验证方法调用

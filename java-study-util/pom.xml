@@ -16,6 +16,23 @@
     <name>Utilities Module</name>
 
     <dependencies>
+        
+        <!-- Test -->
+        <dependency>
+            <groupId>com.yee</groupId>
+            <artifactId>java-study-dep-test</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>pom</type>
+        </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>com.yee</groupId>
+            <artifactId>java-study-dep-log</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>pom</type>
+        </dependency>
+        
     </dependencies>
     
 </project>

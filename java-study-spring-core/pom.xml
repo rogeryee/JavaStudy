@@ -17,18 +17,28 @@
 
     <dependencies>
 
-        <!-- Slf4j + Logback -->
+        <!-- Test -->
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.1.7</version>
+            <groupId>com.yee</groupId>
+            <artifactId>java-study-dep-test</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>pom</type>
         </dependency>
-        
-        <!-- Spring Context -->
+
+        <!-- Logging -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>5.0.7.RELEASE</version>
+            <groupId>com.yee</groupId>
+            <artifactId>java-study-dep-log</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>pom</type>
+        </dependency>
+
+        <!-- Spring Framework -->
+        <dependency>
+            <groupId>com.yee</groupId>
+            <artifactId>java-study-dep-spring</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>pom</type>
         </dependency>
 
     </dependencies>
