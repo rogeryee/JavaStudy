@@ -20,6 +20,7 @@
         <module>java-study-hadoop</module>
         <module>java-study-rabbitmq</module>
         <module>java-study-dubbo</module>
+        <module>java-study-mysoa</module>
         <module>java-study-dep</module>
     </modules>
 
