@@ -26,6 +26,7 @@ public class ProtocolBeanDefinitionParser implements BeanDefinitionParser {
         beanDefinition.setBeanClass(beanClass);
         beanDefinition.setLazyInit(false);
 
+        String id = element.getAttribute("id");
         String name = element.getAttribute("name");
         String host = element.getAttribute("host");
         String port = element.getAttribute("port");
@@ -40,6 +41,7 @@ public class ProtocolBeanDefinitionParser implements BeanDefinitionParser {
             throw new RuntimeException("Attribute[port] is null or blank.");
         }
 
+        beanDefinition.getPropertyValues().addPropertyValue("id", id);
         beanDefinition.getPropertyValues().addPropertyValue("name", name);
         beanDefinition.getPropertyValues().addPropertyValue("host", host);
         beanDefinition.getPropertyValues().addPropertyValue("port", port);

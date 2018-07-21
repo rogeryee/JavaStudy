@@ -26,10 +26,11 @@ public class RegistryBeanDefinitionParser implements BeanDefinitionParser {
         beanDefinition.setBeanClass(beanClass);
         beanDefinition.setLazyInit(false);
 
-        String protocol = element.getAttribute("protocol");
+        String id = element.getAttribute("id");
+        String type = element.getAttribute("type");
         String address = element.getAttribute("address");
 
-        if (StringUtil.isBlank(protocol)) {
+        if (StringUtil.isBlank(type)) {
             throw new RuntimeException("Attribute[protocol] is null or blank.");
         }
 
@@ -37,7 +38,8 @@ public class RegistryBeanDefinitionParser implements BeanDefinitionParser {
             throw new RuntimeException("Attribute[address] is null or blank.");
         }
 
-        beanDefinition.getPropertyValues().addPropertyValue("protocol", protocol);
+        beanDefinition.getPropertyValues().addPropertyValue("id", id);
+        beanDefinition.getPropertyValues().addPropertyValue("type", type);
         beanDefinition.getPropertyValues().addPropertyValue("address", address);
         parserContext.getRegistry().registerBeanDefinition("Registry" + address, beanDefinition);
         return beanDefinition;

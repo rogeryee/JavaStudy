@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mysoa="http://www.yee.com/schema/mysoa"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.yee.com/schema/mysoa
+	   http://www.yee.com/schema/mysoa/mysoa-1.0.0.xsd">
+    
+    <mysoa:registry type="redis" address="127.0.0.1:6379"/>
+    
+    <mysoa:protocol name="http" port="27017" host="127.0.0.1"/>
+
+    <mysoa:reference id="TestServiceImpl" intfClazz="com.yee.study.mysoa.mock.TestService" loadBalance="random" protocol="http"/>
+
+    <!-- 服务提供者-->
+    <bean id="provider-TestService" class="com.yee.study.mysoa.mock.TestServiceProviderImpl"/>
+    <mysoa:service intfClazz="com.yee.study.mysoa.mock.TestService" ref="provider-TestService" protocol="http"/>
+
+</beans>

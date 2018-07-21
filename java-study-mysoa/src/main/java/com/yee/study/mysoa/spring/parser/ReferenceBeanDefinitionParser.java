@@ -1,5 +1,6 @@
 package com.yee.study.mysoa.spring.parser;
 
+import com.yee.study.mysoa.consts.Protocols;
 import com.yee.study.util.StringUtil;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.RootBeanDefinition;
@@ -27,28 +28,28 @@ public class ReferenceBeanDefinitionParser implements BeanDefinitionParser {
         beanDefinition.setLazyInit(false);
 
         String id = element.getAttribute("id");
-        String intf = element.getAttribute("interface");
+        String intfClazz = element.getAttribute("intfClazz");
         String loadBalance = element.getAttribute("loadBalance");
         String protocol = element.getAttribute("protocol");
 
         if (StringUtil.isBlank(id)) {
             throw new RuntimeException("Attribute[id] is null or blank.");
         }
-        if (StringUtil.isBlank(intf)) {
+        if (StringUtil.isBlank(intfClazz)) {
             throw new RuntimeException("Attribute[intf] is null or blank.");
         }
         if (StringUtil.isBlank(loadBalance)) {
             throw new RuntimeException("Attribute[loadBalance] is null or blank.");
         }
         if (StringUtil.isBlank(protocol)) {
-            throw new RuntimeException("Attribute[protocol] is null or blank.");
+            protocol = Protocols.defProtocol();
         }
 
         beanDefinition.getPropertyValues().addPropertyValue("id", id);
-        beanDefinition.getPropertyValues().addPropertyValue("intf", intf);
+        beanDefinition.getPropertyValues().addPropertyValue("intfClazz", intfClazz);
         beanDefinition.getPropertyValues().addPropertyValue("loadBalance", loadBalance);
         beanDefinition.getPropertyValues().addPropertyValue("protocol", protocol);
-        parserContext.getRegistry().registerBeanDefinition("Reference" + id + intf, beanDefinition);
+        parserContext.getRegistry().registerBeanDefinition("Reference" + id + intfClazz, beanDefinition);
         return beanDefinition;
     }
 }

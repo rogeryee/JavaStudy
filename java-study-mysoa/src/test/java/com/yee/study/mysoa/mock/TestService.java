@@ -1,4 +1,4 @@
-package com.yee.study.mysoa.spring.parser;
+package com.yee.study.mysoa.mock;
 
 /**
  * 测试服务接口定义

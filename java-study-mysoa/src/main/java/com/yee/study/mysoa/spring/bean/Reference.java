@@ -1,23 +1,87 @@
 package com.yee.study.mysoa.spring.bean;
 
+import com.yee.study.mysoa.invoke.Invoke;
+import com.yee.study.mysoa.invoke.InvokeFactory;
+import com.yee.study.mysoa.invoke.InvokeInvocationHandler;
+import com.yee.study.util.StringUtil;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.FactoryBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+
+import java.io.Serializable;
+import java.lang.reflect.Proxy;
+
 /**
  * 引用关联定义类
  *
+ * 消费者端配置，引用了生产者服务的配置
+ *
  * @author Roger.Yi
  */
-public class Reference {
+public class Reference implements Serializable, FactoryBean, ApplicationContextAware {
 
+    /**
+     * ID
+     */
     private String id;
 
-    private String intf;
+    /**
+     * 服务接口
+     */
+    private String intfClazz;
 
+    /**
+     * 负载策略
+     */
     private String loadBalance;
 
+    /**
+     * 协议
+     */
     private String protocol;
 
+    /**
+     * SpringContext
+     */
+    private ApplicationContext context;
+
     @Override
-    public String toString() {
-        return "Reference{" + "id='" + id + '\'' + ", intf='" + intf + '\'' + ", loadBalance='" + loadBalance + '\'' + ", protocol='" + protocol + '\'' + '}';
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.context = applicationContext;
+    }
+
+    /**
+     * 返回intfClazz的代理对象
+     *
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Object getObject() throws Exception {
+        Invoke invoke = InvokeFactory.getInvoke(protocol);
+        Object obj = Proxy.newProxyInstance(this.getClass()
+                .getClassLoader(), new Class<?>[]{getObjectType()}, new InvokeInvocationHandler(invoke, this));
+        return obj;
+    }
+
+    @Override
+    public Class<?> getObjectType() {
+
+        if (StringUtil.isNotBlank(intfClazz)) {
+            try {
+                return Class.forName(intfClazz);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException("No interface specified, intf = " + intfClazz);
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean isSingleton() {
+        return true;
     }
 
     public String getId() {
@@ -44,11 +108,11 @@ public class Reference {
         this.protocol = protocol;
     }
 
-    public String getIntf() {
-        return intf;
+    public String getIntfClazz() {
+        return intfClazz;
     }
 
-    public void setIntf(String intf) {
-        this.intf = intf;
+    public void setIntfClazz(String intfClazz) {
+        this.intfClazz = intfClazz;
     }
 }

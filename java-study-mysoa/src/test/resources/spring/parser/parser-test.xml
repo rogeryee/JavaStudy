@@ -7,14 +7,12 @@
        http://www.yee.com/schema/mysoa
 	   http://www.yee.com/schema/mysoa/mysoa-1.0.0.xsd">
 
-    <mysoa:registry protocol="redis" address="127.0.0.1:6379"/>
+    <mysoa:registry type="redis" address="127.0.0.1:6379"/>
     
     <mysoa:protocol name="http" port="27017" host="127.0.0.1"/>
 
-	<bean id="TestServiceImpl" class="com.yee.study.mysoa.spring.parser.TestServiceImpl"/>
+ 	<mysoa:service intfClazz="com.yee.study.mysoa.mock.TestService" ref="TestServiceImpl" protocol="http"/>
 
- 	<mysoa:service interface="com.yee.study.mysoa.spring.parser.TestService" ref="TestServiceImpl" protocol="http"/>
-
-    <mysoa:reference id="TestServiceImpl" interface="com.yee.study.mysoa.spring.parser.TestService" loadBalance="random" protocol="http"/>
+    <mysoa:reference id="TestServiceImpl" intfClazz="com.yee.study.mysoa.mock.TestService" loadBalance="random" protocol="http"/>
 
 </beans>

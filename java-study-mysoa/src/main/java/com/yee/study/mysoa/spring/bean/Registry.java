@@ -1,27 +1,43 @@
 package com.yee.study.mysoa.spring.bean;
 
+import java.io.Serializable;
+
 /**
  * 服务注册定义类
- * 
+ *
  * @author Roger.Yi
  */
-public class Registry {
+public class Registry implements Serializable {
 
-    private String protocol;
+    /**
+     * ID
+     */
+    public String id;
 
+    /**
+     * 注册中心的类型
+     */
+    private String type;
+
+    /**
+     * 注册中心的Host:port
+     */
     private String address;
 
-    @Override
-    public String toString() {
-        return "Registry{" + "protocol='" + protocol + '\'' + ", address='" + address + '\'' + '}';
+    public String getId() {
+        return id;
     }
 
-    public String getProtocol() {
-        return protocol;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setProtocol(String protocol) {
-        this.protocol = protocol;
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getAddress() {

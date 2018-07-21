@@ -1,21 +1,41 @@
 package com.yee.study.mysoa.spring.bean;
 
+import java.io.Serializable;
+
 /**
  * 协议定义类
  *
  * @author Roger.Yi
  */
-public class Protocol {
+public class Protocol implements Serializable {
 
+    /**
+     * ID
+     */
+    public String id;
+
+    /**
+     * 协议类型
+     * {@link com.yee.study.mysoa.consts.Protocols}
+     */
     private String name;
 
+    /**
+     * 端口
+     */
     private String port;
 
+    /**
+     * Host地址
+     */
     private String host;
 
-    @Override
-    public String toString() {
-        return "Protocol{" + "name='" + name + '\'' + ", port='" + port + '\'' + ", host='" + host + '\'' + '}';
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

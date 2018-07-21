@@ -1,29 +1,61 @@
 package com.yee.study.mysoa.spring.bean;
 
+import com.yee.study.mysoa.registry.RegistryDelegate;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+
+import java.io.Serializable;
+
 /**
  * 服务定义类
- * 
+ *
  * @author Roger.Yi
  */
-public class Service {
+public class Service implements Serializable, ApplicationContextAware {
 
-    private String intf;
+    /**
+     * 编号
+     */
+    public String id;
 
+    /**
+     * 接口
+     */
+    private String intfClazz;
+
+    /**
+     * 引用对象
+     */
     private String ref;
 
+    /**
+     * 协议
+     */
     private String protocol;
 
+    private ApplicationContext context;
+    
     @Override
-    public String toString() {
-        return "Service{" + "intf='" + intf + '\'' + ", ref='" + ref + '\'' + ", protocol='" + protocol + '\'' + '}';
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.context = applicationContext;
     }
 
-    public String getIntf() {
-        return intf;
+    public String getId() {
+        return id;
     }
 
-    public void setIntf(String intf) {
-        this.intf = intf;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getIntfClazz() {
+        return intfClazz;
+    }
+
+    public void setIntfClazz(String intfClazz) {
+        this.intfClazz = intfClazz;
     }
 
     public String getRef() {
