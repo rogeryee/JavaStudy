@@ -1,6 +1,6 @@
 package com.yee.study.mysoa.registry;
 
-import org.springframework.context.ApplicationContext;
+import java.util.List;
 
 /**
  * 注册中心接口定义类
@@ -17,4 +17,12 @@ public interface RegistryCenter {
      * @return
      */
     boolean register(RegistryArg arg);
+
+    /**
+     * 获取注册的服务
+     *
+     * @param name
+     * @return
+     */
+    List<RegistryService> getRegistry(GetRegistryArg arg);
 }

@@ -4,9 +4,12 @@ import com.yee.study.mysoa.redis.RedisApi;
 import com.yee.study.mysoa.spring.bean.Protocol;
 import com.yee.study.mysoa.spring.bean.Registry;
 import com.yee.study.mysoa.spring.bean.Service;
+import com.yee.study.util.CollectionUtil;
 import com.yee.study.util.json.JSON;
 import org.springframework.context.ApplicationContext;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,9 +30,32 @@ public class RedisRegistryCenter implements RegistryCenter {
 
         String key = service.getIntfClazz();
         String hashKey = getHashKey(protocol);
-        RedisApi.hset(key, hashKey, JSON.getDefault().toJSONString(service));
+        RegistryService registryService = new RegistryService();
+        registryService.setProtocol(protocol);
+        registryService.setService(service);
+        RedisApi.hset(key, hashKey, RegistryServiceParser.marshal(registryService));
+        return true;
+    }
 
-        return false;
+    @Override
+    public List<RegistryService> getRegistry(GetRegistryArg arg) {
+        ApplicationContext context = arg.getContext();
+
+        Registry registryBean = arg.getContext().getBean(Registry.class);
+        RedisApi.createJedisPool(registryBean.getAddress());
+
+        String key = arg.getServiceName();
+        List<String> serviceDesc = RedisApi.hvals(key);
+
+        if(CollectionUtil.isNotEmpty(serviceDesc)) {
+            List<RegistryService> registryServices = new ArrayList<>(CollectionUtil.size(serviceDesc));
+            for(String desc : serviceDesc) {
+                registryServices.add(RegistryServiceParser.unmarshal(desc));
+            }
+            return registryServices;
+        }
+
+        return null;
     }
 
     private String getHashKey(Protocol protocol) {

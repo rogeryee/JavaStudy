@@ -292,4 +292,20 @@ public class RedisApi {
         }
         return null;
     }
+
+    public static List<String> hvals(String key) {
+        Jedis jedis = null;
+        String value = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.hvals(key);
+        }
+        catch (Exception e) {
+
+        }
+        finally {
+            returnResource(pool, jedis);
+        }
+        return null;
+    }
 }

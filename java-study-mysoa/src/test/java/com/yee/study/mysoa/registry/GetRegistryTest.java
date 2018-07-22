@@ -1,6 +1,5 @@
 package com.yee.study.mysoa.registry;
 
-import com.yee.study.mysoa.mock.TestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -11,22 +10,21 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * 服务注册测试类（生产者端）
+ * 获取服务注册测试类（消费者端）
  *
  * @author Roger.Yi
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:registry/registry-test.xml"})
-public class RegistryTest {
+@ContextConfiguration({"classpath:registry/get-registry-test.xml"})
+public class GetRegistryTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(RegistryTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(GetRegistryTest.class);
 
     @Autowired
     private ApplicationContext context;
 
     @Test
-    public void testRegistry() {
-        TestService testService = context.getBean(TestService.class);
-        testService.hello("Roger");
+    public void testGetRegistry() {
+        logger.info("test get registry");
     }
 }

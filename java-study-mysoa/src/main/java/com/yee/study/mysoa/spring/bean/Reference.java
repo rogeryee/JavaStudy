@@ -3,14 +3,18 @@ package com.yee.study.mysoa.spring.bean;
 import com.yee.study.mysoa.invoke.Invoke;
 import com.yee.study.mysoa.invoke.InvokeFactory;
 import com.yee.study.mysoa.invoke.InvokeInvocationHandler;
+import com.yee.study.mysoa.registry.RegistryDelegate;
+import com.yee.study.mysoa.registry.RegistryService;
 import com.yee.study.util.StringUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 import java.io.Serializable;
 import java.lang.reflect.Proxy;
+import java.util.List;
 
 /**
  * 引用关联定义类
@@ -19,7 +23,7 @@ import java.lang.reflect.Proxy;
  *
  * @author Roger.Yi
  */
-public class Reference implements Serializable, FactoryBean, ApplicationContextAware {
+public class Reference implements Serializable, FactoryBean, ApplicationContextAware, InitializingBean {
 
     /**
      * ID
@@ -40,6 +44,11 @@ public class Reference implements Serializable, FactoryBean, ApplicationContextA
      * 协议
      */
     private String protocol;
+
+    /**
+     * 获取注册
+     */
+    private List<RegistryService> regServices;
 
     /**
      * SpringContext
@@ -82,6 +91,12 @@ public class Reference implements Serializable, FactoryBean, ApplicationContextA
     @Override
     public boolean isSingleton() {
         return true;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        regServices = RegistryDelegate.getRegistry(intfClazz, context);
+        System.out.println(111);
     }
 
     public String getId() {
