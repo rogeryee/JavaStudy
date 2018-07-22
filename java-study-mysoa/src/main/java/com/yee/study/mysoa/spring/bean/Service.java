@@ -13,7 +13,7 @@ import java.io.Serializable;
  *
  * @author Roger.Yi
  */
-public class Service implements Serializable, ApplicationContextAware {
+public class Service implements Serializable, ApplicationContextAware, InitializingBean {
 
     /**
      * 编号
@@ -40,6 +40,11 @@ public class Service implements Serializable, ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.context = applicationContext;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        RegistryDelegate.register(context);
     }
 
     public String getId() {

@@ -25,7 +25,7 @@ public class RegistryTest {
     private ApplicationContext context;
 
     @Test
-    public void testParser() {
+    public void testRegistry() {
         TestService testService = context.getBean(TestService.class);
         testService.hello("Roger");
     }

@@ -260,4 +260,36 @@ public class RedisApi {
         }
         return null;
     }
+
+    public static Boolean hexists(String key, String hashKey) {
+        Jedis jedis = null;
+        String value = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.hexists(key, hashKey);
+        }
+        catch (Exception e) {
+
+        }
+        finally {
+            returnResource(pool, jedis);
+        }
+        return null;
+    }
+
+    public static Long hset(String key, String hashKey, String val) {
+        Jedis jedis = null;
+        String value = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.hset(key, hashKey, val);
+        }
+        catch (Exception e) {
+
+        }
+        finally {
+            returnResource(pool, jedis);
+        }
+        return null;
+    }
 }
