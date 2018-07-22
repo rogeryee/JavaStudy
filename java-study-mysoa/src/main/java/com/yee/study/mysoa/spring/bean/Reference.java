@@ -96,7 +96,6 @@ public class Reference implements Serializable, FactoryBean, ApplicationContextA
     @Override
     public void afterPropertiesSet() throws Exception {
         regServices = RegistryDelegate.getRegistry(intfClazz, context);
-        System.out.println(111);
     }
 
     public String getId() {
@@ -129,5 +128,13 @@ public class Reference implements Serializable, FactoryBean, ApplicationContextA
 
     public void setIntfClazz(String intfClazz) {
         this.intfClazz = intfClazz;
+    }
+
+    public List<RegistryService> getRegServices() {
+        return regServices;
+    }
+
+    public void setRegServices(List<RegistryService> regServices) {
+        this.regServices = regServices;
     }
 }

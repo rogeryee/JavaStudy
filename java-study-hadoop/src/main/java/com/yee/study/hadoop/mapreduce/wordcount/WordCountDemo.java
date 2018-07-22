@@ -24,7 +24,7 @@ import java.util.StringTokenizer;
  * 2) 用 mvn clean install编译打包java-study-hadoop模块，会在target目录下生成 java-study-hadoop-1.0-SNAPSHOT.jar
  * 3) 进入target目录，执行如下命令启动map-reduce计算任务：
  * hadoop jar java-study-hadoop-1.0-SNAPSHOT.jar com.yee.study.hadoop.mapreduce.wordcount.WordCountDemo /input /output1
- * 注意：此处的输出目录每次都要指定一个不存在的。
+ * 注意：此处的输出目录每次都要指定一个不存在的。(也可以用 hadoop fs -rm -r /output1 删除已经存在的输出目录)
  *
  * @author Roger.Yi
  */

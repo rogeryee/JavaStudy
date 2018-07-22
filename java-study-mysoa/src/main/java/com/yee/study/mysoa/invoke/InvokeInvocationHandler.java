@@ -38,6 +38,11 @@ public class InvokeInvocationHandler implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         logger.info("Invoke class=[{}] method=[{}]", proxy.getClass().toString(), method.toString());
-        return null;
+
+        InvocationArg arg = new InvocationArg();
+        arg.setMethod(method);
+        arg.setArgs(args);
+        arg.setReference(reference);
+        return invoke.invoke(arg);
     }
 }
