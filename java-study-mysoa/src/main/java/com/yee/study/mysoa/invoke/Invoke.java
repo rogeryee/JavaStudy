@@ -9,5 +9,5 @@ package com.yee.study.mysoa.invoke;
  */
 public interface Invoke {
 
-    String invoke(InvocationArg arg);
+    String invoke(InvocationArg arg) throws Exception;
 }

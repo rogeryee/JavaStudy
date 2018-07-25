@@ -35,11 +35,11 @@ public class Service implements Serializable, ApplicationContextAware, Initializ
      */
     private String protocol;
 
-    private ApplicationContext context;
+    private static ApplicationContext context;
     
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.context = applicationContext;
+        context = applicationContext;
     }
 
     @Override

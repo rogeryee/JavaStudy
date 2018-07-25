@@ -9,8 +9,8 @@
     
     <mysoa:registry type="redis" address="127.0.0.1:6379"/>
     
-    <mysoa:protocol name="http" port="27017" host="127.0.0.1"/>
+    <mysoa:protocol name="netty" port="27017" host="127.0.0.1"/>
 
-    <mysoa:reference id="TestServiceImpl" intfClazz="com.yee.study.mysoa.mock.TestService" loadBalance="random" protocol="http"/>
+    <mysoa:reference id="TestServiceImpl" intfClazz="com.yee.study.mysoa.mock.TestService" loadBalance="random" protocol="netty"/>
 
 </beans>

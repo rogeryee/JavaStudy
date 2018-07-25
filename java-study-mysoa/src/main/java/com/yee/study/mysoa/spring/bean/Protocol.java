@@ -1,5 +1,9 @@
 package com.yee.study.mysoa.spring.bean;
 
+import com.yee.study.mysoa.rpc.netty.NettyUtil;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+
 import java.io.Serializable;
 
 /**
@@ -7,7 +11,7 @@ import java.io.Serializable;
  *
  * @author Roger.Yi
  */
-public class Protocol implements Serializable {
+public class Protocol implements Serializable, ApplicationListener<ContextRefreshedEvent> {
 
     /**
      * ID
@@ -29,6 +33,28 @@ public class Protocol implements Serializable {
      * Host地址
      */
     private String host;
+
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        if (!ContextRefreshedEvent.class.getName().equals(contextRefreshedEvent.getClass().getName())) {
+            return;
+        }
+
+        if (!"netty".equalsIgnoreCase(name)) {
+            return;
+        }
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    NettyUtil.startServer(port);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }).start();
+    }
 
     public String getId() {
         return id;

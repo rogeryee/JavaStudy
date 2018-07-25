@@ -9,10 +9,10 @@
     
     <mysoa:registry type="redis" address="127.0.0.1:6379"/>
     
-    <mysoa:protocol name="netty" port="27017" host="127.0.0.1"/>
+    <mysoa:protocol name="netty" port="8901" host="127.0.0.1"/>
     
     <!-- 服务提供者-->
-    <bean id="provider-TestService" class="com.yee.study.mysoa.mock.TestServiceProviderImpl"/>
-    <mysoa:service intfClazz="com.yee.study.mysoa.mock.TestService" ref="provider-TestService" protocol="netty"/>
+    <bean id="provider-HelloService" class="com.yee.study.mysoa.integration.provider1.HelloServiceImpl"/>
+    <mysoa:service intfClazz="com.yee.study.mysoa.integration.common.HelloService" ref="provider-HelloService" protocol="netty"/>
 
 </beans>

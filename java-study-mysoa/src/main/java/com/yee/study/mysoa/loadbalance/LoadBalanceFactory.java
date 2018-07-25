@@ -2,6 +2,7 @@ package com.yee.study.mysoa.loadbalance;
 
 import com.yee.study.mysoa.consts.LoadBalanceRules;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Map;
  */
 public class LoadBalanceFactory {
 
-    private static Map<String, LoadBalanceRule> rules;
+    private static Map<String, LoadBalanceRule> rules = new HashMap<>();
 
     static {
         rules.put(LoadBalanceRules.RANDOM, new RandomRule());

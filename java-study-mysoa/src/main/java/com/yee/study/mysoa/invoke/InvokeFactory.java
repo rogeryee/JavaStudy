@@ -18,7 +18,7 @@ public class InvokeFactory {
     static {
         invokes.put(Protocols.HTTP, new HttpInvoke());
         invokes.put(Protocols.RMI, null);
-        invokes.put(Protocols.NETTY, null);
+        invokes.put(Protocols.NETTY, new NettyInvoke());
     }
 
     /**
