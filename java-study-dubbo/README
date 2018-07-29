@@ -1,0 +1,8 @@
+#### 项目说明 ####
+本项目是一个基于Dubbo的学习项目
+
+#### 项目结构 ####
+
+1.  helloworld：展示了一个简单的Hello World示例
+    包com.yee.study.spring.boot.helloworld
+    展示了一个基础SpringBoot程序的构建，包括RestController和AOP配置

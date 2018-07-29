@@ -4,8 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.yee</groupId>
+    
     <artifactId>java-study-dubbo</artifactId>
     <name>Dubbo Study Module</name>
 
@@ -38,6 +37,26 @@
             <artifactId>java-study-dep-log</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>pom</type>
+        </dependency>
+
+        <!-- Dubbo -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>${dubbo.version}</version>
+        </dependency>
+
+        <!-- ZkClient -->
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>${zkclient.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>

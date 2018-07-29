@@ -28,8 +28,10 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <curator.version>4.0.0</curator.version>
-        <dubbo.version>2.5.3</dubbo.version>
+        <dubbo.version>2.5.10</dubbo.version>
         <hadoop.verison>2.7.3</hadoop.verison>
+        <jackson.version>2.9.5</jackson.version>
+        <javassist.version>3.22.0-GA</javassist.version>
         <mysql.version>5.1.21</mysql.version>
         <netty.version>4.1.6.Final</netty.version>
         <jedis.version>2.7.0</jedis.version>

@@ -1,5 +1,21 @@
 #### 项目说明 ####
-本项目是一个自定义的类Dubbo的分布式框架
+本项目是一个自定义的类似Dubbo的分布式框架
 
 #### 项目结构 ####
 
+
+#### 项目测试 ####
+1. ParserTest.java : com.yee.study.mysoa.spring.parser
+    测试了自定义标签的解析和加载
+
+2. RegistryTest.java : com.yee.study.mysoa.registry
+    测试了将服务注册到Redis服务器
+
+3. GetRegistryTest.java : com.yee.study.mysoa.registry
+    测试了将注册到Redis的服务读取至本地的过程
+
+4. 集成测试 : com.yee.study.mysoa.integration
+    common : 定义了通用的服务接口
+    provider1: 启动Provider1App程序，就可以模拟启动一个提供服务的应用
+    provider2: 启动Provider2App程序，就可以模拟启动一个提供服务的应用
+    consumer : 启动ConsumerApp程序，就可以模拟启动一个调用已注册服务的应用，默认会调用hello的方法。
