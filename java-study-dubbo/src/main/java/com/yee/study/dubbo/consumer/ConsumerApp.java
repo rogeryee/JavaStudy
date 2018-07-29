@@ -16,12 +16,13 @@ public class ConsumerApp {
     private static final Logger logger = LoggerFactory.getLogger(ConsumerApp.class);
 
     public static void main(String[] args) throws Exception {
-        AbstractApplicationContext context = new ClassPathXmlApplicationContext(
-                new String[] { "consumer/consumer.xml" });
+        AbstractApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"consumer/consumer.xml"});
         context.registerShutdownHook();
 
         HelloService helloService = context.getBean(HelloService.class);
-        String ret = helloService.sayHello("Roger");
-        logger.info("Return string = " + ret);
+        for (int i = 0; i < 5; i++) {
+            String ret = helloService.sayHello("Roger");
+            logger.info("Return string = " + ret);
+        }
     }
 }
