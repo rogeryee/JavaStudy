@@ -44,3 +44,12 @@
     
     consumer/ServiceConsumerApp：应用服务消费者（本例中实现了Get、Post方式的交互）
     
+
+5.  Hystrix示例：
+    包com.yee.study.spring.cloud.hystrix
+    
+    Eureka服务（注册中心）: 启动 com.yee.study.spring.cloud.eureka.server.EurekaServerApp 作为单节点服务。
+    
+    服务提供者：启动2个ribbon包下的ServiceProviderApp（启动的Program Agrs中用1，2）
+    
+    consumer/ServiceConsumerApp：应用服务消费者（本例中实现了Get、Post方式的交互）

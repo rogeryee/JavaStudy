@@ -71,6 +71,13 @@
             <version>${hadoop.verison}</version>
         </dependency>
 
+        <!-- hbase-client -->
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-client</artifactId>
+            <version>${hbase.client.version}</version>
+        </dependency>
+
 
 
     </dependencies>

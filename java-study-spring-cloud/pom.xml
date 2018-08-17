@@ -83,6 +83,12 @@
             <artifactId>spring-boot-starter-jetty</artifactId>
         </dependency>
 
+        <!-- Acurator -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-acurator</artifactId>
+        </dependency>
+
         <!-- SpringCloud Config -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -111,6 +117,12 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <!-- Hystrix -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
         </dependency>
         
     </dependencies>
