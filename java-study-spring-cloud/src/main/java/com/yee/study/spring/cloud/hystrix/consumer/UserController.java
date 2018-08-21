@@ -30,7 +30,7 @@ public class UserController {
     @GetMapping(value = "/{id}")
     @HystrixCommand(fallbackMethod = "findByIdFallback")
     public String findById(@PathVariable Long id) {
-        String url = "http://SERVICE-PROVIDER/user/get/" + id; // 用服务名访问
+        String url = "http://SERVICE-PROVIDER/user/" + id; // 用服务名访问
         return restTemplate.getForObject(url, String.class);
     }
 

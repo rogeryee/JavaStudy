@@ -33,7 +33,7 @@ public class UserController {
      * @param id
      * @return
      */
-    @GetMapping(value = "/get/{id}")
+    @GetMapping(value = "/{id}")
     public String get(@PathVariable Long id) {
 
         logService();

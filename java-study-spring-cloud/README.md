@@ -39,10 +39,10 @@
     包com.yee.study.spring.cloud.feign
     
     Eureka服务（注册中心）: 启动 com.yee.study.spring.cloud.eureka.server.EurekaServerApp 作为单节点服务。
+
+    服务提供者：ServiceProviderApp（package: com.yee.study.spring.cloud.feign.provider）
     
-    provider/ServiceProviderApp：应用服务提供者
-    
-    consumer/ServiceConsumerApp：应用服务消费者（本例中实现了Get、Post方式的交互）
+    服务消费者：ServiceConsumerApp（package: com.yee.study.spring.cloud.feign.consumer）
     
 
 5.  Hystrix示例：
@@ -50,6 +50,25 @@
     
     Eureka服务（注册中心）: 启动 com.yee.study.spring.cloud.eureka.server.EurekaServerApp 作为单节点服务。
     
-    服务提供者：启动2个ribbon包下的ServiceProviderApp（启动的Program Agrs中用1，2）
+    服务提供者：ServiceProviderApp（package: com.yee.study.spring.cloud.ribbon.provider），启动1-2个提供者（启动的Program Agrs中用1，2）
     
-    consumer/ServiceConsumerApp：应用服务消费者（本例中实现了Get、Post方式的交互）
+    服务消费者：ServiceConsumerApp（package: com.yee.study.spring.cloud.hystrix.consumer）
+
+6.  Zuul示例：
+    包com.yee.study.spring.cloud.zuul
+    
+    Eureka服务（注册中心）: 启动 com.yee.study.spring.cloud.eureka.server.EurekaServerApp 作为单节点服务。
+    
+    服务提供者：ServiceProviderApp（package: com.yee.study.spring.cloud.ribbon.provider），启动1-2个提供者（启动的Program Agrs中用1，2）
+    
+    服务消费者：ServiceConsumerApp（package: com.yee.study.spring.cloud.ribbon.consumer）
+
+    服务网关：GatewayApp（package: com.yee.study.spring.cloud.zuul.gateway）
+
+    测试：
+        1. 加载 gateway.properties 文件，可以通过以下路径访问到相应的服务提供者、消费者。
+            http://localhost:8071/service-consumer/user/1，
+            http://localhost:8071/service-provider/user/1
+        2. 加载 gateway-routes.propeties 文件，增加了路由的配置，可以通过以下路径访问到相应的服务提供者、消费者。 
+
+
