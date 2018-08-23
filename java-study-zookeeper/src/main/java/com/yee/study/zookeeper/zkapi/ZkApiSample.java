@@ -1,4 +1,4 @@
-package com.yee.study.zookeeper.zkorigin;
+package com.yee.study.zookeeper.zkapi;
 
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
@@ -13,13 +13,13 @@ import static org.apache.zookeeper.Watcher.Event.KeeperState;
 import static org.apache.zookeeper.ZooDefs.Ids;
 
 /**
- * 使用原生Zookeeper包示例
+ * 使用原生Zookeeper API 示例
  *
  * @author Roger.Yi
  */
-public class ZkDemo implements Watcher {
+public class ZkApiSample implements Watcher {
 
-    private static final Logger logger = LoggerFactory.getLogger(ZkDemo.class);
+    private static final Logger logger = LoggerFactory.getLogger(ZkApiSample.class);
 
     private static final CountDownLatch cdl = new CountDownLatch(1);
 
@@ -28,33 +28,43 @@ public class ZkDemo implements Watcher {
     private static Stat stat = new Stat();
 
     public static void main(String[] args) throws Exception {
-        zk = new ZooKeeper("127.0.0.1:2181", 5000, new ZkDemo());
+        zk = new ZooKeeper("127.0.0.1:2181", 5000, new ZkApiSample());
         cdl.await();
 
-        doCreateData("/zk-test-");
-//        doDataChange("/zk-test");
-//        doChildNodeData("/zk-test");
+        String rootPath = "/zk-test";
 
+        // 创建节点示例
+        doCreateData(rootPath);
+
+        // 修改节点示例
+//        doDataChange(rootPath);
+
+        // 操作子节点
+//        doChildNodeData(rootPath);
 
         Thread.sleep(Integer.MAX_VALUE);
     }
 
     /**
-     * 创建节点
+     * 创建节点示例
      *
      * @throws Exception
      */
     private static void doCreateData(String path) throws Exception {
+
+        // 创建临时节点
         String path1 = zk.create(path, "123".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
-        logger.info("create path=[{}] end.", path1);
+        logger.info("create ephemeral path=[{}] end.", path1);
 
+        // 创建临时顺序节点
         String path2 = zk.create(path, "456".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
-        logger.info("create path=[{}] end.", path2);
+        logger.info("create ephemeral sequential path=[{}] end.", path2);
 
+        // 创建临时顺序节点
         zk.create(path, "789".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL, new AsyncCallback.StringCallback() {
             @Override
             public void processResult(int rc, String path, Object ctx, String name) {
-                logger.info("create path result : " + rc + ", path = " + path + ", ctx = " + ctx + ", name = " + name);
+                logger.info("process create ephemeral sequential result : " + rc + ", path = " + path + ", ctx = " + ctx + ", name = " + name);
             }
         }, "I am context");
     }
@@ -65,11 +75,17 @@ public class ZkDemo implements Watcher {
      * @throws Exception
      */
     private static void doDataChange(String path) throws Exception {
+
+        String path1 = zk.create(path, "123".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
         zk.getData(path, true, stat);
         logger.info("get path=[{}] : czxid=[{}], mzxid=[{}], version=[{}]", path, stat.getCzxid(), stat.getMzxid(), stat
                 .getVersion());
-        logger.info("set path=[{}] start...", path);
-        zk.setData("/zk-test", "123".getBytes(), -1);
+
+        zk.setData(path, "123456".getBytes(), -1);
+
+        zk.getData(path, true, stat);
+        logger.info("get path=[{}] : czxid=[{}], mzxid=[{}], version=[{}]", path, stat.getCzxid(), stat.getMzxid(), stat
+                .getVersion());
     }
 
     /**
@@ -78,6 +94,8 @@ public class ZkDemo implements Watcher {
      * @throws Exception
      */
     private static void doChildNodeData(String path) throws Exception {
+
+        // 创建父节点
         zk.create(path, "123".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 
         int size = 3;

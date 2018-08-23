@@ -1,4 +1,4 @@
-package com.yee.study.hbase;
+package com.yee.study.hadoop.hbase;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;

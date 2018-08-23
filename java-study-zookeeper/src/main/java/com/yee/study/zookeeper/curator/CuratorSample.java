@@ -18,9 +18,9 @@ import java.util.concurrent.Executors;
  *
  * @author Roger.Yi
  */
-public class CuratorDemo {
+public class CuratorSample {
 
-    private static final Logger logger = LoggerFactory.getLogger(CuratorDemo.class);
+    private static final Logger logger = LoggerFactory.getLogger(CuratorSample.class);
 
     /**
      * zookeeper地址

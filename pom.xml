@@ -18,6 +18,7 @@
         <module>java-study-spring-cloud</module>
         <module>java-study-zookeeper</module>
         <module>java-study-hadoop</module>
+        <module>java-study-spark</module>
         <module>java-study-rabbitmq</module>
         <module>java-study-dubbo</module>
         <module>java-study-mysoa</module>

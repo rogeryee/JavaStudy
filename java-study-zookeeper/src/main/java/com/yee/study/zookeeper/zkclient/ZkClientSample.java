@@ -3,7 +3,6 @@ package com.yee.study.zookeeper.zkclient;
 import org.I0Itec.zkclient.ZkClient;
 import org.I0Itec.zkclient.serialize.SerializableSerializer;
 import org.apache.zookeeper.CreateMode;
-import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,18 +14,25 @@ import java.util.List;
  *
  * @author Roger.Yi
  */
-public class ZkClientDemo {
+public class ZkClientSample {
 
-    public static final Logger logger = LoggerFactory.getLogger(ZkClientDemo.class);
+    public static final Logger logger = LoggerFactory.getLogger(ZkClientSample.class);
 
     private static ZkClient zkClient = null;
 
     public static void main(String[] args) throws Exception {
         zkClient = new ZkClient("127.0.0.1:2181", 5000, 5000, new SerializableSerializer());
 
-        String path = "/zkclient-";
+        String path = "/zkclient-test";
+
+        // 创建节点
 //        doCreateData(path);
-        doSetAndGet(path);
+
+        // 操作节点（读/写）
+//        doSetAndGet(path);
+
+        // 操作子节点
+        doChildNodeData(path);
 
         Thread.sleep(Integer.MAX_VALUE);
     }
@@ -43,7 +49,7 @@ public class ZkClientDemo {
     }
 
     /**
-     * 创建节点
+     * 操作节点（读/写）
      *
      * @throws Exception
      */
