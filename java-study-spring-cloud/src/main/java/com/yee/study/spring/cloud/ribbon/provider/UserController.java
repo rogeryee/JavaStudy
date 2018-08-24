@@ -29,7 +29,7 @@ public class UserController {
     private DiscoveryClient discoveryClient;
 
     /**
-     * curl 'http://localhost:8081/user/get/1'
+     * curl 'http://localhost:8081/user/1'
      * @param id
      * @return
      */

@@ -64,11 +64,16 @@
     服务消费者：ServiceConsumerApp（package: com.yee.study.spring.cloud.ribbon.consumer）
 
     服务网关：GatewayApp（package: com.yee.study.spring.cloud.zuul.gateway）
+    
+    过滤器：PreRequestFilter（package: com.yee.study.spring.cloud.zuul.gateway.filter）
+           是一个前置的请求过滤器（本例中用于在接受到请求后打印出相应的request内容）
 
     测试：
         1. 加载 gateway.properties 文件，可以通过以下路径访问到相应的服务提供者、消费者。
             http://localhost:8071/service-consumer/user/1，
             http://localhost:8071/service-provider/user/1
-        2. 加载 gateway-routes.propeties 文件，增加了路由的配置，可以通过以下路径访问到相应的服务提供者、消费者。 
-
+        2. 加载 gateway-routes.propeties 文件，增加了路由的配置(对service-consumer增加了映射，忽略了service-provider) 
+        	http://localhost:8071/consumer/user/1（配置了路由映射，可以访问）
+        	http://localhost:8071/service-provider/user/1（可以访问）
+        	http://localhost:8071/service-provider/user/1（无法访问，因为在路由中被忽略）
 
