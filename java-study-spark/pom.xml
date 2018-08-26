@@ -22,6 +22,14 @@
             <groupId>com.yee</groupId>
             <artifactId>java-study-util</artifactId>
             <version>1.0-SNAPSHOT</version>
+
+            <!-- 避免Spark运行的兼容性问题，要排除其他jackson的引用 -->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- Test -->
@@ -74,7 +82,6 @@
 
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
-        
         <plugins>
             <plugin>
                 <groupId>org.scala-tools</groupId>
