@@ -1,6 +1,6 @@
 package com.yee.study.spark.scala.wordcount
 
-import java.io.InputStream
+import java.net.URL
 
 import org.apache.spark.sql.SparkSession
 
@@ -25,7 +25,10 @@ object WordCount {
   def main(args: Array[String]): Unit = {
 
     System.setProperty("hadoop.home.dir", "/Users/RogerYee/MyWork/DevTools/hadoop-2.7.3")
-    val file = "/Users/RogerYee/bigdata/wordcount.csv"
+
+    val resource: URL = WordCount.getClass.getResource("/")
+    val file = resource.getPath + "/wordcount/data.csv"
+
     val spark = SparkSession
       .builder()
       .appName("WorkCountSample")
@@ -54,12 +57,7 @@ object WordCount {
     * @param file
     */
   def wordCountByScala(file: String): Unit = {
-
-    //    val stream : InputStream = getClass.getResourceAsStream("wordcount/data.csv")
-    //    val bufferedSource = scala.io.Source.fromInputStream( stream )
-
-    val bufferedSource = Source.fromFile(file);
-
+    val bufferedSource = Source.fromFile(file)
     val text = bufferedSource
       .getLines()
       .toArray
