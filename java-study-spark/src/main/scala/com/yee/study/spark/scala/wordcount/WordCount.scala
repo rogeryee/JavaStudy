@@ -14,7 +14,7 @@ import scala.io.Source
   * 2. Spark RDD
   * 3. Spark DataFrame
   *
-  * 需要存在/Users/RogerYee/bigdata/wordcount.csv文件
+  * java-study-spark/data/wordcount.csv文件
   * 内容如下：
   * Shanghai,Beijin,Tianjin,Hongkong
   * Roger,Johnny,Jason,Joe,
@@ -25,9 +25,8 @@ object WordCount {
   def main(args: Array[String]): Unit = {
 
     System.setProperty("hadoop.home.dir", "/Users/RogerYee/MyWork/DevTools/hadoop-2.7.3")
-
-    val resource: URL = WordCount.getClass.getResource("/")
-    val file = resource.getPath + "/wordcount/data.csv"
+    
+    val file = "java-study-spark/data/wordcount.csv"
 
     val spark = SparkSession
       .builder()
