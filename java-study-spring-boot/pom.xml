@@ -136,9 +136,20 @@
 
     <build>
         <plugins>
+            <!-- 用于将示例以及依赖包打成一个可执行的JAR -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.yee.study.spring.boot.helloworld.HelloWorldApp</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

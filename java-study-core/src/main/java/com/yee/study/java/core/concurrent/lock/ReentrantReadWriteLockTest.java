@@ -75,11 +75,12 @@ class DataWithLock
     public void write(int data)
     {
         rwl.writeLock().lock();// 获取锁
+        String threadName = null;
         try
         {
             try
             {
-                String threadName = Thread.currentThread().getName();
+                threadName = Thread.currentThread().getName();
                 logger.info(threadName + " is ready to write data");
 
                 Thread.sleep(20);
@@ -96,6 +97,8 @@ class DataWithLock
         {
             rwl.writeLock().unlock();// 释放锁
         }
+
+        logger.info(threadName + " finish write " + this.data);
     }
 
     /**
@@ -104,11 +107,12 @@ class DataWithLock
     public void read()
     {
         rwl.readLock().lock();// 获取锁
+        String threadName = null;
         try
         {
             try
             {
-                String threadName = Thread.currentThread().getName();
+                threadName = Thread.currentThread().getName();
                 logger.info(threadName + " is ready to read data");
                 Thread.sleep(20);
                 logger.info(threadName + " read " + this.data);
@@ -122,5 +126,6 @@ class DataWithLock
         {
             rwl.readLock().unlock();// 释放锁
         }
+        logger.info(threadName + " finish read " + this.data);
     }
 }

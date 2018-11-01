@@ -84,10 +84,10 @@
         </dependency>
 
         <!-- Acurator -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-acurator</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-acurator</artifactId>-->
+        <!--</dependency>-->
 
         <!-- SpringCloud Config -->
         <dependency>

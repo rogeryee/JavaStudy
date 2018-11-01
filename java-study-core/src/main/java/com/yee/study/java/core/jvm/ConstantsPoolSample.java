@@ -61,8 +61,8 @@ public class ConstantsPoolSample
     public static void main(String[] args)
     {
         ConstantsPoolSample sample = new ConstantsPoolSample();
-//        sample.test1();
+        sample.test1();
 //        sample.test2();
-        sample.test3();
+//        sample.test3();
     }
 }

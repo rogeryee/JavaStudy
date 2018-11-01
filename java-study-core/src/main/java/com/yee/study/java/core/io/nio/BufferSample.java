@@ -16,7 +16,7 @@ public class BufferSample
 
     public static void main(String[] args)
     {
-        testBufferAllocation();
+//        testBufferAllocation();
         testBufferUsage();
     }
 

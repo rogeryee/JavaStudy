@@ -5,6 +5,7 @@ import com.yee.study.util.MapUtil;
 import com.yee.study.util.StringUtil;
 import org.bouncycastle.util.encoders.Hex;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,6 +15,29 @@ import java.util.regex.Pattern;
  */
 public class Test
 {
+    public static void main(String[] args) {
+        System.out.println(initApplyNo(1234567l));
+        System.out.println(initApplyNo(123456789l));
+    }
+
+    private static String initApplyNo(Long loanApplyId)
+    {
+        StringBuilder sb = new StringBuilder("");
+
+        String id = String.valueOf(loanApplyId);
+        int length = id.length();
+        if (length < 9)
+        {
+            for (int i = 0; i < 5 - length; i++)
+            {
+                sb.append("0");
+            }
+        }
+        sb.append(id);
+        String dateStr = (new SimpleDateFormat("yyyyMMdd")).format(new Date());
+        return "021" + dateStr + sb.toString();
+    }
+
     /**
      * 转换推送内容
      *
@@ -54,7 +78,7 @@ public class Test
         return sb.toString();
     }
 
-    public static void main(String[] args)
+    public static void main1(String[] args)
     {
         List<String> list = new ArrayList<>();
         list.add("0");
