@@ -5,6 +5,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Roger.Yi
@@ -72,6 +75,20 @@ public class Main
     }
 
     public static void main(String[] args) {
-        new Main().getSequenceDiagram("a->b:hello", "out.png", "qsd");
+//        new Main().getSequenceDiagram("a->b:hello", "out.png", "qsd");
+
+        List<String> netList = new ArrayList<>();
+        netList.add("0004");
+        netList.add("0001");
+        netList.add("0002");
+
+        List<String> authNetIds = new ArrayList<>();
+        authNetIds.add("0003");
+        authNetIds.add("0002");
+        authNetIds.add("0001");
+
+        authNetIds.retainAll(netList);
+
+        System.out.println();
     }
 }
