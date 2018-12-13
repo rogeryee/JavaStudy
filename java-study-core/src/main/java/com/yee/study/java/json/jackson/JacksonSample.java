@@ -188,6 +188,11 @@ class Friend {
 
 /**
  * 使用JacksonAnnotation的POJO
+ *
+ * Jackson提供了一系列注解，方便对JSON序列化和反序列化进行控制，下面介绍一些常用的注解。
+ * @JsonIgnore 此注解用于属性上，作用是进行JSON操作时忽略该属性。
+ * @JsonFormat 此注解用于属性上，作用是把Date类型直接转化为想要的格式，如@JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")。
+ * @JsonProperty 此注解用于属性上，作用是把该属性的名称序列化为另外一个名称，如把trueName属性序列化为name，@JsonProperty("name")。
  */
 @JsonRootName("FriendDetailObject")
 @JsonIgnoreProperties({"uselessProp1"})
