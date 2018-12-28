@@ -74,7 +74,7 @@ public class Main
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 //        new Main().getSequenceDiagram("a->b:hello", "out.png", "qsd");
 
         List<String> netList = new ArrayList<>();
@@ -90,5 +90,7 @@ public class Main
         authNetIds.retainAll(netList);
 
         System.out.println();
+
+        System.out.println("convert space to :[" + URLEncoder.encode(" ", "utf-8") + "]");
     }
 }

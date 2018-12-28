@@ -7,145 +7,151 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.nio.ByteBuffer;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.Selector;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
+import java.nio.channels.*;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
  * 采用NIO的服务端示例
- * 
+ *
  * @author Roger
  */
-public class NioServer
-{
+public class NioServer {
+
     private static final Logger logger = LoggerFactory.getLogger(NioServer.class);
-    
-    private int BLOCK = 4096; //缓冲区大小
 
-    private ByteBuffer sendbuffer = ByteBuffer.allocate(BLOCK); // 接受数据缓冲区
-
-    private ByteBuffer receivebuffer = ByteBuffer.allocate(BLOCK); // 发送数据缓冲区
+    private ServerSocketChannel serverSocketChannel;
 
     private Selector selector;
 
-    public NioServer(int port) throws IOException
-    {
-        // 打开服务器套接字通道, 并设置为非阻塞
-        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
-        serverSocketChannel.configureBlocking(false);
+    public NioServer(int port) throws IOException {
+        this.serverSocketChannel = ServerSocketChannel.open(); // 打开 Server Socket Channel
+        this.serverSocketChannel.configureBlocking(false); // 配置为非阻塞
+        this.serverSocketChannel.socket().bind(new InetSocketAddress(port)); // 绑定 Server port
 
-        // 检索与此通道关联的服务器套接字， 并进行服务的绑定
-        ServerSocket serverSocket = serverSocketChannel.socket();
-        serverSocket.bind(new InetSocketAddress(port));
+        this.selector = Selector.open(); // 创建 Selector
+        this.serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT); // 注册 Server Socket Channel 到 Selector
+        logger.info("Server started.");
 
-        // 通过open()方法找到Selector
-        this.selector = Selector.open();
-
-        // 注册到selector，等待连接
-        serverSocketChannel.register(this.selector, SelectionKey.OP_ACCEPT);
-        logger.info("NIOServer:Server Start at port 8888");
+        handleKeys();
     }
 
     /**
-     * 启动
+     * 处理事件
+     *
      * @throws IOException
-     * @throws InterruptedException
      */
-    private void start() throws IOException, InterruptedException
-    {
-        while (true)
-        {
-            // 选择一组键，并且相应的通道已经打开
-            this.selector.select();
-
-            // 返回此选择器的已选择键集。
-            Set<SelectionKey> selectionKeys = this.selector.selectedKeys();
-            Iterator<SelectionKey> iterator = selectionKeys.iterator();
-            while (iterator.hasNext())
-            {
-                SelectionKey selectionKey = iterator.next();
-                iterator.remove();
-                this.handleKey(selectionKey);
+    private void handleKeys() throws IOException {
+        while (true) {
+            // 通过 Selector 选择 Channel
+            int selectNums = selector.select(10 * 1000L);
+            if (selectNums == 0) {
+                continue;
             }
-            TimeUnit.SECONDS.sleep(5);
+
+            // 遍历可选择的 Channel 的 SelectionKey 集合
+            Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
+            while (iterator.hasNext()) {
+                SelectionKey key = iterator.next();
+                iterator.remove(); // 移除下面要处理的 SelectionKey
+
+                // 忽略无效的 SelectionKey
+                if (!key.isValid()) {
+                    continue;
+                }
+
+                handleKey(key);
+            }
+        }
+    }
+
+    private void handleKey(SelectionKey key) throws IOException {
+        // 接受连接就绪
+        if (key.isAcceptable()) {
+            handleAcceptableKey(key);
+        }
+        // 读就绪
+        if (key.isReadable()) {
+            handleReadableKey(key);
+        }
+        // 写就绪
+        if (key.isWritable()) {
+            handleWritableKey(key);
         }
     }
 
     /**
-     * 处理请求
-     * @param selectionKey
+     * 处理接受连接事件
+     *
+     * @param key
      * @throws IOException
      */
-    private void handleKey(SelectionKey selectionKey) throws IOException
-    {
-        // 接受请求
-        ServerSocketChannel server = null;
-        SocketChannel client = null;
-        String receiveText;
-        String sendText;
+    private void handleAcceptableKey(SelectionKey key) throws IOException {
+        SocketChannel clientSocketChannel = ((ServerSocketChannel) key.channel()).accept(); // 接受 Client Socket Channel
+        clientSocketChannel.configureBlocking(false); // 配置为非阻塞
+        clientSocketChannel.register(selector, SelectionKey.OP_READ, new ArrayList<String>()); // 注册 Client Socket Channel 到 Selector
+        logger.info("Accept new channel");
+    }
 
-        // 测试此键的通道是否已准备好接受新的套接字连接。
-        if (selectionKey.isAcceptable())
-        {
-            // 返回为之创建此键的通道。
-            server = (ServerSocketChannel) selectionKey.channel();
+    /**
+     * 处理可读事件
+     *
+     * @param key
+     * @throws IOException
+     */
+    private void handleReadableKey(SelectionKey key) throws IOException {
 
-            // 接受到此通道套接字的连接。
-            // 此方法返回的套接字通道（如果有）将处于阻塞模式。
-            client = server.accept();
+        // 从客户端SocketChannel中读取数据
+        SocketChannel clientSocketChannel = (SocketChannel) key.channel();
+        ByteBuffer readBuffer = CodecUtil.read(clientSocketChannel);
 
-            // 配置为非阻塞
-            client.configureBlocking(false);
-
-            // 注册到selector，等待连接
-            client.register(this.selector, SelectionKey.OP_READ);
+        // 处理连接已经断开的情况
+        if (readBuffer == null) {
+            logger.info("Disconnect channel");
+            clientSocketChannel.register(selector, 0);
+            return;
         }
-        else if (selectionKey.isReadable())
-        {
-            // 返回为之创建此键的通道。
-            client = (SocketChannel) selectionKey.channel();
 
-            //将缓冲区清空以备下次读取
-            this.receivebuffer.clear();
+        if (readBuffer.position() > 0) {
+            String content = CodecUtil.newString(readBuffer);
+            logger.info("Read data：" + content);
 
-            //读取服务器发送来的数据到缓冲区中
-            int count = client.read(this.receivebuffer);
-            if (count > 0)
-            {
-                receiveText = new String(this.receivebuffer.array(), 0, count);
-                client.register(selector, SelectionKey.OP_WRITE);
-                logger.info("NIOServer: Receive data from client --> " + receiveText);
-            }
-        }
-        else if (selectionKey.isWritable())
-        {
-            //将缓冲区清空以备下次写入
-            this.sendbuffer.clear();
+            // 添加到响应队列
+            List<String> responseQueue = (ArrayList<String>) key.attachment();
+            responseQueue.add("Response：" + content);
 
-            // 返回为之创建此键的通道。
-            client = (SocketChannel) selectionKey.channel();
-            sendText = "message from server";
-
-            //向缓冲区中输入数据
-            this.sendbuffer.put(sendText.getBytes());
-            this.sendbuffer.flip(); //将缓冲区各标志复位,因为向里面put了数据标志被改变要想从中读取数据发向服务器,就要复位
-
-            //输出到通道
-            client.write(this.sendbuffer);
-            client.register(selector, SelectionKey.OP_READ);
-            logger.info("NIOServer:Send data to client --> " + sendText);
+            // 注册 Client Socket Channel 到 Selector
+            clientSocketChannel.register(selector, SelectionKey.OP_WRITE, key.attachment());
         }
     }
-    
-    public static void main(String[] args) throws IOException, InterruptedException
-    {
-        int port = 8888;
-        NioServer server = new NioServer(port);
-        server.start();
+
+    /**
+     * 处理可写事件
+     *
+     * @param key
+     * @throws ClosedChannelException
+     */
+    private void handleWritableKey(SelectionKey key) throws ClosedChannelException {
+        // 向客户端SocketChannel写入数据
+        SocketChannel clientSocketChannel = (SocketChannel) key.channel();
+
+        // 遍历响应队列
+        List<String> responseQueue = (ArrayList<String>) key.attachment();
+        for (String content : responseQueue) {
+            logger.info("Write data：" + content);
+            CodecUtil.write(clientSocketChannel, content);
+        }
+        responseQueue.clear();
+
+        // 注册 Client Socket Channel 到 Selector
+        clientSocketChannel.register(selector, SelectionKey.OP_READ, responseQueue);
+    }
+
+    public static void main(String[] args) throws IOException {
+        NioServer server = new NioServer(8888);
     }
 }
 

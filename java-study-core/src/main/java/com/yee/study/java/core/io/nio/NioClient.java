@@ -6,106 +6,147 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
+import java.nio.channels.ClosedChannelException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * 采用NIO通讯的客户端示例
- * 
+ *
  * @author Roger
  */
-public class NioClient
-{
+public class NioClient {
     private static final Logger logger = LoggerFactory.getLogger(NioClient.class);
-    
-    private static int BLOCK = 4096; // 缓冲区大小
 
-    private static ByteBuffer sendbuffer = ByteBuffer.allocate(BLOCK); // 接受数据缓冲区
+    private SocketChannel clientSocketChannel;
 
-    private static ByteBuffer receivebuffer = ByteBuffer.allocate(BLOCK); // 据缓冲区
+    private Selector selector;
 
-    private final static InetSocketAddress SERVER_ADDRESS = new InetSocketAddress("localhost", 8888); // 服务器端地址
+    private final List<String> responseQueue = new ArrayList<String>();
 
-    public static void main(String[] args) throws IOException, InterruptedException
-    {
-        // 打开socket通道，并设置为非阻塞方式
-        SocketChannel socketChannel = SocketChannel.open();
-        socketChannel.configureBlocking(false);
+    private CountDownLatch connected = new CountDownLatch(1);
 
-        // 打开选择器，注册连接服务端socket动作
-        Selector selector = Selector.open();
-        socketChannel.register(selector, SelectionKey.OP_CONNECT);
-        socketChannel.connect(SERVER_ADDRESS);
+    public NioClient(int port) throws IOException, InterruptedException {
+        this.clientSocketChannel = SocketChannel.open(); // 打开 Client Socket Channel
+        this.clientSocketChannel.configureBlocking(false); // 配置为非阻塞
+        this.selector = Selector.open(); // 创建 Selector
+        this.clientSocketChannel.register(selector, SelectionKey.OP_CONNECT); // 注册 Server Socket Channel 到 Selector
+        this.clientSocketChannel.connect(new InetSocketAddress(port)); // 连接服务器
 
-        Set<SelectionKey> selectionKeys;
-        Iterator<SelectionKey> iterator;
-        SelectionKey selectionKey;
-        SocketChannel client;
-        String receiveText;
-        String sendText;
-
-        while (true)
-        {
-            //选择一组键，其相应的通道已为 I/O 操作准备就绪。
-            //此方法执行处于阻塞模式的选择操作。
-            selector.select();
-
-            //返回此选择器的已选择键集。
-            selectionKeys = selector.selectedKeys();
-            iterator = selectionKeys.iterator();
-            while (iterator.hasNext())
-            {
-                selectionKey = iterator.next();
-                if (selectionKey.isConnectable())
-                {
-                    client = (SocketChannel) selectionKey.channel();
-                    // 判断此通道上是否正在进行连接操作。
-                    // 完成套接字通道的连接过程。
-                    if (client.isConnectionPending())
-                    {
-                        client.finishConnect();
-                        logger.info("NIOClient:Connected to Server!");
-                        sendbuffer.clear();
-                        sendbuffer.put("Hello,Server".getBytes());
-                        sendbuffer.flip();
-                        client.write(sendbuffer);
-                    }
-                    client.register(selector, SelectionKey.OP_READ);
-                }
-                else if (selectionKey.isReadable())
-                {
-                    client = (SocketChannel) selectionKey.channel();
-                    //将缓冲区清空以备下次读取
-                    receivebuffer.clear();
-                    //读取服务器发送来的数据到缓冲区中
-                    int count = client.read(receivebuffer);
-                    if (count > 0)
-                    {
-                        receiveText = new String(receivebuffer.array(), 0, count);
-                        logger.info("NIOClient:Receive data from server --> " + receiveText);
-                        client.register(selector, SelectionKey.OP_WRITE);
-                    }
-
-                }
-                else if (selectionKey.isWritable())
-                {
-                    sendbuffer.clear();
-                    client = (SocketChannel) selectionKey.channel();
-                    sendText = "message from client";
-                    sendbuffer.put(sendText.getBytes());
-                    //将缓冲区各标志复位,因为向里面put了数据标志被改变要想从中读取数据发向服务器,就要复位
-                    sendbuffer.flip();
-                    client.write(sendbuffer);
-                    logger.info("NIOClient:Send data to server" + sendText);
-                    client.register(selector, SelectionKey.OP_READ);
-                }
+        new Thread(() -> {
+            try {
+                handleKeys();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            selectionKeys.clear();
-            TimeUnit.SECONDS.sleep(5);
+        }).start();
+
+        if (connected.getCount() != 0) {
+            connected.await();
+        }
+        logger.info("Client 启动完成");
+    }
+
+    /**
+     * 处理事件
+     *
+     * @throws IOException
+     */
+    private void handleKeys() throws IOException {
+        while (true) {
+            // 通过 Selector 选择 Channel
+            int selectNums = selector.select(30 * 1000L);
+            if (selectNums == 0) {
+                continue;
+            }
+
+            // 遍历可选择的 Channel 的 SelectionKey 集合
+            Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
+            while (iterator.hasNext()) {
+                SelectionKey key = iterator.next();
+                iterator.remove(); // 移除下面要处理的 SelectionKey
+                if (!key.isValid()) { // 忽略无效的 SelectionKey
+                    continue;
+                }
+
+                handleKey(key);
+            }
+        }
+    }
+
+    private synchronized void handleKey(SelectionKey key) throws IOException {
+        // 接受连接就绪
+        if (key.isConnectable()) {
+            handleConnectableKey(key);
+        }
+        // 读就绪
+        if (key.isReadable()) {
+            handleReadableKey(key);
+        }
+        // 写就绪
+        if (key.isWritable()) {
+            handleWritableKey(key);
+        }
+    }
+
+    private void handleConnectableKey(SelectionKey key) throws IOException {
+        // 完成连接
+        if (!clientSocketChannel.isConnectionPending()) {
+            return;
+        }
+        clientSocketChannel.finishConnect();
+        logger.info("Accpet new channel");
+
+        clientSocketChannel.register(selector, SelectionKey.OP_READ, responseQueue); // 注册 Client Socket Channel 到 Selector
+        connected.countDown(); // 标记为已连接
+    }
+
+    private void handleReadableKey(SelectionKey key) throws ClosedChannelException {
+        // 从客户端Socket Channel读取数据
+        SocketChannel clientSocketChannel = (SocketChannel) key.channel();
+        ByteBuffer readBuffer = CodecUtil.read(clientSocketChannel);
+
+        if (readBuffer.position() > 0) { // 写入模式下，
+            String content = CodecUtil.newString(readBuffer);
+            logger.info("Read data：" + content);
+        }
+    }
+
+    private void handleWritableKey(SelectionKey key) throws ClosedChannelException {
+        // Client Socket Channel
+        SocketChannel clientSocketChannel = (SocketChannel) key.channel();
+
+        // 遍历响应队列
+        List<String> responseQueue = (ArrayList<String>) key.attachment();
+        for (String content : responseQueue) {
+            logger.info("Write data：" + content);
+            CodecUtil.write(clientSocketChannel, content);
+        }
+        responseQueue.clear();
+
+        // 注册 Client Socket Channel 到 Selector
+        clientSocketChannel.register(selector, SelectionKey.OP_READ, responseQueue);
+    }
+
+    public synchronized void send(String content) throws ClosedChannelException {
+        // 添加到响应队列
+        responseQueue.add(content);
+        logger.info("Write data：" + content);
+
+        clientSocketChannel.register(selector, SelectionKey.OP_WRITE, responseQueue); // 注册 Client Socket Channel 到 Selector
+        selector.wakeup(); // 本例中使用了每一秒发送一次消息，而服务端采用的是每30秒轮训一次，所以为了保证每次发送客户端的数据能被及时响应，则需要手动唤醒
+    }
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        NioClient client = new NioClient(8888);
+        for (int i = 0; i < 30; i++) {
+            client.send("nihao: " + i);
+            Thread.sleep(1000L);
         }
     }
 }
