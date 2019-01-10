@@ -11,18 +11,19 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>java-study-util</module>
         <module>java-study-core</module>
         <module>java-study-spring-core</module>
         <module>java-study-spring-boot</module>
         <module>java-study-spring-cloud</module>
+        <module>java-study-shardingsphere</module>
+        <module>java-study-rabbitmq</module>
+        <module>java-study-dubbo</module>
+        <module>java-study-mysoa</module>
         <module>java-study-zookeeper</module>
         <module>java-study-hadoop</module>
         <module>java-study-flink</module>
         <module>java-study-spark</module>
-        <module>java-study-rabbitmq</module>
-        <module>java-study-dubbo</module>
-        <module>java-study-mysoa</module>
+        <module>java-study-util</module>
         <module>java-study-dep</module>
     </modules>
 
