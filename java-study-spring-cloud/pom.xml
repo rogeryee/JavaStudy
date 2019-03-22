@@ -6,6 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>java-study-spring-cloud</artifactId>
     <name>Spring Cloud Study Module</name>
+    <packaging>pom</packaging>
 
     <parent>
         <groupId>com.yee</groupId>
@@ -132,14 +133,5 @@
         </dependency>
         
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
