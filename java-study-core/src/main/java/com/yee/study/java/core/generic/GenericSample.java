@@ -19,7 +19,7 @@ public class GenericSample<T extends Person> {
         Person person = sample.createPerson(new Person());
         System.out.println(person.toString());
 
-        Map<String, ? extends Person> map = new HashMap<>();
+        Map<String, ? super Person> map = new HashMap<>();
         map.put("man", new Man());
     }
 }
