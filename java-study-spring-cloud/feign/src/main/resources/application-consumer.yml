@@ -1,0 +1,19 @@
+# Application
+spring:
+  application:
+    name: service-consumer
+
+server:
+  port: 8091
+
+# Log
+logging:
+  config: classpath:logback.xml
+
+# Eureka配置
+eureka:
+  client:
+    service-url:
+      default-zone: http://eureka:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true

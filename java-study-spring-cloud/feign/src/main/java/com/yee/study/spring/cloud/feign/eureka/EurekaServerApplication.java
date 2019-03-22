@@ -1,4 +1,4 @@
-package com.yee.study.spring.cloud.eureka.server;
+package com.yee.study.spring.cloud.feign.eureka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,7 +8,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
  * 单节点的Eureka Server示例
  * <p>
  * 加载 application-eureka-server.yml
- * 环境变量设置: spring.profiles.active=eureka
+ * 环境变量设置: spring.profiles.active=eureka-server
  *
  * @author Roger.Yi
  */
@@ -17,7 +17,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 public class EurekaServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication application = new SpringApplication(com.yee.study.spring.cloud.feign.eureka.EurekaServerApplication.class);
+        SpringApplication application = new SpringApplication(EurekaServerApplication.class);
         application.run(args);
     }
 }
