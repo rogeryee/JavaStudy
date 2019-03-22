@@ -1,0 +1,30 @@
+# Application
+spring:
+  application:
+    name: eureka-server
+
+server:
+  port: 8764
+
+# Log
+logging:
+  config: classpath:logback.xml
+
+# Eureka配置
+eureka:
+  instance:
+    hostname: eureka
+    preferIpAddress: true
+    metadataMap.zone: zone2
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    region: region-east
+    service-url:
+      zone1: http://eureka:8761/eureka/,http://eureka:8762/eureka/
+      zone2: http://eureka:8763/eureka/,http://eureka:8764/eureka/
+    availability-zones:
+      region-east: zone1,zone2
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+    enableSelfPreservation: false
