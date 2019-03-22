@@ -5,10 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -300,9 +297,67 @@ public class StreamSample {
 
         //模拟Filter查找其中含有字母a的所有元素，由于使用了r1.addAll(r2)，其打印结果将不会是预期的aa ab ad
         //Predicate<String> predicate = t -> t.contains("a");
-        List<String> strList4 = Stream.of("a", "b").parallel().reduce(new ArrayList<String>(), (r, t) -> { r.add(t);  return r; },
-                (r1, r2) -> {r1.addAll(r2); return r1; });
+        List<String> strList4 = Stream.of("a", "b").parallel().reduce(new ArrayList<String>(), (r, t) -> {
+                    r.add(t);
+                    return r;
+                },
+                (r1, r2) -> {
+                    r1.addAll(r2);
+                    return r1;
+                });
 
         logger.info("end");
+    }
+
+    /**
+     *
+     */
+    @Test
+    public void collect() {
+
+        // 将Stream转换成容器或Map
+        Stream<String> stream = Stream.of("I", "love", "you", "too");
+        List<String> list = stream.collect(Collectors.toList());
+
+        stream = Stream.of("I", "love", "you", "too");
+        Set<String> set = stream.collect(Collectors.toSet());
+
+        stream = Stream.of("I", "love", "you", "too");
+        Map<String, Integer> map = stream.collect(Collectors.toMap(Function.identity(), String::length));
+
+        logger.info("end");
+    }
+
+    public static class DataBean {
+
+        private int type;
+
+        private int depId;
+
+        private int num;
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
+
+        public int getDepId() {
+            return depId;
+        }
+
+        public void setDepId(int depId) {
+            this.depId = depId;
+        }
+
+        public int getNum() {
+            return num;
+        }
+
+        public void setNum(int num) {
+            this.num = num;
+        }
     }
 }

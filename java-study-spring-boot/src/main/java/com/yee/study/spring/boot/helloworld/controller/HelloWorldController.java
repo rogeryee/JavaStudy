@@ -1,10 +1,8 @@
 package com.yee.study.spring.boot.helloworld.controller;
 
-import org.hibernate.validator.constraints.EAN;
-import org.springframework.stereotype.Controller;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -29,6 +27,28 @@ public class HelloWorldController {
     @RequestMapping("/sayhello/{name}")
     public String helloWorld(@PathVariable String name) {
         return "Hello, my name is " + name;
+    }
+
+    /**
+     * http://localhost:8081/helloworld/sayhello/Roger
+     * @param name
+     * @return
+     */
+    @Async
+    @RequestMapping("/sayhello/asyn/{name}")
+    public String asynHelloWorld(@PathVariable String name) {
+
+        new Thread(() -> {
+            try {
+                System.out.println("enter thread");
+                Thread.sleep(5000);
+                System.out.println("exit thread");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+        System.out.println("call asynHelloWorld");
+        return "[Asyn] Hello, my name is " + name;
     }
 
     /**

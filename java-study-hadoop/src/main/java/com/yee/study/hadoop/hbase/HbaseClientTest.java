@@ -20,7 +20,7 @@ public class HbaseClientTest {
 
     public static void main(String[] args) throws Exception {
         Configuration configuration = HBaseConfiguration.create();
-        configuration.set("hbase.zookeeper.quorum", "roger:2184");
+        configuration.set("hbase.zookeeper.quorum", "rogermbp:2194");
 
         // 获取hbase连接
         Connection connection = ConnectionFactory.createConnection(configuration);

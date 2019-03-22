@@ -1,5 +1,8 @@
 package com.yee.study.java.core.generic;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author Roger.Yi
  */
@@ -15,6 +18,9 @@ public class GenericSample<T extends Person> {
         GenericSample<Person> sample = new GenericSample<>();
         Person person = sample.createPerson(new Person());
         System.out.println(person.toString());
+
+        Map<String, ? extends Person> map = new HashMap<>();
+        map.put("man", new Man());
     }
 }
 
@@ -31,6 +37,18 @@ class Person {
 }
 
 class Man extends Person {
+    private String gener;
+
+    public String getGener() {
+        return gener;
+    }
+
+    public void setGener(String gener) {
+        this.gener = gener;
+    }
+}
+
+class Woman extends Person {
     private String gener;
 
     public String getGener() {
