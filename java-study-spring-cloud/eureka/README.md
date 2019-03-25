@@ -1,7 +1,7 @@
 Eureka注册示例：
 包com.yee.study.spring.cloud.eureka
 
-Server: com.yee.study.spring.cloud.feign.eureka.EurekaServerApplication
+Server: com.yee.study.spring.cloud.eureka.server.EurekaServerApplication
 Client: com.yee.study.spring.cloud.eureka.client.EurekaClientApplication
 
 1. 单节点Eureka服务

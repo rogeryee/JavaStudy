@@ -1,19 +1,13 @@
-Eureka注册示例：
-包com.yee.study.spring.cloud.eureka
+Feign 示例：
+包com.yee.study.spring.cloud.feign
 
 Server: com.yee.study.spring.cloud.feign.eureka.EurekaServerApplication
-Client: com.yee.study.spring.cloud.eureka.client.EurekaClientApplication
+Provider: com.yee.study.spring.cloud.feign.provider.ServiceProviderApplication
+Consumer: com.yee.study.spring.cloud.feign.consumer.ServiceConsumerApplication
 
-1. 单节点Eureka服务
-    server：单节点的Eureka服务，使用spring.profiles.active=eureka-server
-    client：使用spring.profiles.active=eureka-client
+1. 数据提供者 ServiceProviderApplication
+   提供后端数据服务
 
-2. 多节点Eureka服务
-    本例一共配置了4个Eureka服务（同一个Region，2个zone中）
-    使用spring.profiles.active=eureka-server-zone1a
-    使用spring.profiles.active=eureka-server-zone1b
-    使用spring.profiles.active=eureka-server-zone2a
-    使用spring.profiles.active=eureka-server-zone2b
-
-    client：启动2个Client服务，分别在zone1和zone2中分别向服务端注册
+2. 数据消费者 ServiceConsumerApplication
+   消费后端服务，其中的UserClient使用Feign封装了后端数据服务的Restful接口。
      
