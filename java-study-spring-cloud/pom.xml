@@ -13,6 +13,11 @@
         <artifactId>java-study</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
+    <modules>
+        <module>eureka</module>
+        <module>feign</module>
+    </modules>
     
     <dependencyManagement>
         <dependencies>
