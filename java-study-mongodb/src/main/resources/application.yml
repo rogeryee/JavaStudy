@@ -1,0 +1,10 @@
+server:
+  port: 8081
+
+logging:
+  config: classpath:logback.xml
+
+mongodb:
+  client:
+    uri: mongodb://localhost:27017
+    db: mytest
