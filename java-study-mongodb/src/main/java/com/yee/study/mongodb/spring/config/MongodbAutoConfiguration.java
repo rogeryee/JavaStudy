@@ -4,6 +4,7 @@ import com.yee.study.mongodb.spring.DefaultMongoClientFactory;
 import com.yee.study.mongodb.spring.DefaultMongoDataSource;
 import com.yee.study.mongodb.spring.MongoDataSource;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @author Roger.Yi
  */
 @Configuration
+@ConditionalOnProperty(prefix = "mongodb", name = "switch", havingValue = "true")
 public class MongodbAutoConfiguration {
 
     @Value("${mongodb.client.uri}")

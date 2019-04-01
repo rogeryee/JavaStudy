@@ -5,6 +5,7 @@ logging:
   config: classpath:logback.xml
 
 mongodb:
+  switch: true
   client:
     uri: mongodb://localhost:27017
     db: mytest
