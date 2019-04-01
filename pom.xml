@@ -16,6 +16,7 @@
         <module>java-study-spring-boot</module>
         <module>java-study-spring-cloud</module>
         <module>java-study-shardingsphere</module>
+        <module>java-study-mongodb</module>
         <module>java-study-rabbitmq</module>
         <module>java-study-dubbo</module>
         <module>java-study-mysoa</module>
@@ -38,12 +39,15 @@
         <jackson.version>2.9.5</jackson.version>
         <javassist.version>3.22.0-GA</javassist.version>
         <kafka.version>2.0.0</kafka.version>
+        <mongodb.driver>3.2.2</mongodb.driver>
         <mysql.version>5.1.21</mysql.version>
         <netty.version>4.1.6.Final</netty.version>
         <jedis.version>2.7.0</jedis.version>
         <scala.version>2.11</scala.version>
         <spark.version>2.3.1</spark.version>
         <spring.boot.version>2.0.3.RELEASE</spring.boot.version>
+        <spring.cloud.version>Finchley.RELEASE</spring.cloud.version>
+        <spring.data.mongodb.version>1.9.6.RELEASE</spring.data.mongodb.version>
         <zookeeper.version>3.4.12</zookeeper.version>
         <zkclient.version>0.10</zkclient.version>
     </properties>

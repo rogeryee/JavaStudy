@@ -20,7 +20,7 @@
         <module>bus</module>
         <module>stream</module>
     </modules>
-    
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -34,7 +34,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Finchley.RELEASE</version>
+                <version>${spring.cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -84,7 +84,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <!-- 使用Jetty作为Web容器 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -93,8 +93,8 @@
 
         <!-- Acurator -->
         <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-acurator</artifactId>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-acurator</artifactId>-->
         <!--</dependency>-->
 
         <!-- SpringCloud Config -->
@@ -149,9 +149,8 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
-            <version>2.0.0.RELEASE</version>
         </dependency>
-        
+
     </dependencies>
 
 </project>
