@@ -1,4 +1,4 @@
-package com.yee.study.java.junit.mockito;
+package com.yee.study.java.test.mockito;
 
 import org.junit.Test;
 import org.mockito.ArgumentMatcher;

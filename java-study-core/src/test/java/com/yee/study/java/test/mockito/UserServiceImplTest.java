@@ -1,5 +1,8 @@
-package com.yee.study.java.junit.mockito.sample;
+package com.yee.study.java.test.mockito;
 
+import com.yee.study.java.test.mock.User;
+import com.yee.study.java.test.mock.UserDao;
+import com.yee.study.java.test.mock.UserServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,8 +19,7 @@ import static org.mockito.Mockito.*;
  * @author Roger.Yi
  */
 @RunWith(MockitoJUnitRunner.class)
-public class UserServiceImplTest
-{
+public class UserServiceImplTest {
     @InjectMocks
     private UserServiceImpl userService;
 
@@ -25,8 +27,7 @@ public class UserServiceImplTest
     private UserDao userDao;
 
     @Before
-    public void setUp()
-    {
+    public void setUp() {
         // 如果在class前加上 @RunWith(MockitoJUnitRunner.class)，就不需要手动的初始化了
 //        MockitoAnnotations.initMocks(this);
 
@@ -37,8 +38,7 @@ public class UserServiceImplTest
     }
 
     @Test
-    public void testGetUserByName()
-    {
+    public void testGetUserByName() {
         // 设置方法调用的预期返回
         User rtnUser = new User();
         rtnUser.setId("001");
@@ -55,8 +55,7 @@ public class UserServiceImplTest
     }
 
     @Test
-    public void testAddUser()
-    {
+    public void testAddUser() {
         // 设置方法调用的预期返回
         User rtnUser = new User();
         rtnUser.setId("001");

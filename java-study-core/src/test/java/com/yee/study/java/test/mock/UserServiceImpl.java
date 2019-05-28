@@ -1,4 +1,4 @@
-package com.yee.study.java.junit.mockito.sample;
+package com.yee.study.java.test.mock;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

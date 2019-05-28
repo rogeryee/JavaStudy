@@ -1,4 +1,4 @@
-package com.yee.study.java.junit.mockito.sample;
+package com.yee.study.java.test.mock;
 
 /**
  * @author Roger.Yi
