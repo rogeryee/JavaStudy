@@ -25,18 +25,11 @@
     <dependencies>
 
         <!-- Junit -->
-        <!--<dependency>-->
-            <!--<groupId>junit</groupId>-->
-            <!--<artifactId>junit</artifactId>-->
-            <!--<version>${junit.version}</version>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>org.junit.jupiter</groupId>-->
-            <!--<artifactId>junit-jupiter-api</artifactId>-->
-            <!--<version>${junit.jupiter.version}</version>-->
-            <!--&lt;!&ndash;<scope>test</scope>&ndash;&gt;-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
