@@ -39,11 +39,11 @@
             <type>pom</type>
         </dependency>
 
-        <dependency>
-            <groupId>io.shardingsphere</groupId>
-            <artifactId>sharding-jdbc-core</artifactId>
-            <version>${sharding.sphere.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>io.shardingsphere</groupId>-->
+            <!--<artifactId>sharding-jdbc-core</artifactId>-->
+            <!--<version>${sharding.sphere.version}</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 

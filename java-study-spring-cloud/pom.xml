@@ -19,6 +19,7 @@
         <module>feign</module>
         <module>bus</module>
         <module>stream</module>
+        <module>nepxion</module>
     </modules>
 
     <dependencyManagement>
