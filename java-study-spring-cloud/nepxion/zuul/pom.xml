@@ -13,6 +13,22 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>com.nepxion</groupId>
+            <artifactId>discovery-plugin-starter-eureka</artifactId>
+            <version>${nepxion.discovery.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.nepxion</groupId>
+            <artifactId>discovery-plugin-strategy-starter-zuul</artifactId>
+            <version>${nepxion.discovery.version}</version>
+        </dependency>
+
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>

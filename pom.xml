@@ -45,6 +45,7 @@
         <mongodb.driver.version>3.10.1</mongodb.driver.version>
         <mysql.version>5.1.21</mysql.version>
         <netty.version>4.1.6.Final</netty.version>
+        <nepxion.discovery.version>5.1.0</nepxion.discovery.version>
         <jedis.version>2.7.0</jedis.version>
         <scala.version>2.11</scala.version>
         <spark.version>2.3.1</spark.version>

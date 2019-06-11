@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 /**
  * 单节点的Eureka Server示例
  * <p>
- * 加载 application-eureka-server.yml
+ * 加载 application.yml
  * 环境变量设置: spring.profiles.active=eureka-server
  *
  * @author Roger.Yi

@@ -1,10 +1,10 @@
 # Application
 spring:
   application:
-    name: service-provider
+    name: service-consumer
 
 server:
-  port: 8081
+  port: ${port}
 
 # Log
 logging:
@@ -12,6 +12,11 @@ logging:
 
 # Eureka配置
 eureka:
+  instance:
+    metadata-map:
+      group: service-consumer-group
+      version: 1.0
+      region: ${env}
   client:
     service-url:
       default-zone: http://eureka:8761/eureka

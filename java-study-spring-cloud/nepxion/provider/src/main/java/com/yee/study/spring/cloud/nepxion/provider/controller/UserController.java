@@ -26,7 +26,7 @@ public class UserController {
      */
     @GetMapping(value = "/{id}")
     public String findById(@PathVariable Long id) {
-        logger.info("Find user, id = " + id);
-        return "";
+        logger.info("Provider user, id = " + id);
+        return "user[" + id + "]";
     }
 }

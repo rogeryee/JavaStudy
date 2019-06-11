@@ -1,0 +1,67 @@
+logging:
+  config: classpath:logback.xml
+
+# Eureka
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    registry-fetch-interval-seconds: 5
+    eureka-service-url-poll-interval-seconds: 10 #默认为300秒，这里为了验证改为10秒
+    serviceUrl:
+      defaultZone: http://eureka01:8761/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 10
+    metadata-map:
+      group: service-zuul-group
+      version: 1.0
+      region: ${env}
+
+# Hystrix
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+
+# Ribbon
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
+
+---
+spring:
+  profiles: zuul01
+  application:
+    name: zuul-server
+server:
+  port: 9071
+zuul:
+  routes:
+    insight-client-srv:
+      path: /user/**
+      serviceId: service-consumer
+
+---
+spring:
+  profiles: zuul02
+  application:
+    name: zuul-server
+server:
+  port: 9072
+zuul:
+  routes:
+    insight-client-srv:
+      path: /user/**
+      serviceId: service-consumer
+
+---
+spring:
+  profiles: zuul03
+  application:
+    name: zuul-server
+server:
+  port: 9073
+zuul:
+  routes:
+    insight-client-srv:
+      path: /user/**
+      serviceId: service-consumer
+
