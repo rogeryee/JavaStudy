@@ -42,6 +42,7 @@
         <jackson.version>2.9.5</jackson.version>
         <javassist.version>3.22.0-GA</javassist.version>
         <kafka.version>2.0.0</kafka.version>
+        <lombok.verison>1.16.22</lombok.verison>
         <mongodb.driver.version>3.10.1</mongodb.driver.version>
         <mysql.version>5.1.21</mysql.version>
         <netty.version>4.1.6.Final</netty.version>

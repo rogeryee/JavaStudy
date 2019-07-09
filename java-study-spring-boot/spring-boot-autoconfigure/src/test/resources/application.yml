@@ -1,0 +1,14 @@
+ds:
+  dataSources:
+    - id: ds-1
+      name: ds-name-1
+    - id: ds-2
+      name: ds-name-2
+daf:
+  templates:
+    - id: tp-1
+      ds-ref: ds-1
+    - id: tp-2
+      ds-ref: ds-2
+    - id: tp-3
+      ds-ref: ds-3
