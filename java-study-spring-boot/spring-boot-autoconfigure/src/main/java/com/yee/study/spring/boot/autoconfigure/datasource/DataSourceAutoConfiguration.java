@@ -73,6 +73,8 @@ public class DataSourceAutoConfiguration implements BeanFactoryAware, Applicatio
         factory.registerBeanDefinition(ds2.getId(), beanDefinition);
     }
 
+
+
     @Data
     public static class DataSourceHolderProperties {
 
