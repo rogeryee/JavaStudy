@@ -16,6 +16,26 @@ import java.util.regex.Pattern;
 public class Test
 {
     public static void main(String[] args) {
+        Pattern pattern = Pattern.compile("^(.*)=(.*)://(.*)$");
+
+        String line = "(ac-acms)\\.(.*)=amqp://ti-event.ac-acms-event-exchange";
+        Matcher matcher = pattern.matcher(line);
+        boolean matchFound = matcher.find();
+        if (matchFound) {
+
+//            String eventTypeMatch = StringUtil.emptyAsNull(matcher.group(1));
+//            route.eventTypePattern = Pattern.compile(eventTypeMatch);
+//            route.eventBusType = StringUtil.emptyAsNull(matcher.group(2));
+//            route.eventBusPara = StringUtil.emptyAsNull(matcher.group(3));
+
+
+            System.out.println(matcher.group(1));
+            System.out.println(matcher.group(2));
+            System.out.println(matcher.group(3));
+        }
+    }
+
+    public static void main2(String[] args) {
         System.out.println(initApplyNo(1234567l));
         System.out.println(initApplyNo(123456789l));
     }
