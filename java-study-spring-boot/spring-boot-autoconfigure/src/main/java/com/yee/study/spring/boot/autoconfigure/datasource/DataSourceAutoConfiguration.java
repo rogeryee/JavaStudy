@@ -32,7 +32,7 @@ public class DataSourceAutoConfiguration implements BeanFactoryAware, Applicatio
     @ConfigurationProperties(prefix = "ds")
     public DataSourceHolderProperties dataSourceHolderProperties() {
 
-        log.info("DataSourceHolderProperties created.");
+        System.out.println("######## AutoConfigure.Bean: DataSourceHolderProperties created.");
         return new DataSourceHolderProperties();
     }
 
@@ -48,7 +48,7 @@ public class DataSourceAutoConfiguration implements BeanFactoryAware, Applicatio
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        log.info("DataSourceAutoConfiguration afterProperties");
+        System.out.println("######## AutoConfigure.afterProperties");
 
         DataSourceModel ds1 = new DataSourceModel();
         ds1.setId("ds-1");

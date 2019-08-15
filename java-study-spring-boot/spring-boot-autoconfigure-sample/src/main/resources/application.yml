@@ -1,0 +1,6 @@
+ds:
+  dataSources:
+    - id: ds-1
+      name: ds-name-1
+    - id: ds-2
+      name: ds-name-2

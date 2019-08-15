@@ -1,3 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.yee.study.spring.boot.autoconfigure.datasource.DataSourceAutoConfiguration,\
-com.yee.study.spring.boot.autoconfigure.daf.DafAutoConfiguration
+com.yee.study.spring.boot.autoconfigure.datasource.DataSourceAutoConfiguration
+#com.yee.study.spring.boot.autoconfigure.datasource.DataSourceAutoConfiguration,\
+#com.yee.study.spring.boot.autoconfigure.daf.DafAutoConfiguration

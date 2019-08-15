@@ -31,7 +31,7 @@ public class DafAutoConfiguration implements BeanFactoryAware, ApplicationContex
     @Bean
     @ConfigurationProperties(prefix = "daf")
     public DafTemplatesProperties dafTemplatesProperties() {
-        log.info("DafTemplatesProperties created.");
+        System.out.println("######## DafTemplatesProperties created.");
         return new DafTemplatesProperties();
     }
 
