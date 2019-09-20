@@ -29,10 +29,10 @@ public class UpdateApi {
      * @throws IOException
      */
     public static void getDocSync(RestHighLevelClient client) throws IOException {
-        UpdateRequest request = new UpdateRequest("posts", "post", "1");
+        UpdateRequest request = new UpdateRequest("customer", "_doc", "1");
 
         String jsonString = "{" +
-                "\"updated\":\"2017-01-01\"," +
+                "\"updated\":\"2017-02-01\"," +
                 "\"reason\":\"daily update\"" +
                 "}";
         request.doc(jsonString, XContentType.JSON);

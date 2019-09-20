@@ -41,4 +41,17 @@ public class UserController {
     public void register(@RequestBody RegisterRequest request) {
         userClient.register(request);
     }
+
+    @GetMapping("/test")
+    public void test() {
+        userClient.asyncGetUser("aaaa");
+        logger.info("test completed. ");
+    }
+
+    @PostMapping(value = "/callback")
+    public String callback(@RequestBody User user) {
+        logger.info("callback invoked, user = " + user);
+        return "callback";
+    }
+
 }

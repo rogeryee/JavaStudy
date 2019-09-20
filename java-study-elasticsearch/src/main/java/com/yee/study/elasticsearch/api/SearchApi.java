@@ -36,18 +36,19 @@ public class SearchApi {
     public static void search(RestHighLevelClient client) throws IOException {
 
         // Query Builder
-        MatchQueryBuilder matchQueryBuilder = new MatchQueryBuilder("user", "Roger");
+//        MatchQueryBuilder matchQueryBuilder = new MatchQueryBuilder("customer_id", 10002);
+        MatchQueryBuilder matchQueryBuilder = new MatchQueryBuilder("defined_tags1.tag_name", "after_00s");
 
         // Source Builder
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(matchQueryBuilder);
 
-        String[] includeFields = new String[] {"user", "postDate"};
-        String[] excludeFields = new String[] {"message"};
-        searchSourceBuilder.fetchSource(includeFields, excludeFields);
+        String[] includeFields = new String[] {"agent_code", "customer_id", "gender", "defined_tags1.tag_name"};
+        String[] excludeFields = new String[] {};
+//        searchSourceBuilder.fetchSource(includeFields, excludeFields);
 
         // Search Request
-        SearchRequest searchRequest = new SearchRequest("posts");
+        SearchRequest searchRequest = new SearchRequest("customer");
         searchRequest.source(searchSourceBuilder);
 
         SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);

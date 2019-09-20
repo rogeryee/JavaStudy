@@ -14,8 +14,16 @@ import org.springframework.web.bind.annotation.*;
 public interface UserClient {
 
     @GetMapping(value = "/user/{id}")
-    public User findById(@PathVariable("id") Long id);
+    User findById(@PathVariable("id") Long id);
 
     @PostMapping(value = "/user/register")
-    public void register(@RequestBody RegisterRequest request);
+    void register(@RequestBody RegisterRequest request);
+
+//    @GetMapping(value = "/user/async/{callback}")
+//    void asyncGetUser(@PathVariable String callback);
+
+    @GetMapping(value = "/user/async/{callback}")
+    void asyncGetUser(@PathVariable(value = "callback") String callback);
 }
+
+
