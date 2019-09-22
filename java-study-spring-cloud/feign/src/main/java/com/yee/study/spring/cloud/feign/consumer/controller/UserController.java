@@ -1,5 +1,6 @@
 package com.yee.study.spring.cloud.feign.consumer.controller;
 
+import com.yee.study.spring.cloud.feign.provider.ProviderCallback;
 import com.yee.study.spring.cloud.feign.provider.controller.RegisterRequest;
 import com.yee.study.spring.cloud.feign.provider.model.User;
 import org.slf4j.Logger;
@@ -48,10 +49,29 @@ public class UserController {
         logger.info("test completed. ");
     }
 
+    /**
+     * curl 'http://localhost:8091/user/test2'
+     */
+    @GetMapping("/test2")
+    public void test2() {
+
+        ProviderCallback callback = new ProviderCallbackImpl();
+        callback.setUrl("http://localhost:8091/user/callback");
+        userClient.asyncCallback(callback);
+        logger.info("test completed. ");
+    }
+
     @PostMapping(value = "/callback")
     public String callback(@RequestBody User user) {
         logger.info("callback invoked, user = " + user);
         return "callback";
+    }
+
+    public static class ProviderCallbackImpl extends ProviderCallback {
+        @Override
+        public void onResponse(String resp) {
+            logger.info("Test2 : callback invoked");
+        }
     }
 
 }
