@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.yee.study.spring.boot.autoconfigure.sample.Config

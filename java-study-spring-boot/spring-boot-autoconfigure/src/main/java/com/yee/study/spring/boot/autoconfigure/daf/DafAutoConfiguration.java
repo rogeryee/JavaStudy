@@ -20,8 +20,8 @@ import java.util.List;
  * @author Roger.Yi
  */
 @Slf4j
-@Configuration
-@AutoConfigureAfter(value = {DataSourceAutoConfiguration.class})
+//@Configuration
+//@AutoConfigureAfter(value = {DataSourceAutoConfiguration.class})
 public class DafAutoConfiguration implements BeanFactoryAware, ApplicationContextAware, InitializingBean {
 
     private BeanFactory beanFactory;
@@ -31,7 +31,7 @@ public class DafAutoConfiguration implements BeanFactoryAware, ApplicationContex
     @Bean
     @ConfigurationProperties(prefix = "daf")
     public DafTemplatesProperties dafTemplatesProperties() {
-        System.out.println("######## DafTemplatesProperties created.");
+        System.out.println("######## DafAutoConfiguration DafTemplatesProperties created.");
         return new DafTemplatesProperties();
     }
 
@@ -47,7 +47,7 @@ public class DafAutoConfiguration implements BeanFactoryAware, ApplicationContex
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println("DafAutoConfiguration afterProperties");
+        System.out.println("######## DafAutoConfiguration afterProperties");
     }
 
     @Data

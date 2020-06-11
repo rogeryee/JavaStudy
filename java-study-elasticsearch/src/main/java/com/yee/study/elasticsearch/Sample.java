@@ -16,7 +16,11 @@ import org.elasticsearch.script.Script;
 import org.elasticsearch.script.ScriptType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.misc.BASE64Encoder;
+import sun.security.provider.MD5;
 
+import java.security.MessageDigest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +32,28 @@ public class Sample {
     private static final Logger logger = LoggerFactory.getLogger(Sample.class);
 
     public static void main(String[] args) throws Exception {
+
+        System.out.println(new Date(225561600000l));
+
+        String appId = "appId-1";
+        String appSecret = "appSecret-1";
+
+        long timestamp = new Date().getTime();
+        String text = appId + "#" + appSecret + "#" + timestamp;
+
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] md5Bytes = md.digest(text.getBytes());
+
+        BASE64Encoder encoder = new BASE64Encoder();
+        String sign = encoder.encode(md5Bytes);
+        System.out.println("sign=[" + sign + "]");
+
+        md5Bytes = md.digest(text.getBytes());
+        sign = encoder.encode(md5Bytes);
+        System.out.println("sign=[" + sign + "]");
+    }
+
+    public static void main1(String[] args) throws Exception {
 
         RestHighLevelClient client = new RestHighLevelClient(
                 RestClient.builder(

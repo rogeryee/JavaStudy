@@ -1,4 +1,4 @@
-package com.yee.study;
+package com.yee.study.java;
 
 import com.yee.study.util.DateUtil;
 import com.yee.study.util.MapUtil;

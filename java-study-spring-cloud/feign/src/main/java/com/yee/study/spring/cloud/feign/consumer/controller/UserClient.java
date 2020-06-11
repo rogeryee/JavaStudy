@@ -1,5 +1,6 @@
 package com.yee.study.spring.cloud.feign.consumer.controller;
 
+import com.yee.study.spring.cloud.feign.CallbackService;
 import com.yee.study.spring.cloud.feign.provider.ProviderCallback;
 import com.yee.study.spring.cloud.feign.provider.controller.RegisterRequest;
 import com.yee.study.spring.cloud.feign.provider.model.User;
@@ -28,6 +29,9 @@ public interface UserClient {
 
     @PostMapping(value = "/user/async/callback")
     void asyncCallback(@RequestBody ProviderCallback callback);
+
+    @PostMapping(value = "/user/async/callback2")
+    void asyncCallback2(@RequestBody CallbackService callback);
 }
 
 

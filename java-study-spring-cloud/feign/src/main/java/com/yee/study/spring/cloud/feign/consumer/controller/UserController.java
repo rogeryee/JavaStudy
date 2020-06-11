@@ -74,4 +74,13 @@ public class UserController {
         }
     }
 
+    /**
+     * curl 'http://localhost:8091/user/test3'
+     */
+    @GetMapping("/test3")
+    public void test3() {
+        userClient.asyncCallback2(new CallbackServiceImpl());
+        logger.info("test3 completed. ");
+    }
+
 }

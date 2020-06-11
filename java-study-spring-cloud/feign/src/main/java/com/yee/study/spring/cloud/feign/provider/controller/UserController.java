@@ -1,5 +1,6 @@
 package com.yee.study.spring.cloud.feign.provider.controller;
 
+import com.yee.study.spring.cloud.feign.CallbackService;
 import com.yee.study.spring.cloud.feign.provider.ProviderCallback;
 import com.yee.study.spring.cloud.feign.provider.model.User;
 import org.slf4j.Logger;
@@ -97,6 +98,32 @@ public class UserController {
                 }
 
                 String resp = restTemplate.postForObject(callback.getUrl(), new User(), String.class);
+                logger.info("Callback response = " + resp);
+            }
+        }).start();
+
+        logger.info("Response async-get request");
+    }
+
+    /**
+     * 查询用户
+     *
+     * @return
+     */
+    @PostMapping(value = "/async/callback2")
+    public void asyncCallback2(@RequestBody CallbackService callback) {
+        logger.info("Receive async-get request");
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                String resp = restTemplate.postForObject(callback.url, new User(), String.class);
                 logger.info("Callback response = " + resp);
             }
         }).start();

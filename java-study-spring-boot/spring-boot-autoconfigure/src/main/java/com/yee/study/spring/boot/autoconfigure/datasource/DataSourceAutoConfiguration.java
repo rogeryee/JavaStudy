@@ -21,7 +21,7 @@ import java.util.List;
  * @author Roger.Yi
  */
 @Slf4j
-@Configuration
+//@Configuration
 public class DataSourceAutoConfiguration implements BeanFactoryAware, ApplicationContextAware, InitializingBean {
 
     private BeanFactory beanFactory;
@@ -32,7 +32,7 @@ public class DataSourceAutoConfiguration implements BeanFactoryAware, Applicatio
     @ConfigurationProperties(prefix = "ds")
     public DataSourceHolderProperties dataSourceHolderProperties() {
 
-        System.out.println("######## AutoConfigure.Bean: DataSourceHolderProperties created.");
+        System.out.println("######## DataSourceAutoConfiguration DataSourceHolderProperties created.");
         return new DataSourceHolderProperties();
     }
 
@@ -48,7 +48,7 @@ public class DataSourceAutoConfiguration implements BeanFactoryAware, Applicatio
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println("######## AutoConfigure.afterProperties");
+        System.out.println("######## DataSourceAutoConfiguration.afterProperties");
 
         DataSourceModel ds1 = new DataSourceModel();
         ds1.setId("ds-1");
