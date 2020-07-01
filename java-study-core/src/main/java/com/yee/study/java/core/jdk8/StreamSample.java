@@ -1,11 +1,14 @@
 package com.yee.study.java.core.jdk8;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
-import java.util.function.*;
+import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -60,90 +63,60 @@ public class StreamSample {
     private static final Logger logger = LoggerFactory.getLogger(StreamSample.class);
 
     /**
-     * 构建stream示例
+     * 构建 Stream 流的四种方式 示例
      */
     @Test
     public void buildStream() {
-        // 1. 单个值
-        Stream<String> stream = Stream.of("a", "b", "c");
+        /**
+         * 1. 通过 Collection 的 stream() 构建
+         */
+        List<String> list = Arrays.asList("1", "2", "3", "4", "0", "222", "33");
+        Stream<String> stream1 = list.stream();
+        Stream<String> stream2 = list.parallelStream();
 
-        // 2. 数组
-        String[] strArray = new String[]{"a", "b", "c"};
-        stream = Stream.of(strArray);
-        stream = Arrays.stream(strArray);
+        /**
+         * 2. 通过 Arrays 的 stream() 方法构建
+         */
+        Stream<String> stream3 = Arrays.stream(new String[]{"a", "b", "c"});
 
-        // 3. 集合
-        List<String> list = Arrays.asList(strArray);
-        stream = list.stream();
+        /**
+         * 3. 通过Stream类中得 of（）静态方法构建
+         */
+        Stream<String> stream4 = Stream.of("a", "b", "c");
 
-        // 对于基本数值型，目前有三种对应的包装类型 Stream： IntStream、LongStream、DoubleStream
-        // 4. 数值流的构造
+        /**
+         * 对于基本数值型，目前有三种对应的包装类型 Stream： IntStream、LongStream、DoubleStream
+         */
         IntStream.of(new int[]{1, 2, 3}).forEach(x -> logger.info(String.valueOf(x)));
         IntStream.range(1, 4).forEach(x -> logger.info(String.valueOf(x)));
 
-        // 5. 流转换为其它数据结构
-        // 数组
-        stream = Stream.of("e", "f", "g");
-        String[] strArray1 = stream.toArray(String[]::new);
-
-        // 集合
-        stream = Stream.of("e", "f", "g");
-        List<String> list1 = stream.collect(Collectors.toList());
-
-        stream = Stream.of("e", "f", "g");
-        List<String> list2 = stream.collect(Collectors.toCollection(ArrayList::new));
-
-        stream = Stream.of("e", "f", "g", "g");
-        Set set1 = stream.collect(Collectors.toSet());
-
-        stream = Stream.of("e", "f", "g");
-        Stack stack1 = stream.collect(Collectors.toCollection(Stack::new));
-
-        // 字符串
-        stream = Stream.of("e", "f", "g");
-        String str = stream.collect(Collectors.joining()).toString();
-    }
-
-    /**
-     * generator方法：生成一个无限长度的Stream，其元素的生成是通过给定的Supplier（这个接口可以看成一个对象的工厂，每次调用返回一个给定类型的对象）
-     */
-    @Test
-    public void generate() {
-        // 以下三个方法是相同的功能，都是用于随机数的生成
-        Stream.generate(new Supplier<Double>() {
-            @Override
-            public Double get() {
-                return Math.random();
-            }
-        });
-        Stream.generate(() -> Math.random());
-        Stream.generate(Math::random);
+        /**
+         * 4 创建无限流(迭代、生成)
+         */
+        Stream<Integer> stream5 = Stream.iterate(2, (x) -> x * 2);
+        Stream<Double> stream6 = Stream.generate(() -> Math.random());
     }
 
     /**
      * map/flatMap 示例
+     * <p>
+     * map - 接受lambda 将元素转换为其他形式或提取信息。接受一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新元素
+     * <p>
+     * flatMap 接受一个函数作为参数，将流中的每个值都转成另一个流，然后把所有流连成一个流。
      */
     @Test
     public void map() {
-        // map 生成的是个 1:1 映射，每个输入元素，都按照规则转换成为另外一个元素
-        // 转换大写
-        List<String> wordList = Arrays.asList("beijing", "shanghai", "macau");
-        List<String> output = wordList.stream().
-                map(String::toUpperCase).
-                collect(Collectors.toList());
+        /**
+         * map 生成的是个 1:1 映射，每个输入元素，都按照规则转换成为另外一个元素
+         */
+        Stream.of("beijing", "shanghai", "macau").map(String::toUpperCase).forEach(System.out::println); // 转换大写
+        Stream.of(1, 2, 3, 4).map(n -> n * n).forEach(System.out::println); // 平方数
 
-        // 平方数
-        List<Integer> nums = Arrays.asList(1, 2, 3, 4);
-        List<Integer> squareNums = nums.stream().
-                map(n -> n * n).
-                collect(Collectors.toList());
-
-        // flatMap 用于处理一对多映射关系
+        /**
+         * flatMap 用于处理一对多映射关系
+         */
         Stream<List<Integer>> inputStream = Stream.of(Arrays.asList(1), Arrays.asList(2, 3), Arrays.asList(4, 5, 6));
-        Stream<Integer> outputStream = inputStream.
-                flatMap((childList) -> childList.stream());
-        nums = outputStream.collect(Collectors.toList());
-        logger.info("end");
+        inputStream.flatMap((childList) -> childList.stream()).forEach(System.out::println);
     }
 
     /**
@@ -151,16 +124,65 @@ public class StreamSample {
      */
     @Test
     public void filter() {
-        // 留下偶数
-        Integer[] evens = Stream.of(1, 2, 3, 4, 5, 6).filter(n -> n % 2 == 0).toArray(Integer[]::new);
+        /**
+         * 留下偶数
+         */
+        Stream.of(1, 2, 3, 4, 5, 6).filter(n -> n % 2 == 0).forEach(System.out::println);
 
-        // 把单词挑出来
-        List<String> output = Stream.of("This is Shanghai", "Shanghai is a big city", "Beijing is the capital").
+        /**
+         * 把单词挑出来，且排除长度小于等于2的字符串
+         */
+        Stream.of("This is Shanghai", "Shanghai is a big city", "Beijing is the capital").
                 flatMap(line -> Stream.of(line.split(" "))).
-                filter(word -> word.length() > 2). // 排除长度小于等于2的字符串 
-                collect(Collectors.toList());
+                filter(word -> word.length() > 2).
+                forEach(System.out::println);
+    }
 
-        logger.info("end");
+    /**
+     * distinct 示例
+     */
+    @Test
+    public void distinct() {
+        Stream.of(1, 2, 3, 4, 5, 6, 3, 1).distinct().forEach(System.out::println);
+    }
+
+    /**
+     * limit 和 skip 示例
+     */
+    @Test
+    public void limitAndSkip() {
+        /**
+         * 输出 3, 4, 5
+         */
+        Stream.of(1, 2, 3, 4, 5, 6).skip(2).limit(3).forEach(System.out::println);
+    }
+
+    /**
+     * sort 示例
+     */
+    @Test
+    public void sort() {
+        /**
+         * 自然排序，输出 1, 2, 3, 4, 5, 6
+         */
+        Stream.of(4, 5, 2, 6, 3, 1).sorted().forEach(System.out::println);
+
+        /**
+         * 自定义排序，输出 6, 5, 4, 3, 2, 1
+         */
+        Stream.of(4, 5, 2, 6, 3, 1).sorted((x, y) -> y - x).forEach(System.out::println);
+    }
+
+    /**
+     * peek 示例
+     * peek 方法主要用于 debug
+     */
+    @Test
+    public void peek() {
+        /**
+         * 输出 1, 2, 3, -4, 5, -6
+         */
+        Stream.of(1, 2, 3, -4, 5, -6).peek(a -> System.out.println(a * -1)).forEach(System.out::println);
     }
 
     /**
@@ -310,54 +332,108 @@ public class StreamSample {
     }
 
     /**
-     *
+     * count 示例
+     */
+    @Test
+    public void count() {
+        long count = Stream.of("apple", "banana", "orange", "waltermaleon", "grape").count();
+        Assert.assertEquals(5, count);
+    }
+
+    /**
+     * min 和 max 示例
+     */
+    @Test
+    public void minAndMax() {
+        Stream.of(1, 2, 3, 4).min(Integer::compareTo).ifPresent(System.out::println);
+        Stream.of(1, 2, 3, 4).max(Integer::compareTo).ifPresent(System.out::println);
+    }
+
+    /**
+     * find 示例
+     */
+    @Test
+    public void find() {
+        Stream.of("apple", "banana", "orange", "waltermaleon", "grape").findFirst().ifPresent(System.out::println);
+        Stream.of("apple", "banana", "orange", "waltermaleon", "grape").findAny().ifPresent(System.out::println);
+    }
+
+    /**
+     * match 示例
+     */
+    @Test
+    public void match() {
+        boolean match1 = Stream.of(1, 2, 3, 4, 5).allMatch(x -> x > 0);
+        Assert.assertTrue(match1);
+
+        boolean match2 = Stream.of(1, 2, 3, 4, 5).noneMatch(x -> x < 0);
+        Assert.assertTrue(match2);
+
+        boolean match3 = Stream.of(1, 2, 3, 4, 5).anyMatch(x -> x > 6);
+        Assert.assertFalse(match3);
+    }
+
+    /**
+     * collect 示例
      */
     @Test
     public void collect() {
+        /**
+         * 1. toList
+         */
+        Stream.of("I", "love", "you", "too", "you").collect(Collectors.toList()).forEach(System.out::println);
 
-        // 将Stream转换成容器或Map
-        Stream<String> stream = Stream.of("I", "love", "you", "too");
-        List<String> list = stream.collect(Collectors.toList());
+        /**
+         * 2. toSet
+         */
+        Stream.of("I", "love", "you", "too", "you").collect(Collectors.toSet()).forEach(System.out::println);
 
-        stream = Stream.of("I", "love", "you", "too");
-        Set<String> set = stream.collect(Collectors.toSet());
+        /**
+         * 3. toCollection 通过指定集合类型来生成集合
+         */
+        Stream.of("I", "love", "you", "too", "you").collect(Collectors.toCollection(ArrayList::new)).forEach(System.out::println);
+        Stream.of("I", "love", "you", "too", "you").collect(Collectors.toCollection(HashSet::new)).forEach(System.out::println);
 
-        stream = Stream.of("I", "love", "you", "too");
-        Map<String, Integer> map = stream.collect(Collectors.toMap(Function.identity(), String::length));
+        /**
+         * 3. toMap
+         */
+        Stream.of("I", "love", "you", "too").collect(Collectors.toMap(Function.identity(), String::length)).forEach((x, y) -> System.out.println(x + ", " + y));
 
-        logger.info("end");
-    }
+        /**
+         * 4. joining
+         */
+        String joining = Stream.of("I", "love", "you").collect(Collectors.joining(" "));
+        Assert.assertEquals("I love you", joining);
 
-    public static class DataBean {
+        /**
+         * 5. counting, maxBy, minBy 此处建议直接使用 Stream 的 count, max, min 替换
+         */
+        Stream.of(1, 0, -10, 9, 8, 100, 200, -80).collect(Collectors.counting());
+        Stream.of(1, 0, -10, 9, 8, 100, 200, -80).collect(Collectors.minBy(Integer::compareTo));
+        Stream.of(1, 0, -10, 9, 8, 100, 200, -80).collect(Collectors.maxBy(Integer::compareTo));
 
-        private int type;
+        /**
+         * 6. summingInt()、summarizingLong()、summarizingDouble() 这三个分别用于int、long、double类型数据一个求总操作，返回的是一个SummaryStatistics(求总)。
+         *    包含了数量统计count、求和sum、最小值min、平均值average、最大值max
+         */
+        double average = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).collect(Collectors.summarizingInt(Integer::valueOf)).getAverage();
+        double average2 = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).collect(Collectors.averagingDouble(Integer::valueOf)).doubleValue();
+        Assert.assertTrue(average == average2);
 
-        private int depId;
+        /**
+         * 7. groupingBy
+         *    groupingByConcurrent() 和 groupingBy，这两者区别也仅是多线程和单线程的使用场景
+         */
+        // 默认结果类型为 Map<String,List<Integer>>
+        Stream.of(-6, -7, -8, -9, 1, 2, 3, 4, 5, 6, 0)
+                .collect(Collectors.groupingBy(n -> n == 0 ? "等于" : n > 0 ? "大于" : "小于")).forEach((x, y) -> System.out.println(x + ":" + y));
 
-        private int num;
+        // 自定义下游收集器 Map<String,Set<Integer>>
+        Stream.of(-6, -7, -8, -9, 1, 2, 3, 4, 5, 6, 0)
+                .collect(Collectors.groupingBy(n -> n == 0 ? "等于" : n > 0 ? "大于" : "小于", Collectors.toSet()));
 
-        public int getType() {
-            return type;
-        }
-
-        public void setType(int type) {
-            this.type = type;
-        }
-
-        public int getDepId() {
-            return depId;
-        }
-
-        public void setDepId(int depId) {
-            this.depId = depId;
-        }
-
-        public int getNum() {
-            return num;
-        }
-
-        public void setNum(int num) {
-            this.num = num;
-        }
+        // 自定义map容器 和 下游收集器 Map<String,Set<Integer>>
+        Stream.of(-6, -7, -8, -9, 1, 2, 3, 4, 5, 6, 0)
+                .collect(Collectors.groupingBy(n -> n == 0 ? "等于" : n > 0 ? "大于" : "小于", LinkedHashMap::new, Collectors.toSet()));
     }
 }
