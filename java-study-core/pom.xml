@@ -128,18 +128,6 @@
             <version>3.7</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apdplat</groupId>
-            <artifactId>word</artifactId>
-            <version>1.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.huaban</groupId>
-            <artifactId>jieba-analysis</artifactId>
-            <version>1.0.3</version>
-        </dependency>
-
     </dependencies>
 
 </project>
