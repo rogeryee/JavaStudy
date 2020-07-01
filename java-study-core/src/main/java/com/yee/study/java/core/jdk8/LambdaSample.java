@@ -3,11 +3,10 @@ package com.yee.study.java.core.jdk8;
 import com.google.common.collect.Lists;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.Objects;
+import java.util.function.*;
 
 /**
  * JDK8 新特性 - Lambda表达式
@@ -50,83 +49,79 @@ import java.util.function.Supplier;
 public class LambdaSample {
 
     /**
+     * Java8中引入了一个新的操作符，"->"，该操作符称为箭头操作符或者Lambda操作符，箭头操作符将Lambda表达式拆分成两部分；
+     * 左侧: Lambda表达式的参数列表，对应的是接口中抽象方法的参数列表；
+     * 右侧: Lambda表达式中所需要执行的功能(Lambda体)，对应的是对抽象方法的实现；(函数式接口(只能有一个抽象方法))
+     * Lambda表达式的实质是　对接口的实现；
+     */
+    @Test
+    public void anonymousInnerClass() {
+        /**
+         * 1. 接口中的抽象方法 : 无参数，无返回值；
+         *
+         * 以下写法的效果是一样的：
+         * new Runnable() {
+         *     @Override
+         *     public void run() {
+         *          System.out.println("In Java8!")
+         *     }
+         * }
+         */
+        new Thread(() -> System.out.println("In Java8!")).start();
+
+        /**
+         * 2. 接口中的抽象方法 : 一个参数且无返回值； (若只有一个参数，那么小括号可以省略不写)
+         *
+         * x -> System.out.println("hello") 与 (x) -> System.out.println("hello") 一样
+         */
+        InterfaceOne one = x -> System.out.println("hello");
+
+        /**
+         * 3. 两个参数，有返回值，并且有多条语句 ：　要用大括号括起来，而且要写上return
+         *
+         * Lambda表达式的参数列表的数据类型 可以省略不写，因为JVM编译器通过上下文推断出数据类型，即"类型推断"，
+         * (Integer x,Integer y ) -> Integer.compare(x,y)可以简写成(x,y) -> Integer.compare(x,y)；
+         *
+         * 以下写法的效果是一样的：
+         * Comparator<Integer> compartor = new Comparator<Integer>() {
+         *     @Override
+         *     public int compare(Integer x, Integer y) {
+         *         System.out.println(x + y);
+         *         return Integer.compare(y, x);
+         *     }
+         * };
+         */
+        Comparator<Integer> compartorOne = (x, y) -> {
+            System.out.println(x + y);
+            return Integer.compare(y, x);
+        };
+
+        /**
+         * 4. 两个参数，有返回值，只有一条语句 ：　大括号省略，return省略
+         *
+         * 以下写法的效果是一样的：
+         * Comparator<Integer> compartor = new Comparator<Integer>() {
+         *     @Override
+         *     public int compare(Integer x, Integer y) {
+         *         return Integer.compare(y, x);
+         *     }
+         * };
+         */
+        Comparator<Integer> compartorTwo = (x, y) -> Integer.compare(y, x);
+    }
+
+    interface InterfaceOne {
+        void doSomething(String input);
+    }
+
+    /**
      * 集合遍历
      */
     @Test
     public void iterateCollection() {
         List<Integer> list = Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-
         list.forEach(System.out::print);
-        System.out.println("----------------");
-
-        list.forEach(e -> System.out.print(e));
-        System.out.println();
-    }
-
-    /**
-     * 利用函数式接口实现匿名内部类
-     */
-    @Test
-    public void anonymousInnerClass() {
-        new Thread(() -> System.out.println("In Java8!")).start();
-    }
-
-    /**
-     * Predicate是jdk8 中的新增接口, 共有5个方法,
-     * <p>
-     * Returns a predicate which evaluates to true only if this predicate
-     * and the provided predicate both evaluate to true.
-     * and(Predicate<? super T> p)
-     * <p>
-     * Returns a predicate which negates the result of this predicate.
-     * negate()
-     * <p>
-     * Returns a predicate which evaluates to true if either
-     * this predicate or the provided predicate evaluates to true
-     * or(Predicate<? super T> p)
-     * <p>
-     * Returns a predicate that evaluates to true if both or neither
-     * of the component predicates evaluate to true
-     * xor(Predicate<? super T> p)
-     * <p>
-     * Returns true if the input object matches some criteria
-     * test(T t)
-     * <p>
-     */
-    @Test
-    public void predicate() {
-        List<String> languages = Arrays.asList("Java", "Scala", "C++", "Haskell", "Lisp", "Swift");
-
-        Predicate<String> startWithS = (n) -> n.startsWith("S"); // 以J开头的字符串
-        Predicate<String> endWithA = (n) -> n.endsWith("a"); // 以a结尾的字符串
-        Predicate<String> fourLength = (n) -> n.length() == 5; // 长度等于5的字符串
-        Predicate<String> fourGtLength = (n) -> n.length() > 4; // 长度大于4的字符串
-
-        System.out.println("startWithS : --------------");
-        filterWithTest(languages, startWithS); // 以J开头的字符串
-
-        System.out.println("endWithA : --------------");
-        filterWithTest(languages, endWithA); // 以a结尾的字符串
-
-        System.out.println("fourGtLength : --------------");
-        filterWithTest(languages, fourGtLength); // 长度大于4的字符串
-
-        System.out.println("All : --------------");
-        filterWithTest(languages, (str) -> true); // 打印所有
-
-        System.out.println("No : --------------");
-        filterWithTest(languages, (str) -> false); // 不打印所有
-
-        System.out.println("fourGtLength and startWithS : --------------");
-        filterWithTest(languages, fourGtLength.and(startWithS));
-    }
-
-    public static void filterWithTest(List<String> names, Predicate condition) {
-        for (String name : names) {
-            if (condition.test(name)) {
-                System.out.println(name + " ");
-            }
-        }
+        list.forEach(e -> System.out.print(e)); // 如果没有对集合元素引用或者修改，可以简化成 System.out::print
     }
 
     /**
@@ -136,7 +131,7 @@ public class LambdaSample {
     public void stream() {
         List<Integer> nums = Lists.newArrayList(1, 1, null, 2, 3, 4, null, 5, 6, 7, 8, 9, 10);
         System.out.println("求和：" + nums.stream()//转成Stream
-                .filter(team -> team != null)//过滤
+                .filter(Objects::nonNull)//过滤
                 .distinct()//去重
                 .mapToInt(num -> num * 2)//map操作
                 .skip(2)//跳过前2个元素
@@ -147,50 +142,64 @@ public class LambdaSample {
 
     /**
      * 方法引用, 与Lambda表达式联合使用
+     * <p>
+     * Lambda体中调用方法的参数列表和返回值类型，要和函数式接口中抽象方法的参数列表和返回值类型保持一致
      */
     @Test
     public void methodReference() {
+        /**
+         * 1. 对象::实例方法名
+         *
+         * 以下2中写法和用方法引用的效果是一样的。
+         *
+         * a) Consumer<String> consumerOne = s -> System.out.println(s);
+         *    useConsumer(consumerOne,"123");
+         * b) useConsumer(s -> System.out.println(s),"123");
+         */
+        useConsumer(System.out::println, "123"); //因为println和 accept 是同样的只有一个入参，没有返回值
 
-        // 构造器引用。语法是Class::new，或者更一般的Class< T >::new，要求构造器方法是没有参数；
-        final Car car = Car.create(Car::new);
-        final List<Car> cars = Arrays.asList(car);
+        /**
+         * 与 (s, index) -> s.charAt(index) 一样，第一个参数可以省略，但是必须是 String类型
+         */
+        BiFunction<String, Integer, Character> bf = String::charAt; //这里第一个必须传入　String
 
-        //静态方法引用。语法是Class::static_method，要求接受一个Class类型的参数；
-        cars.forEach(Car::collide);
+        /**
+         * 2. 类名::静态方法
+         *
+         * 与 Comparator<Integer> com = (x,y) -> Integer.compare(x,y) 一样
+         */
+        Comparator<Integer> comparator = Integer::compare;
 
-        //任意对象的方法引用。它的语法是Class::instance_method。无参，所有元素调用；
-        cars.forEach(Car::repair);
+        /**
+         * 3. 类::实例方法名
+         *
+         * 若Lambda参数列表中的第一个参数是实例方法的第一个调用者，而第二个参数是实例方法的参数时，可以使用ClassName :: method
+         */
+        BiPredicate<String, String> bp = (x, y) -> x.equals(y);
+        BiPredicate<String, String> bp2 = String::equals;
 
-        //特定对象的方法引用，它的语法是instance::instance_method。
-        // 有参，在某个对象上调用方法，将列表元素作为参数传入；第一个参数当成instanceMethod的目标对象，其他剩余参数当成该方法的参数
-        final Car police = Car.create(Car::new);
-        cars.forEach(police::follow);  // 等于 x -> x.follow(), 此处police其实没有参与调用
+        /**
+         * 构造器引用。语法是Class::new，或者更一般的Class< T >::new，要求构造器方法是没有参数
+         *
+         * 需要调用构造器的参数列表，要与函数式接口中的抽象方法的参数列表保持一致；
+         */
+        Supplier<Car> carSupplier = Car::new; // 无参调用l
+        Car carOne = carSupplier.get();
+
+        Function<String, Car> carFunction = Car::new; // 带参数调用
+        Car carTwo = carFunction.apply("Auto");
+    }
+
+    public static <T> void useConsumer(Consumer<T> consumer, T t) {
+        consumer.accept(t);
     }
 
     public static class Car {
 
         public Car() {
-            System.out.println("constructor without parameter.");
         }
 
         public Car(String name) {
-            System.out.println("constructor with parameter.");
-        }
-
-        public static Car create(final Supplier<Car> supplier) {
-            return supplier.get();
-        }
-
-        public static void collide(final Car car) {
-            System.out.println("static method reference: " + car.toString());
-        }
-
-        public void repair() {
-            System.out.println("instance method: " + this.toString());
-        }
-
-        public void follow(final Car car) {
-            System.out.println("simple method " + car.toString());
         }
     }
 }
