@@ -1,6 +1,7 @@
 package com.yee.study.java.protobuf;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.util.JsonFormat;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -60,6 +61,14 @@ public class ProtoTest {
             PersonTestProtos.PersonTest personTestResult = PersonTestProtos.PersonTest.parseDelimitedFrom(byteArrayInputStream);
             System.out.println(String.format("反序列化得到的信息，姓名：%s，性别：%d，手机号：%s", personTestResult.getName(), personTest.getSexValue(), personTest.getPhone(0).getNumber()));
 
+
+            String json = JsonFormat.printer().print(personTest);
+            System.out.println(json);
+
+            PersonTestProtos.PersonTest.Builder newBuilder = PersonTestProtos.PersonTest.newBuilder();
+            JsonFormat.parser().merge(json, newBuilder);
+            PersonTestProtos.PersonTest personAfterMerge = newBuilder.build();
+            System.out.println(String.format("反序列化得到的信息，姓名：%s，性别：%d，手机号：%s", personAfterMerge.getName(), personAfterMerge.getSexValue(), personAfterMerge.getPhone(0).getNumber()));
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
         } catch (IOException e) {
