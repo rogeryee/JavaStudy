@@ -8,10 +8,9 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class EmployeeServiceImpl implements IEmployeeService {
+public class EmployeeComponent {
 
-    @Override
     public void doBiz() {
-        log.info("do biz ...");
+        log.info("do biz");
     }
 }
