@@ -25,6 +25,20 @@ public class DateSample {
     private static final Logger logger = LoggerFactory.getLogger(DateSample.class);
 
     public static void main(String[] args) {
+        LocalDateTime local = LocalDateTime.now();
+        Date date = new Date();
+//Date 类型的时间使用SimpleDateFormat
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(sdf.format(date));
+//LocalDateTime 类型的使用DateTimeFormatter
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        System.out.println(formatter.format(local));
+
+        Integer integer = Integer.parseInt("-9999");
+        System.out.println(integer);
+    }
+
+    public static void main1(String[] args) {
         // Clock 提供了访问当前日期和时间的方法，Clock是时区敏感的，可以用来取代 System.currentTimeMillis() 来获取当前的微秒数。
         Clock clock = Clock.systemDefaultZone();
         long millis = clock.millis();
@@ -94,6 +108,17 @@ public class DateSample {
         // 使用SimpleFormat
         dateStr = format(new Date());
         logger.info("SimpleFormatted date = {}", dateStr);
+
+        DateTimeFormatter DAILY_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyyMMdd");
+        LocalDateTime local = LocalDateTime.now();
+        Integer dateInt = Integer.parseInt(DAILY_DATE_FORMATTER.format(local));
+
+        LocalDate date2 = LocalDate.parse(String.valueOf(dateInt), formatter1);
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy年MM月dd日 E | yyyy年M月d日", Locale.CHINA);
+        System.out.println(formatter2.format(date2));
+
+
     }
 
     // 在并发环境下使用ThreadLocal来限制SimpleDateFormat只能在线程内共享，这样就避免了多线程导致的线程安全问题。
