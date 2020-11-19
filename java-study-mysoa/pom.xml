@@ -52,14 +52,14 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-            <version>${jedis.version}</version>
+            <version>${deps.jedis.version}</version>
         </dependency>
 
         <!-- Netty -->
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
-            <version>${netty.version}</version>
+            <version>${deps.netty.version}</version>
         </dependency>
 
     </dependencies>

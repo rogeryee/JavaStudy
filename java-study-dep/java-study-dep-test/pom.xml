@@ -16,33 +16,26 @@
     <name>Test dependencies for studying Java technology</name>
     <version>1.1-SNAPSHOT</version>
 
-    <properties>
-        <junit.version>4.12</junit.version>
-        <junit.jupiter.version>5.4.2</junit.jupiter.version>
-        <mockito.version>2.13.0</mockito.version>
-    </properties>
-
     <dependencies>
 
         <!-- Junit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <version>${deps.junit.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>${junit.jupiter.version}</version>
-            <!--<scope>test</scope>-->
+            <version>${deps.junit.jupiter.version}</version>
         </dependency>
 
         <!-- Mockito -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
+            <version>${deps.mockito.version}</version>
         </dependency>
 
     </dependencies>

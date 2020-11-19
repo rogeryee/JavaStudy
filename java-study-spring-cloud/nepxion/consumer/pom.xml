@@ -18,13 +18,13 @@
         <dependency>
             <groupId>com.nepxion</groupId>
             <artifactId>discovery-plugin-starter-eureka</artifactId>
-            <version>${nepxion.discovery.version}</version>
+            <version>${deps.nepxion.discovery.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.nepxion</groupId>
             <artifactId>discovery-plugin-strategy-starter-service</artifactId>
-            <version>${nepxion.discovery.version}</version>
+            <version>${deps.nepxion.discovery.version}</version>
         </dependency>
 
     </dependencies>
