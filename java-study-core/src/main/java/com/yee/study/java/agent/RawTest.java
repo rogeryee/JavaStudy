@@ -42,84 +42,24 @@ public class RawTest {
         rawReport.setOverall_rank(1001);
         rawReport.setOverall_score(new BigDecimal(45.5));
 
-        AgentReport report = new AgentReport();
-        JXPathContext context = JXPathContext.newContext(report);
-        context.setFactory(new AbstractFactory() {
-            @Override
-            public boolean createObject(JXPathContext context, Pointer pointer, Object parent, String name, int index) {
-                if(parent instanceof AgentReport && "overall".equals(name)) {
-                    ((AgentReport) parent).setOverall(new BehaviorInfo());
-                    return true;
-                }
-                return super.createObject(context, pointer, parent, name, index);
-            }
-        });
-
-        attrMap.entrySet().stream().forEach(entry -> {
-            AttributeBean attrBean = entry.getValue();
-            Object value = getFieldValue(rawReport, attrBean.getSrcField());
-            context.createPathAndSetValue(attrBean.getDesc(), value);
-        });
-//        Field f = getField(report, "overall");
-//        context.setValue("overall", f.getType().newInstance());
-//        context.setValue("overall/rank", 100);
-
-        Field f1 = getField(report, "behaviorInfoList");
-        Type genericType = f1.getGenericType();
-        if (genericType!=null) {
-            if (genericType instanceof ParameterizedType) {
-                ParameterizedType pt = (ParameterizedType) genericType;
-                Class<?> actualTypeArgument = (Class<?>)pt.getActualTypeArguments()[0];
-//                Object actualType = actualTypeArgument.newInstance();
-                System.out.println(actualTypeArgument);
-            }
-        }
-        System.out.println(report);
+//        AgentReport report = new AgentReport();
+//        JXPathContext context = JXPathContext.newContext(report);
+//        context.setFactory(new AbstractFactory() {
+//            @Override
+//            public boolean createObject(JXPathContext context, Pointer pointer, Object parent, String name, int index) {
+//                if(parent instanceof AgentReport && "overall".equals(name)) {
+//                    ((AgentReport) parent).setOverall(new BehaviorInfo());
+//                    return true;
+//                }
+//                return super.createObject(context, pointer, parent, name, index);
+//            }
+//        });
 //
-//        ActionInfo a1 = new ActionInfo();
-//        a1.setCode("a01");
-//        a1.setCount(10);
-//        a1.setScore(new BigDecimal(10));
-//
-//        ActionInfo a2 = new ActionInfo();
-//        a2.setCode("a02");
-//        a2.setCount(20);
-//        a2.setScore(new BigDecimal(20));
-//
-//        ActionInfo a3 = new ActionInfo();
-//        a3.setCode("a03");
-//        a3.setCount(30);
-//        a3.setScore(new BigDecimal(30));
-//        List<ActionInfo> list = ArrayUtil.asList(a1, a2, a3);
-//
-//        ActionInfo a2_1 = new ActionInfo();
-//        a2_1.setCode("a02");
-//        a2_1.setCount(201);
-//        a2_1.setScore(new BigDecimal(201));
-//
-//        ActionInfo a4 = new ActionInfo();
-//        a4.setCode("a04");
-//        a4.setCount(40);
-//        a4.setScore(new BigDecimal(40));
-//        List<ActionInfo> list2 = ArrayUtil.asList(a2_1, a3);
-//
-//        BehaviorInfo b1 = new BehaviorInfo();
-//        b1.setCode("b1");
-//        b1.setRank(10);
-//        b1.setActionInfoList(list);
-//
-//        BehaviorInfo b2 = new BehaviorInfo();
-//        b2.setCode("b2");
-//        b2.setRank(10);
-//        b2.setActionInfoList(list2);
-//
-//        report = new AgentReport();
-//        report.setBehaviorInfoList(ArrayUtil.asList(b1, b2));
-//
-//        context = JXPathContext.newContext(report);
-//        context.setLenient(true);
-//        Object obj = context.getValue("behaviorInfoList[@code=b3]/actionInfoList");
-//        System.out.println(obj);
+//        attrMap.entrySet().stream().forEach(entry -> {
+//            AttributeBean attrBean = entry.getValue();
+//            Object value = getFieldValue(rawReport, attrBean.getSrcField());
+//            context.createPathAndSetValue(attrBean.getDesc(), value);
+//        });
     }
 
     /**
@@ -206,8 +146,8 @@ public class RawTest {
             if (field.isAnnotationPresent(Attribute.class)) {
                 Attribute attribute = field.getAnnotation(Attribute.class);
                 AttributeBean attrBean = new AttributeBean();
-                attrBean.setDesc(attribute.dest());
-                attrBean.setSrc(StringUtil.isBlank(attribute.src()) ? field.getName() : attribute.src());
+//                attrBean.setDesc(attribute.dest());
+//                attrBean.setSrc(StringUtil.isBlank(attribute.src()) ? field.getName() : attribute.src());
                 attrBean.setSrcField(field);
                 attrMap.put(attrBean.getSrc(), attrBean);
             }
@@ -218,9 +158,9 @@ public class RawTest {
 
                 Stream.of(attribute.attrs()).forEach(mapper -> {
                     AttributeBean attrBean = new AttributeBean();
-                    attrBean.setDesc(baseDest + "/" + mapper.dest());
-                    attrBean.setSrc(StringUtil.isBlank(mapper.src()) ? field.getName() : mapper.src());
-                    attrBean.setSrcField(getField(RawReport.class, mapper.src()));
+//                    attrBean.setDesc(baseDest + "/" + mapper.dest());
+//                    attrBean.setSrc(StringUtil.isBlank(mapper.src()) ? field.getName() : mapper.src());
+//                    attrBean.setSrcField(getField(RawReport.class, mapper.src()));
                     attrMap.put(attrBean.getSrc(), attrBean);
                 });
             }
@@ -231,56 +171,26 @@ public class RawTest {
 }
 
 @Data
-@Report(clazz = AgentReport.class)
 class RawReport {
-    @Attribute(src = "id", dest = "id")
     private Long id;
 
-    @Attribute(dest = "agentCode")
     private String agent_code;
 
-    @Nested(property = "overall", attrs = {
-//            @Mapper(src = "code", dest = "overall"),
-            @Attribute(src = "overall_score", dest = "score"),
-            @Attribute(src = "overall_rank", dest = "rank")})
     private BigDecimal overall_score;
     private Integer overall_rank;
 
-    @NestedCollection(property = "behaviorInfoList", group = "sr",
-            attrs = {
-//                    @Attribute(src = "code", dest = "sr"),
-                    @Attribute(src = "sr_score", dest = "score"),
-                    @Attribute(src = "sr_rank", dest = "rank")})
     private BigDecimal sr_score;
     private Integer sr_rank;
 
-    @NestedCollection(property = "behaviorInfoList/actionInfoList", group = "share_article_cnt",
-            attrs = {
-//                    @Attribute(src = "code", dest = "share_article_cnt"),
-                    @Attribute(src = "share_article_cnt", dest = "count"),
-                    @Attribute(src = "share_article_cnt_score", dest = "score")})
     private Integer share_article_cnt;
     private BigDecimal share_article_cnt_score;
 
-    @NestedCollection(property = "behaviorInfoList/actionInfoList", group = "share_poster_cnt",
-            attrs = {
-//                    @Attribute(src = "code", dest = "share_poster_cnt"),
-                    @Attribute(src = "share_poster_cnt", dest = "count"),
-                    @Attribute(src = "share_poster_cnt_score", dest = "score")})
     private Integer share_poster_cnt;
     private BigDecimal share_poster_cnt_score;
 
-    @NestedCollection(property = "behaviorInfoList/actionInfoList", group = "login_app_cnt",
-            attrs = {
-                    @Attribute(src = "login_app_cnt", dest = "count"),
-                    @Attribute(src = "login_app_cnt", dest = "score")})
     private Integer login_app_cnt;
     private BigDecimal login_app_cnt_score;
 
-    @NestedCollection(property = "behaviorInfoList", group = "op",
-            attrs = {
-                    @Attribute(src = "op_score", dest = "score"),
-                    @Attribute(src = "op_rank", dest = "rank")})
     private BigDecimal op_score;
     private Integer op_rank;
 }
@@ -296,8 +206,8 @@ class RawReport {
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 @interface Attribute {
-    String src() default "";
-    String dest() default "";
+    String raw() default "";
+    String property() default "";
 }
 
 @Documented

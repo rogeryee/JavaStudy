@@ -78,6 +78,17 @@
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
             <version>${deps.jayway.jsonpath.version}</version>
+            <exclusions>
+                <!-- 避免和cglib中的class writter版本冲突 -->
+                <exclusion>
+                    <artifactId>asm</artifactId>
+                    <groupId>org.ow2.asm</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>json-smart</artifactId>
+                    <groupId>net.minidev</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- Guava -->
@@ -146,6 +157,13 @@
             <groupId>commons-jxpath</groupId>
             <artifactId>commons-jxpath</artifactId>
             <version>${deps.apache.jxpath.version}</version>
+        </dependency>
+
+        <!-- CGLIB -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>${deps.cglib.version}</version>
         </dependency>
 
     </dependencies>

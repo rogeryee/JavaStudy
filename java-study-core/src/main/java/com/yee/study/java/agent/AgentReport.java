@@ -1,17 +1,29 @@
 package com.yee.study.java.agent;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
  * @author Roger.Yi
  */
 public class AgentReport {
+    @Attribute(raw = "id")
     private Long id;
 
+    @Attribute(raw = "agent_code")
     private String agentCode;
 
+    @Nested(property = "overall", attrs = {
+            @Attribute(property = "score", raw = "overall_score"),
+            @Attribute(property = "rank", raw = "overall_rank")})
     private BehaviorInfo overall;
 
+//    @NestedCollection(property = "behaviorInfoList", group = "sr",
+//            attrs = {
+//                    @Attribute(src = "code", dest = "sr"),
+//                    @Attribute(src = "sr_score", dest = "score"),
+//                    @Attribute(src = "sr_rank", dest = "rank")}
+//                    )
     private List<BehaviorInfo> behaviorInfoList;
 
     public Long getId() {
