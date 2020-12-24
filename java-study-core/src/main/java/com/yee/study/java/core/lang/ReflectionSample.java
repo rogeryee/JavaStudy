@@ -2,6 +2,9 @@ package com.yee.study.java.core.lang;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.stream.Stream;
 
 /**
@@ -39,10 +42,31 @@ public class ReflectionSample {
         Stream.of(SubTop.class.getDeclaredMethods()).forEach(method -> {
             log.info("SubTop method=[{}], isVarArgs=[{}], parameterCount=[{}]", method, method.isVarArgs(), method.getParameterCount());
         });
+
+        log.info("SubTopAndBottom getInterfaces: ----------");
+        Stream.of(SubTopAndBottom.class.getInterfaces()).forEach(inter -> {
+            log.info("SubTopAndBottom interface=[{}]", inter.getName());
+        });
+
+        log.info("SubTopAndBottom getAllInterfaces: ----------");
+        Set<Class<?>> clazzInterfaceSet = new LinkedHashSet<>();
+        Class<?> current = SubTopAndBottom.class;
+        while (current != null) {
+            Class<?>[] ifcs = current.getInterfaces();
+            clazzInterfaceSet.addAll(Arrays.asList(ifcs));
+            current = current.getSuperclass();
+        }
+        clazzInterfaceSet.forEach(inter -> {
+            log.info("SubTopAndBottom interface=[{}]", inter.getName());
+        });
     }
 }
 
 interface Top {
+}
+
+interface Bottom {
+
 }
 
 class SubTop implements Top {
@@ -77,4 +101,8 @@ class SubTop3 extends SubTop2 {
     public String toString() {
         return super.toString();
     }
+}
+
+class SubTopAndBottom extends SubTop3 implements Bottom {
+
 }

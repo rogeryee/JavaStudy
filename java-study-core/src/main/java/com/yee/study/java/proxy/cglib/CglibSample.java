@@ -6,10 +6,13 @@ import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.FixedValue;
 import net.sf.cglib.proxy.InvocationHandler;
 import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.reflect.ConstructorDelegate;
+import net.sf.cglib.reflect.MethodDelegate;
 
 import java.lang.reflect.Method;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * CGLIB 示例
@@ -100,10 +103,51 @@ public class CglibSample {
         immutableBean.setName("Hello cglib"); //直接修改将throw exception
     }
 
+    interface SampleBeanDelegate {
+        String getFullName();
+    }
+
+    /**
+     * 关于Method.create的参数说明：
+     * 1. 第二个参数为即将被代理的方法
+     * 2. 第一个参数必须是一个无参数构造的bean。因此MethodDelegate.create并不是你想象的那么有用
+     * 3. 第三个参数为只含有一个方法的接口。当这个接口中的方法被调用的时候，将会调用第一个参数所指向bean的第二个参数方法
+     *
+     * 缺点：
+     * 1. 为每一个代理类创建了一个新的类，这样可能会占用大量的永久代堆内存
+     * 2. 你不能代理需要参数的方法
+     * 3. 如果你定义的接口中的方法需要参数，那么代理将不会工作，并且也不会抛出异常；如果你的接口中方法需要其他的返回类型，那么将抛出IllegalArgumentException
+     * @throws Exception
+     */
+    private static void testMethodDelegate()  throws Exception{
+        SampleBean bean = new SampleBean();
+        bean.setName("Hello cglib");
+        SampleBeanDelegate delegate = (SampleBeanDelegate) MethodDelegate.create(bean,"getName", SampleBeanDelegate.class);
+        assertEquals("Hello cglib", delegate.getFullName());
+    }
+
+    interface SampleBeanConstructorDelegate{
+        Object newInstance(String value);
+    }
+
+    /**
+     * 对构造函数进行代理
+     * @throws Exception
+     */
+    private static void testConstructorDelegate() throws Exception{
+        SampleBeanConstructorDelegate constructorDelegate = (SampleBeanConstructorDelegate) ConstructorDelegate.create(
+                SampleBean.class, SampleBeanConstructorDelegate.class);
+        SampleBean bean = (SampleBean) constructorDelegate.newInstance("Hello world");
+        assertTrue(SampleBean.class.isAssignableFrom(bean.getClass()));
+        log.info(bean.getName());
+    }
+
     public static void main(String[] args) throws Exception {
-        testMethodInterceptor();
+//        testMethodInterceptor();
 //        testFixValue();
-        testInvocationHandler();
+//        testInvocationHandler();
 //        testImmutableBean();
+//        testMethodDelegate();
+        testConstructorDelegate();
     }
 }
