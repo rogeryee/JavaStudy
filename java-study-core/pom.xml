@@ -166,6 +166,13 @@
             <version>${deps.cglib.version}</version>
         </dependency>
 
+        <!-- Org.Objenesis -->
+        <dependency>
+            <groupId>org.objenesis</groupId>
+            <artifactId>objenesis</artifactId>
+            <version>${deps.org.objenesis.version}</version>
+        </dependency>
+
     </dependencies>
 
 </project>

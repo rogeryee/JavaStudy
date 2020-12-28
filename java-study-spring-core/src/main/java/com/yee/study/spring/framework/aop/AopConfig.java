@@ -1,4 +1,4 @@
-package com.yee.study.spring.framework.utils.aop;
+package com.yee.study.spring.framework.aop;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

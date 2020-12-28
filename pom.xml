@@ -61,6 +61,7 @@
         <deps.mysql.version>5.1.21</deps.mysql.version>
         <deps.nepxion.discovery.version>5.1.0</deps.nepxion.discovery.version>
         <deps.netty.version>4.1.6.Final</deps.netty.version>
+        <deps.org.objenesis.version>3.1</deps.org.objenesis.version>
         <deps.scala.version>2.11</deps.scala.version>
         <deps.spark.version>2.3.1</deps.spark.version>
         <deps.springframework.version>5.0.7.RELEASE</deps.springframework.version>
