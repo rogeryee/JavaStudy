@@ -22,20 +22,12 @@ public class SampleBean {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void test() {
-        log.info("Hello World");
+        log.info("SampleBean Test.");
     }
 
     public String test2() {
-        log.info("test2 : hello world.");
-        return "Hello World";
+        log.info("SampleBean Test2.");
+        return "test2";
     }
 }
