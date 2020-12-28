@@ -14,4 +14,9 @@ public class BizServiceImpl implements BizInterface {
     public void doBiz() {
         log.info("do biz ...");
     }
+
+    @Override
+    public void cancelBiz() {
+        log.info("cancel biz ...");
+    }
 }

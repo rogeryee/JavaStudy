@@ -10,4 +10,9 @@ public interface BizInterface {
      * 业务接口
      */
     void doBiz();
+
+    /**
+     * 业务接口
+     */
+    void cancelBiz();
 }
