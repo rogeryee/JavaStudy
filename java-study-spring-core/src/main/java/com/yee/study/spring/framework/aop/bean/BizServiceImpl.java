@@ -23,4 +23,11 @@ public class BizServiceImpl implements BizInterface {
         log.info(msg);
         return msg;
     }
+
+    @Override
+    public String fallback() {
+        String msg = "fallback";
+        log.info(msg);
+        return msg;
+    }
 }

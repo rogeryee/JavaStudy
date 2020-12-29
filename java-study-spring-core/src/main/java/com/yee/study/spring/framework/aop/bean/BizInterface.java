@@ -15,4 +15,10 @@ public interface BizInterface {
      * 业务接口
      */
     String cancelBiz();
+
+    /**
+     * 失败业务处理
+     * @return
+     */
+    String fallback();
 }
