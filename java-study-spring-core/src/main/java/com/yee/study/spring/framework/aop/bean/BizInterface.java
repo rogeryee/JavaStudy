@@ -9,10 +9,10 @@ public interface BizInterface {
     /**
      * 业务接口
      */
-    void doBiz();
+    String doBiz();
 
     /**
      * 业务接口
      */
-    void cancelBiz();
+    String cancelBiz();
 }

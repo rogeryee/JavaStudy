@@ -11,12 +11,16 @@ import lombok.extern.slf4j.Slf4j;
 public class BizServiceImpl implements BizInterface {
 
     @Override
-    public void doBiz() {
-        log.info("do biz ...");
+    public String doBiz() {
+        String msg = "do biz";
+        log.info(msg);
+        return msg;
     }
 
     @Override
-    public void cancelBiz() {
-        log.info("cancel biz ...");
+    public String cancelBiz() {
+        String msg = "cancel biz";
+        log.info(msg);
+        return msg;
     }
 }

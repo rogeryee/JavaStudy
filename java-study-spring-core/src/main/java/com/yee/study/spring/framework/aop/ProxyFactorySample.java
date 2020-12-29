@@ -1,22 +1,16 @@
 package com.yee.study.spring.framework.aop;
 
-import com.yee.study.spring.framework.aop.bean.AdditionInterface;
 import com.yee.study.spring.framework.aop.bean.AnotherBizService;
 import com.yee.study.spring.framework.aop.bean.BizInterface;
 import com.yee.study.spring.framework.aop.bean.BizServiceImpl;
-import com.yee.study.spring.framework.aop.bean.IntroductionAdvice;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.aop.SpringProxy;
-import org.springframework.aop.aspectj.AspectJExpressionPointcut;
-import org.springframework.aop.aspectj.annotation.AspectJProxyFactory;
 import org.springframework.aop.framework.Advised;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.AopUtils;
-import org.springframework.aop.support.DefaultPointcutAdvisor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.DecoratingProxy;
 import org.springframework.objenesis.Objenesis;
 import org.springframework.objenesis.ObjenesisStd;
@@ -29,17 +23,15 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
 
-import static org.junit.Assert.assertTrue;
-
 /**
- * AOP 测试类
+ * ProxyFactory 示例类
  *
  * @author Roger.Yi
  */
 @Slf4j
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = AopConfig.class)
-public class AopTest {
+public class ProxyFactorySample {
 
     /**
      * 以下从上而下的介绍下ProxyFactory的父接口和父类：
@@ -156,44 +148,9 @@ public class AopTest {
         log.info("obj2 name={}, id={}", obj2.name, obj2.id);
         log.info("obj3 name={}, id={}", obj3.name, obj3.id);
         log.info("obj2 == obj3 : {}", obj2 == obj3);
-    }
 
-    /**
-     * 使用Objeneseis构建的对象，属性都是不会被初始化的
-     */
-    @Test
-    public void testSpringObjenesis() {
-        Objenesis objenesis = new SpringObjenesis();
-        AnotherBizService obj = objenesis.newInstance(AnotherBizService.class); // 使用newInstance获取实例
-        log.info("obj name={}, id={}", obj.name, obj.id);
-    }
-
-    @Test
-    public void testAspectJExecution() {
-        AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
-        pointcut.setExpression("execution(* com.yee.study.spring.framework.aop.bean.*.doBiz())");
-        assertTrue(AopUtils.canApply(pointcut, BizInterface.class));
-        assertTrue(AopUtils.canApply(pointcut, BizServiceImpl.class));
-
-        DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor();
-        advisor.setPointcut(pointcut);
-        advisor.setAdvice((MethodBeforeAdvice) (method, args, target) -> log.info("Before method={} invoked.", method));
-
-        ProxyFactory proxyFactory = new ProxyFactory(new BizServiceImpl());
-        proxyFactory.addAdvisor(advisor);
-        BizInterface proxy = (BizInterface) proxyFactory.getProxy();
-        proxy.doBiz();
-        proxy.cancelBiz();
-    }
-
-    @Test
-    public void testIntroduction() {
-        AspectJProxyFactory proxyFactory = new AspectJProxyFactory(new BizServiceImpl());
-        proxyFactory.addAdvice((MethodBeforeAdvice) (method, args, target) ->
-                log.info("Advice injected：method=[{}], args=[{}]", method.getName(), Arrays.asList(args)));
-        proxyFactory.addAspect(new IntroductionAdvice());
-        BizInterface proxy = proxyFactory.getProxy();
-        proxy.doBiz();
-        ((AdditionInterface) proxy).doAdditional(); // 通过@DeclareParents可以实现多个接口的代理
+        Objenesis springObjenesis = new SpringObjenesis(); // 使用SpringObjensis
+        AnotherBizService anotherObj = springObjenesis.newInstance(AnotherBizService.class); // 使用newInstance获取实例
+        log.info("anotherObj name={}, id={}", anotherObj.name, anotherObj.id);
     }
 }

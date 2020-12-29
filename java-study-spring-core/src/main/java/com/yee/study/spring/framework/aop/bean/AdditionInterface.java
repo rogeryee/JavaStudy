@@ -6,6 +6,10 @@ package com.yee.study.spring.framework.aop.bean;
  * @author Roger.Yi
  */
 public interface AdditionInterface {
-
-    void doAdditional();
+    /**
+     * 业务接口
+     *
+     * @return
+     */
+    String doAdditional();
 }

@@ -11,7 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 public class AdditionServiceImpl implements AdditionInterface {
 
     @Override
-    public void doAdditional() {
-        log.info("do addition");
+    public String doAdditional() {
+        String msg = "do addition";
+        log.info(msg);
+        return msg;
     }
 }
