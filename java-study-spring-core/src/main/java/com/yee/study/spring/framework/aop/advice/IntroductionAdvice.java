@@ -15,6 +15,7 @@ public class IntroductionAdvice {
 
     /**
      * 声明一个需要被代理的接口，目标是所有BizInterface接口以及其子类，为其增加AdditionInterface接口的代理（默认使用AdditionServiceImpl类的实现）
+     * 注：AdditionServiceImpl必须有默认构造器，Spring会为@DeclareParents声明的切面创建一个 DelegatePerTargetObjectIntroductionInterceptor，对相应的方法进行拦截
      * <p>
      * "+" 号，表示只要是BizInterface及其子类都添加IAddition的实现方法
      */
