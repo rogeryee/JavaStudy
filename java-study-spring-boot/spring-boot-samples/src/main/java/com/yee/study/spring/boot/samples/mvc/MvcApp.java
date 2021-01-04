@@ -1,6 +1,6 @@
 package com.yee.study.spring.boot.samples.mvc;
 
-import com.yee.study.spring.boot.samples.helloworld.HelloWorldApp;
+import com.yee.study.spring.boot.samples.cache.CacheApp;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
@@ -19,7 +19,7 @@ import java.util.Properties;
 public class MvcApp {
     public static void main(String[] args) throws Exception {
         Properties properties = new Properties();
-        InputStream inputStream = HelloWorldApp.class.getClassLoader()
+        InputStream inputStream = CacheApp.class.getClassLoader()
                 .getResourceAsStream("mvc/mvc.properties");
         properties.load(inputStream);
 
