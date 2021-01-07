@@ -23,6 +23,18 @@ public class MyInstantiationBeanPostProcessor implements InstantiationAwareBeanP
     }
 
     @Override
+    public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
+        log.info("MyInstantiationBeanPostProcessor.postProcessAfterInstantiation beanName={}, bean={}", beanName, bean);
+        return true;
+    }
+
+    @Override
+    public PropertyValues postProcessPropertyValues(PropertyValues pvs, PropertyDescriptor[] pds, Object bean, String beanName) throws BeansException {
+        log.info("MyInstantiationBeanPostProcessor.postProcessPropertyValues beanName={}, bean={}", beanName, bean);
+        return pvs;
+    }
+
+    @Override
     public int getOrder() {
         return 2;
     }

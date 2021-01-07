@@ -50,12 +50,13 @@ public class BeanFactorySample {
      * MyInstantiationBeanPostProcessor.BeforeInstantiation beanName=person
      * Person.newInstance()
      * MyMergedBeanDefinitionPostProcessor.MergedBeanDefinition beanName=person
+     * MyInstantiationBeanPostProcessor.postProcessAfterInstantiation beanName=person
+     * MyInstantiationBeanPostProcessor.postProcessPropertyValues beanName=person
      * MyBeanPostProcessor.BeforeInitialization beanName=person
      * Person.afterPropertiesSet
      * MyBeanPostProcessor.AfterInitialization beanName=person
      * MyDestructionAwareBeanPostProcessor.BeforeDestruction beanName=person
      * Person.destroy
-     *
      */
     @Test
     public void testBeanProcessor() {
@@ -65,6 +66,6 @@ public class BeanFactorySample {
         assertEquals("Roger", person.getName());
         assertEquals("Shanghai", person.getAddress());
 
-        ((AbstractApplicationContext)context).registerShutdownHook();
+        ((AbstractApplicationContext)context).registerShutdownHook(); // 注册关闭的hook
     }
 }
