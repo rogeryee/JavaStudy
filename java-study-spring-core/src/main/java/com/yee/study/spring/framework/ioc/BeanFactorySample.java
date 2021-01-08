@@ -68,4 +68,15 @@ public class BeanFactorySample {
 
         ((AbstractApplicationContext)context).registerShutdownHook(); // 注册关闭的hook
     }
+
+    @Test
+    public void testBeanFactoryProcessor() {
+        ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"classpath:ioc/spring-ioc-bean-factory-processor.xml"});
+
+        Person person = context.getBean(Person.class);
+        assertEquals("Roger", person.getName());
+        assertEquals("Shanghai", person.getAddress());
+
+        ((AbstractApplicationContext)context).registerShutdownHook(); // 注册关闭的hook
+    }
 }

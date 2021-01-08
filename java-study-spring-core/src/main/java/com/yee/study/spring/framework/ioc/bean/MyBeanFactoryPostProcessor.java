@@ -8,7 +8,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.core.Ordered;
 
 /**
- * 定制的BeanFactoryPostProcessor1
+ * 定制的BeanFactoryPostProcessor
  *
  * @author Roger.Yi
  */
