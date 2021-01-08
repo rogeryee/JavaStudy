@@ -14,7 +14,7 @@ import java.util.Arrays;
  * 
  * @author Roger.Yi
  */
-//@Configuration
+@Configuration
 //@Aspect
 public class HelloWorldAopConfig {
 
