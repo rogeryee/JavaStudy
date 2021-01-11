@@ -54,6 +54,7 @@ public class BeanFactorySample {
      * MyInstantiationBeanPostProcessor.postProcessPropertyValues beanName=person
      * MyBeanPostProcessor.BeforeInitialization beanName=person
      * Person.afterPropertiesSet
+     * Person.init
      * MyBeanPostProcessor.AfterInitialization beanName=person
      * MyDestructionAwareBeanPostProcessor.BeforeDestruction beanName=person
      * Person.destroy

@@ -22,6 +22,10 @@ public class Person implements InitializingBean, DisposableBean {
         log.info("Person.newInstance()");
     }
 
+    public void init() {
+        log.info("Person.init()");
+    }
+
     @Override
     public void afterPropertiesSet() throws Exception {
         log.info("Person.afterPropertiesSet");
