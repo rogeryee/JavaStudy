@@ -6,6 +6,8 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="messageService"
-          class="com.yee.study.spring.framework.ioc.bean.MessageServiceImpl"/>
+          class="com.yee.study.spring.framework.ioc.bean.MessageServiceImpl">
+        <property name="name" value="Roger"/>
+    </bean>
 
 </beans>

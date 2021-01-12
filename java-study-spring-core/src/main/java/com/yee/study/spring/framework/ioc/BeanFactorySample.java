@@ -5,9 +5,13 @@ import com.yee.study.spring.framework.ioc.bean.Person;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.support.PropertiesBeanDefinitionReader;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.core.io.ClassPathResource;
 
 import static org.junit.Assert.assertEquals;
 
@@ -91,5 +95,29 @@ public class BeanFactorySample {
         assertEquals("Shanghai", person.getAddress());
 
         ((AbstractApplicationContext) context).registerShutdownHook(); // 注册关闭的hook
+    }
+
+    /**
+     * GenericApplicationContext 可以比较灵活的加载BeanDefinitionReader
+     * 本例同时通过xml和properties文件加载了2个bean定义
+     */
+    @Test
+    public void testGenericApplicationContext() {
+        GenericApplicationContext context = new GenericApplicationContext();
+
+        // 基于Xml定义
+        XmlBeanDefinitionReader xmlReader = new XmlBeanDefinitionReader(context);
+        xmlReader.loadBeanDefinitions(new ClassPathResource("ioc/spring-ioc-simple.xml"));
+
+        // 基于properties定义
+        PropertiesBeanDefinitionReader propReader = new PropertiesBeanDefinitionReader(context);
+        propReader.loadBeanDefinitions(new ClassPathResource("ioc/spring-bean.properties"));
+        context.refresh();
+
+        MessageService messageService = context.getBean("messageService", MessageService.class);
+        assertEquals("hello world, Roger", messageService.getMessage());
+
+        MessageService messageService2 = context.getBean("messageService2", MessageService.class);
+        assertEquals("hello world, Phoebe", messageService2.getMessage());
     }
 }

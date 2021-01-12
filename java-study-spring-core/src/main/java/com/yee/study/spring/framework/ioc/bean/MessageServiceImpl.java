@@ -1,6 +1,6 @@
 package com.yee.study.spring.framework.ioc.bean;
 
-import org.springframework.stereotype.Component;
+import com.yee.study.util.StringUtil;
 
 /**
  * 消息服务实现类
@@ -8,8 +8,15 @@ import org.springframework.stereotype.Component;
  * @author Roger.Yi
  */
 public class MessageServiceImpl implements MessageService {
+
+    private String name;
+
     @Override
     public String getMessage() {
-        return "hello world";
+        return "hello world" + (StringUtil.isBlank(name) ? "" : ", " + name);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
