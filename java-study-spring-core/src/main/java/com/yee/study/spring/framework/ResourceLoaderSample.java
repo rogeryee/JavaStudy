@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class ResourceLoaderSample {
 
-    private static final Logger log = LoggerFactory.getLogger(ResolvableTypeTest.class);
+    private static final Logger log = LoggerFactory.getLogger(ResourceLoaderSample.class);
 
     /**
      *

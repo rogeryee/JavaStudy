@@ -1,5 +1,6 @@
 package com.yee.study.spring.framework.ioc;
 
+import com.yee.study.spring.framework.ioc.bean.City;
 import com.yee.study.spring.framework.ioc.bean.MessageService;
 import com.yee.study.spring.framework.ioc.bean.Person;
 import org.junit.Test;
@@ -120,5 +121,12 @@ public class BeanFactorySample {
 
         MessageService messageService2 = context.getBean("messageService2", MessageService.class);
         assertEquals("hello world, Phoebe", messageService2.getMessage());
+    }
+
+    @Test
+    public void testFactoryBean() {
+        ApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "classpath:ioc/spring-ioc-factory-bean.xml"});
+        City city = context.getBean(City.class);
+        assertEquals("Default", city.getName());
     }
 }

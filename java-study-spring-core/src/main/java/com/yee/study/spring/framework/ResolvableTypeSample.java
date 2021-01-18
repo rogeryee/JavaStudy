@@ -17,9 +17,9 @@ import java.util.List;
 /**
  * @author Roger.Yi
  */
-public class ResolvableTypeTest {
+public class ResolvableTypeSample {
 
-    private static final Logger log = LoggerFactory.getLogger(ResolvableTypeTest.class);
+    private static final Logger log = LoggerFactory.getLogger(ResolvableTypeSample.class);
 
     /**
      *
