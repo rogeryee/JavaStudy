@@ -123,10 +123,25 @@ public class BeanFactorySample {
         assertEquals("hello world, Phoebe", messageService2.getMessage());
     }
 
+    /**
+     * 测试通过factory-bean构建Bean实例
+     */
     @Test
     public void testFactoryBean() {
         ApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "classpath:ioc/spring-ioc-factory-bean.xml"});
         City city = context.getBean(City.class);
         assertEquals("Default", city.getName());
+    }
+
+    /**
+     * 测试自定义的 LifecycleProcessor
+     * 注意：只有自定义的beanName为 lifecycleProcessor 时，才会替换默认的LifecycleProcessor
+     *
+     * SmartMessageServiceImpl 实现了 SmartLifecycle
+     */
+    @Test
+    public void testLifecycleProcessor() {
+        ApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "classpath:ioc/spring-ioc-lifecycle-processor.xml"});
+        log.info("context started.");
     }
 }

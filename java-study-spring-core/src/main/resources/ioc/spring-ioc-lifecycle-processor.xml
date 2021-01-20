@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="smartMessageService"
+          class="com.yee.study.spring.framework.ioc.bean.SmartMessageServiceImpl">
+        <property name="name" value="Roger"/>
+    </bean>
+
+    <!-- 当 id="lifecycleProcessor" 则会替换默认的 LifecycleProcessor  -->
+    <bean id="lifecycleProcessor_bak" class="com.yee.study.spring.framework.ioc.bean.MyLifecycleProcessor"/>
+
+</beans>
