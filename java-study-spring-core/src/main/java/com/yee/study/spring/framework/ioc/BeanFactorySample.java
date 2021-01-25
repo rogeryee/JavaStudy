@@ -1,6 +1,7 @@
 package com.yee.study.spring.framework.ioc;
 
 import com.yee.study.spring.framework.ioc.bean.City;
+import com.yee.study.spring.framework.ioc.bean.CycleBean;
 import com.yee.study.spring.framework.ioc.bean.MessageService;
 import com.yee.study.spring.framework.ioc.bean.Person;
 import org.junit.Test;
@@ -9,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.PropertiesBeanDefinitionReader;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
@@ -128,7 +128,7 @@ public class BeanFactorySample {
      */
     @Test
     public void testFactoryBean() {
-        ApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "classpath:ioc/spring-ioc-factory-bean.xml"});
+        ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"classpath:ioc/spring-ioc-factory-bean.xml"});
         City city = context.getBean(City.class);
         assertEquals("Default", city.getName());
     }
@@ -136,12 +136,52 @@ public class BeanFactorySample {
     /**
      * 测试自定义的 LifecycleProcessor
      * 注意：只有自定义的beanName为 lifecycleProcessor 时，才会替换默认的LifecycleProcessor
-     *
+     * <p>
      * SmartMessageServiceImpl 实现了 SmartLifecycle
      */
     @Test
     public void testLifecycleProcessor() {
-        ApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "classpath:ioc/spring-ioc-lifecycle-processor.xml"});
+        ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"classpath:ioc/spring-ioc-lifecycle-processor.xml"});
         log.info("context started.");
+    }
+
+    /**
+     * 测试 单例对象的循环依赖（基于Setter方法）
+     */
+    @Test
+    public void testCycleDepsSingleton() {
+        ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"classpath:ioc/spring-ioc-cycle-deps-singleton.xml"});
+        log.info("cycle-deps loaded.");
+        CycleBean.CycleBeanA a = context.getBean(CycleBean.CycleBeanA.class);
+        CycleBean.CycleBeanB b = context.getBean(CycleBean.CycleBeanB.class);
+        CycleBean.CycleBeanC c = context.getBean(CycleBean.CycleBeanC.class);
+    }
+
+    /**
+     * 测试 单例对象的循环依赖（基于构造器）
+     * <p>
+     * 会得到一个 BeanCurrentlyInCreationException，由此可见 Spring不支持基于构造器的循环依赖
+     */
+    @Test
+    public void testCycleDepsSingletonConstructor() {
+        ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"classpath:ioc/spring-ioc-cycle-deps-singleton-constructor.xml"});
+        log.info("cycle-deps loaded.");
+        CycleBean.CycleBeanA a = context.getBean(CycleBean.CycleBeanA.class);
+        CycleBean.CycleBeanB b = context.getBean(CycleBean.CycleBeanB.class);
+        CycleBean.CycleBeanC c = context.getBean(CycleBean.CycleBeanC.class);
+    }
+
+    /**
+     * 测试 多例对象的循环依赖
+     * <p>
+     * 会得到一个 BeanCurrentlyInCreationException，由此可见 Spring不支持prototype对象的循环依赖
+     */
+    @Test
+    public void testCycleDepsPrototype() {
+        ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"classpath:ioc/spring-ioc-cycle-deps-prototype.xml"});
+        log.info("cycle-deps-prototype loaded.");
+        CycleBean.CycleBeanA a = context.getBean(CycleBean.CycleBeanA.class);
+        CycleBean.CycleBeanB b = context.getBean(CycleBean.CycleBeanB.class);
+        CycleBean.CycleBeanC c = context.getBean(CycleBean.CycleBeanC.class);
     }
 }
