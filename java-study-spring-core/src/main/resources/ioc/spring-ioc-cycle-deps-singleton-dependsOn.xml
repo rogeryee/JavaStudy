@@ -26,6 +26,7 @@
 
     <bean id="cycleBeanD"
           class="com.yee.study.spring.framework.ioc.bean.CycleBean.CycleBeanD"
+          depends-on="cycleBeanA"
           scope="singleton"/>
 
 </beans>

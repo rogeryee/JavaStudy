@@ -58,4 +58,6 @@ public class CycleBean {
             this.a = a;
         }
     }
+
+    public static class CycleBeanD {}
 }

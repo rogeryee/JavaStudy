@@ -147,10 +147,26 @@ public class BeanFactorySample {
 
     /**
      * 测试 单例对象的循环依赖（基于Setter方法）
+     *
+     * 本例中的 cycleBeanA 定了 dependsOn - cycleBeanD
      */
     @Test
     public void testCycleDepsSingleton() {
         ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"classpath:ioc/spring-ioc-cycle-deps-singleton.xml"});
+        log.info("cycle-deps loaded.");
+        CycleBean.CycleBeanA a = context.getBean(CycleBean.CycleBeanA.class);
+        CycleBean.CycleBeanB b = context.getBean(CycleBean.CycleBeanB.class);
+        CycleBean.CycleBeanC c = context.getBean(CycleBean.CycleBeanC.class);
+    }
+
+    /**
+     * 测试 单例对象的循环依赖（基于Setter方法）
+     *
+     * dependsOn 标签不支持互相依赖，会得到一个 BeanCreationException - Circular depends-on relationship between 'cycleBeanD' and 'cycleBeanA'
+     */
+    @Test
+    public void testCycleDepsSingletonDependsOn() {
+        ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"classpath:ioc/spring-ioc-cycle-deps-singleton-dependsOn.xml"});
         log.info("cycle-deps loaded.");
         CycleBean.CycleBeanA a = context.getBean(CycleBean.CycleBeanA.class);
         CycleBean.CycleBeanB b = context.getBean(CycleBean.CycleBeanB.class);
