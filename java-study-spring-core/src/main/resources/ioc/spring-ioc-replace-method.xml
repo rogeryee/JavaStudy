@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="helloMethodReplacement"
+          class="com.yee.study.spring.framework.ioc.bean.ReplaceBean.HelloMethodReplacement"/>
+
+    <bean id="hiMethodReplacement"
+          class="com.yee.study.spring.framework.ioc.bean.ReplaceBean.HiMethodReplacement"/>
+
+    <bean id="replaceBean"
+          class="com.yee.study.spring.framework.ioc.bean.ReplaceBean">
+        <replaced-method name="hello" replacer="helloMethodReplacement"/>
+        <replaced-method name="hi" replacer="hiMethodReplacement"/>
+    </bean>
+
+</beans>

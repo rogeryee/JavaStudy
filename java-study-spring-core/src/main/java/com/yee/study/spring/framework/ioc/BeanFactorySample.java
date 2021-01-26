@@ -4,6 +4,7 @@ import com.yee.study.spring.framework.ioc.bean.City;
 import com.yee.study.spring.framework.ioc.bean.CycleBean;
 import com.yee.study.spring.framework.ioc.bean.MessageService;
 import com.yee.study.spring.framework.ioc.bean.Person;
+import com.yee.study.spring.framework.ioc.bean.ReplaceBean;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -199,5 +200,20 @@ public class BeanFactorySample {
         CycleBean.CycleBeanA a = context.getBean(CycleBean.CycleBeanA.class);
         CycleBean.CycleBeanB b = context.getBean(CycleBean.CycleBeanB.class);
         CycleBean.CycleBeanC c = context.getBean(CycleBean.CycleBeanC.class);
+    }
+
+    /**
+     * 测试 Replace-Method
+     * <p>
+     * hello 有2个同名方法（方法名不唯一），则不会触发覆盖（method override）
+     * hi 只有一个方法，触发覆盖（method override）
+     */
+    @Test
+    public void testReplaceMethod() {
+        ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"classpath:ioc/spring-ioc-replace-method.xml"});
+        log.info("context loaded.");
+        ReplaceBean replaceBean = context.getBean(ReplaceBean.class);
+        replaceBean.hello("Roger");
+        replaceBean.hi();
     }
 }
