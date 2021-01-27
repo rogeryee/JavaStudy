@@ -10,4 +10,13 @@
         <property name="name" value="Roger"/>
     </bean>
 
+    <bean id="person" class="com.yee.study.spring.framework.ioc.bean.Person"/>
+
+    <bean id="city" class="com.yee.study.spring.framework.ioc.bean.City" autowire="constructor"/>
+
+    <!-- 也可以指定构造器的参数来完成构造器注入 -->
+<!--    <bean id="city" class="com.yee.study.spring.framework.ioc.bean.City">-->
+<!--        <constructor-arg ref="person"/>-->
+<!--    </bean>-->
+
 </beans>

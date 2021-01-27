@@ -15,6 +15,14 @@ public class City implements InitializingBean {
 
     private String country = "China";
 
+    private Person person;
+
+    public City() {}
+
+    public City(Person person) {
+        this.person = person;
+    }
+
     @Override
     public void afterPropertiesSet() throws Exception {
         log.info("City.afterPropertiesSet");

@@ -29,6 +29,8 @@ public class BeanFactorySample {
 
     /**
      * spring-ioc-simple.xml 配置了一个Bean - MessageService
+     *
+     * 这里的 City 采用了 autowire constructor的方式，所以会通过匹配构造器来获取实例
      */
     @Test
     public void testIocSimple() {
@@ -39,7 +41,9 @@ public class BeanFactorySample {
         MessageService messageService = context.getBean(MessageService.class);
 
         // 这句将输出: hello world
-        assertEquals("hello world", messageService.getMessage());
+        assertEquals("hello world, Roger", messageService.getMessage());
+
+        context.getBean(City.class);
     }
 
     /**
