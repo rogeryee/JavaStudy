@@ -1,5 +1,7 @@
 package com.yee.study.java.core.jdk8;
 
+import com.yee.study.util.ArrayUtil;
+import lombok.Data;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -12,6 +14,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import static com.yee.study.java.core.jdk8.StreamSample.WordTuple.newWord;
 
 /**
  * JDK8 新特性 - Stream
@@ -391,13 +395,32 @@ public class StreamSample {
         /**
          * 3. toCollection 通过指定集合类型来生成集合
          */
-        Stream.of("I", "love", "you", "too", "you").collect(Collectors.toCollection(ArrayList::new)).forEach(System.out::println);
-        Stream.of("I", "love", "you", "too", "you").collect(Collectors.toCollection(HashSet::new)).forEach(System.out::println);
+        Stream.of("I", "love", "you", "too", "you")
+                .collect(Collectors.toCollection(ArrayList::new))
+                .forEach(System.out::println);
+        Stream.of("I", "love", "you", "too", "you")
+                .collect(Collectors.toCollection(HashSet::new))
+                .forEach(System.out::println);
 
         /**
-         * 3. toMap
+         * 3.1 toMap
          */
-        Stream.of("I", "love", "you", "too").collect(Collectors.toMap(Function.identity(), String::length)).forEach((x, y) -> System.out.println(x + ", " + y));
+        Stream.of("I", "love", "you", "too")
+                .collect(Collectors.toMap(Function.identity(), String::length))
+                .forEach((x, y) -> System.out.println(x + ", " + y));
+
+        /**
+         * 3.2 toMap, 将word相同的数量求和
+         */
+        List<WordTuple> wordList = ArrayUtil.asList(newWord("hello", 1), newWord("Shanghai", 5), newWord("hello", 10), newWord("Shanghai", 3));
+        Map<String, WordTuple> wordSumResult = wordList.stream()
+                .collect(Collectors.toMap(t -> t.getWord(), Function.identity(), (t1, t2) -> {
+                    t1.setCount(t1.getCount() + t2.getCount());
+                    return t1;
+                }));
+        Assert.assertEquals(2, wordSumResult.size());
+        Assert.assertEquals(11, wordSumResult.get("hello").getCount());
+        Assert.assertEquals(8, wordSumResult.get("Shanghai").getCount());
 
         /**
          * 4. joining
@@ -416,8 +439,12 @@ public class StreamSample {
          * 6. summingInt()、summarizingLong()、summarizingDouble() 这三个分别用于int、long、double类型数据一个求总操作，返回的是一个SummaryStatistics(求总)。
          *    包含了数量统计count、求和sum、最小值min、平均值average、最大值max
          */
-        double average = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).collect(Collectors.summarizingInt(Integer::valueOf)).getAverage();
-        double average2 = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).collect(Collectors.averagingDouble(Integer::valueOf)).doubleValue();
+        double average = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+                .collect(Collectors.summarizingInt(Integer::valueOf))
+                .getAverage();
+        double average2 = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+                .collect(Collectors.averagingDouble(Integer::valueOf))
+                .doubleValue();
         Assert.assertTrue(average == average2);
 
         /**
@@ -426,7 +453,8 @@ public class StreamSample {
          */
         // 默认结果类型为 Map<String,List<Integer>>
         Stream.of(-6, -7, -8, -9, 1, 2, 3, 4, 5, 6, 0)
-                .collect(Collectors.groupingBy(n -> n == 0 ? "等于" : n > 0 ? "大于" : "小于")).forEach((x, y) -> System.out.println(x + ":" + y));
+                .collect(Collectors.groupingBy(n -> n == 0 ? "等于" : n > 0 ? "大于" : "小于"))
+                .forEach((x, y) -> System.out.println(x + ":" + y));
 
         // 自定义下游收集器 Map<String,Set<Integer>>
         Stream.of(-6, -7, -8, -9, 1, 2, 3, 4, 5, 6, 0)
@@ -435,5 +463,21 @@ public class StreamSample {
         // 自定义map容器 和 下游收集器 Map<String,Set<Integer>>
         Stream.of(-6, -7, -8, -9, 1, 2, 3, 4, 5, 6, 0)
                 .collect(Collectors.groupingBy(n -> n == 0 ? "等于" : n > 0 ? "大于" : "小于", LinkedHashMap::new, Collectors.toSet()));
+    }
+
+    @Data
+    public static class WordTuple {
+        private String word;
+
+        private int count;
+
+        public WordTuple(String word, int count) {
+            this.count = count;
+            this.word = word;
+        }
+
+        public static WordTuple newWord(String word, int count) {
+            return new WordTuple(word, count);
+        }
     }
 }
