@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="child" class="com.yee.study.spring.framework.aop.bean.Family.Child"/>
+
+    <bean id="mother" class="com.yee.study.spring.framework.aop.bean.Family.Mother"/>
+
+    <aop:config>
+        <aop:aspect ref="mother">
+            <aop:pointcut id="eat"
+                          expression="execution(* com.yee.study.spring.framework.aop.bean.Family.Child.eat())"/>
+            <aop:before method="prepare" pointcut-ref="eat"/>
+            <aop:after method="clean" pointcut-ref="eat"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
