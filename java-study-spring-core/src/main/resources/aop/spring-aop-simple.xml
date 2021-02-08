@@ -5,6 +5,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <aop:aspectj-autoproxy/>
+
     <bean id="child" class="com.yee.study.spring.framework.aop.bean.Family.Child"/>
 
     <bean id="mother" class="com.yee.study.spring.framework.aop.bean.Family.Mother"/>
