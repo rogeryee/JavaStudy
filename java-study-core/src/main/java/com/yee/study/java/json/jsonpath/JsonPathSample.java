@@ -10,14 +10,13 @@ import java.util.List;
 
 /**
  * JsonPath 示例
+ *
  * @author Roger.Yi
  */
-public class JsonPathSample
-{
+public class JsonPathSample {
     private static final Logger logger = LoggerFactory.getLogger(JsonPathSample.class);
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         String json = "{\n" +
                 "    \"applyId\" : \"296180\",\n" +
                 "    \"loanApplyInfo\" : {\n" +
@@ -204,5 +203,22 @@ public class JsonPathSample
         // 获取 贷款记录数 (类型为4和9的记录)
         List<Object> loanRecords = context.read("$.pcrReport.data.pcrLoanRecords[?(@.loanType == '4' || @.loanType == '9')]");
         logger.info("获取 贷款记录数 : {}", CollectionUtil.size(loanRecords));
+
+        json = "{\n" +
+                "    \"1\": {\n" +
+                "        \"actionDefId\": 1,\n" +
+                "        \"count\": {\n" +
+                "            \"20210628\": 0,\n" +
+                "            \"20210629\": 1,\n" +
+                "            \"20210630\": 0,\n" +
+                "            \"20210701\": 0\n" +
+                "        },\n" +
+                "        \"countTbc\": {\n" +
+                "            \"20210702\": 1\n" +
+                "        }\n" +
+                "    }\n" +
+                "}";
+
+        logger.info("count : {}", context.read("$.*.count", String.class));
     }
 }

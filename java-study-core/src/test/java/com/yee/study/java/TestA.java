@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 /**
  * @author Roger.Yi
  */
-public class Test
+public class TestA
 {
     public static void main(String[] args) {
         Pattern pattern = Pattern.compile("^(.*)=(.*)://(.*)$");
