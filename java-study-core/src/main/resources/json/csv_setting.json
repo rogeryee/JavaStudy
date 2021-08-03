@@ -1,0 +1,37 @@
+{
+  "rowConfig": {
+    "path": "$.hits.hits[*]._source"
+  },
+  "columnConfig": [
+    {
+      "header": "机构",
+      "path": "$.baseOrganAbbrName",
+      "trim": "太平人寿,分公司"
+    },
+    {
+      "header": "奔驰登录人数",
+      "path": "$.appSummary[?(@.appCode=='tpbc')].statItemList[?(@.code=='tpbc_login_cnt')].value",
+      "format": "###"
+    },
+    {
+      "header": "微课堂登录人数",
+      "path": "$.appSummary[?(@.appCode=='tpwkt')].statItemList[?(@.code=='tpwkt_login_cnt')].value",
+      "format": "###"
+    },
+    {
+      "header": "产品通登录人数",
+      "path": "$.appSummary[?(@.appCode=='tpcpt')].statItemList[?(@.code=='tpcpt_login_cnt')].value",
+      "format": "###"
+    },
+    {
+      "header": "惠汇登录人数",
+      "path": "$.appSummary[?(@.appCode=='tphh')].statItemList[?(@.code=='tphh_login_cnt')].value",
+      "format": "###"
+    },
+    {
+      "header": "保宝登录人数",
+      "path": "$.appSummary[?(@.appCode=='tpbb')].statItemList[?(@.code=='tpbb_login_cnt')].value",
+      "format": "###"
+    }
+  ]
+}

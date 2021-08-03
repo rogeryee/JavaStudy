@@ -78,17 +78,17 @@
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
             <version>${deps.jayway.jsonpath.version}</version>
-            <exclusions>
+<!--            <exclusions>-->
                 <!-- 避免和cglib中的class writter版本冲突 -->
-                <exclusion>
-                    <artifactId>asm</artifactId>
-                    <groupId>org.ow2.asm</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>json-smart</artifactId>
-                    <groupId>net.minidev</groupId>
-                </exclusion>
-            </exclusions>
+<!--                <exclusion>-->
+<!--                    <artifactId>asm</artifactId>-->
+<!--                    <groupId>org.ow2.asm</groupId>-->
+<!--                </exclusion>-->
+<!--                <exclusion>-->
+<!--                    <artifactId>json-smart</artifactId>-->
+<!--                    <groupId>net.minidev</groupId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
         </dependency>
 
         <!-- Guava -->
@@ -172,6 +172,12 @@
             <artifactId>objenesis</artifactId>
             <version>${deps.org.objenesis.version}</version>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba</groupId>-->
+<!--            <artifactId>fastjson</artifactId>-->
+<!--            <version>1.2.23</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 
