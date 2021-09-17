@@ -126,6 +126,6 @@ public class Json2Csv {
 
     public static void main(String[] args) throws Exception {
         Json2Csv json2Csv = new Json2Csv();
-        json2Csv.generate("json/csv_setting.json", "json/data.json", "/Users/cntp/Desktop/json2csv_result.csv");
+        json2Csv.generate("json/csv_setting.json", "json/data.json", "/Users/cntp/Desktop/json2csv_result2.csv");
     }
 }

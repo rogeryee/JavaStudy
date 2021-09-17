@@ -4,6 +4,16 @@
   },
   "columnConfig": [
     {
+      "header": "日期",
+      "path": "$.reportDate",
+      "format": "###"
+    },
+    {
+      "header": "机构class",
+      "path": "$.classId",
+      "format": "###"
+    },
+    {
       "header": "机构",
       "path": "$.baseOrganAbbrName",
       "trim": "太平人寿,分公司"
