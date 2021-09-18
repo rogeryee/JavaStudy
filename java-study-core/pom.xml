@@ -72,23 +72,23 @@
             <version>${deps.jedis.version}</version>
             <type>jar</type>
         </dependency>
-        
+
         <!-- JsonPath -->
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
             <version>${deps.jayway.jsonpath.version}</version>
-<!--            <exclusions>-->
-                <!-- 避免和cglib中的class writter版本冲突 -->
-<!--                <exclusion>-->
-<!--                    <artifactId>asm</artifactId>-->
-<!--                    <groupId>org.ow2.asm</groupId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <artifactId>json-smart</artifactId>-->
-<!--                    <groupId>net.minidev</groupId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
+            <!--            <exclusions>-->
+            <!-- 避免和cglib中的class writter版本冲突 -->
+            <!--                <exclusion>-->
+            <!--                    <artifactId>asm</artifactId>-->
+            <!--                    <groupId>org.ow2.asm</groupId>-->
+            <!--                </exclusion>-->
+            <!--                <exclusion>-->
+            <!--                    <artifactId>json-smart</artifactId>-->
+            <!--                    <groupId>net.minidev</groupId>-->
+            <!--                </exclusion>-->
+            <!--            </exclusions>-->
         </dependency>
 
         <!-- Guava -->
@@ -118,7 +118,7 @@
             <artifactId>jboss-marshalling</artifactId>
             <version>${deps.jboss.marshalling.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.jboss.marshalling</groupId>
             <artifactId>jboss-marshalling-serial</artifactId>
@@ -173,11 +173,12 @@
             <version>${deps.org.objenesis.version}</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba</groupId>-->
-<!--            <artifactId>fastjson</artifactId>-->
-<!--            <version>1.2.23</version>-->
-<!--        </dependency>-->
+        <!-- MySQL -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${deps.mysql.version}</version>
+        </dependency>
 
     </dependencies>
 
