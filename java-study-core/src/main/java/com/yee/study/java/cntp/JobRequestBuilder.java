@@ -75,7 +75,7 @@ public class JobRequestBuilder {
             return "INT";
         } else if (upperType.startsWith("DOUBLE")) {
             return "DOUBLE";
-        } else if (upperType.startsWith("NUMERIC") || upperType.startsWith("DECIMAL") || upperType.startsWith("NUMBER")) {
+        } else if (upperType.startsWith("NUMERIC") || upperType.startsWith("DECIMAL") || upperType.startsWith("NUMBER") || upperType.startsWith("BIGINT")) {
             if (upperType.contains(",0")) {
                 return "LONG";
             } else if (upperType.contains(",")) {
@@ -111,7 +111,7 @@ public class JobRequestBuilder {
 
     public static void main(String[] args) throws Exception {
         JobRequestBuilder builder = new JobRequestBuilder();
-        List<ColumnMeta> metaList = builder.getColumnMeta("TAIPINGLIFEMAIN", "T_POLICY_PRODUCT_ATTACH");
+        List<ColumnMeta> metaList = builder.getColumnMeta("tpi_if_db", "tpi_cust_info_with_policy");
         ObjectMapper mapper = new ObjectMapper();
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);

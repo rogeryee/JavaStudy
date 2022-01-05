@@ -19,11 +19,6 @@
       "trim": "太平人寿,分公司"
     },
     {
-      "header": "机构总人数",
-      "path": "$.agentTotalCount",
-      "format": "###"
-    },
-    {
       "header": "奔驰登录人数",
       "path": "$.appSummary[?(@.appCode=='tpbc')].statItemList[?(@.code=='tpbc_login_cnt')].value",
       "format": "###"
