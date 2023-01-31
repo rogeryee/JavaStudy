@@ -1,0 +1,122 @@
+{
+  "rowConfig": {
+    "path": "$.hits.hits[*]._source"
+  },
+  "columnConfig": [
+    {
+      "header": "日期",
+      "path": "$.reportDate",
+      "format": "###"
+    },
+    {
+      "header": "机构class",
+      "path": "$.classId",
+      "format": "###"
+    },
+    {
+      "header": "机构",
+      "path": "$.baseOrganAbbrName",
+      "trim": "太平人寿,分公司"
+    },
+    {
+      "header": "机构活跃人数",
+      "path": "$.agentActiveCount",
+      "format": "###"
+    },
+    {
+      "header": "机构总人数",
+      "path": "$.agentTotalCount",
+      "format": "###"
+    },
+    {
+      "header": "奔驰登录人数",
+      "path": "$.appSummary[?(@.appCode=='tpbc')].statItemList[?(@.code=='tpbc_login_cnt')].value",
+      "format": "###"
+    },
+    {
+      "header": "奔驰使用率",
+      "path": "$.appSummary[?(@.appCode=='tpbc')].statItemList[?(@.code=='tpbc_usage')].value",
+      "format": "###.#####"
+    },
+    {
+      "header": "奔驰登录排名",
+      "path": "$.appSummary[?(@.appCode=='tpbc')].statItemList[?(@.code=='tpbc_login_cnt_rank')].value",
+      "format": "###"
+    },
+    {
+      "header": "微课堂登录人数",
+      "path": "$.appSummary[?(@.appCode=='tpwkt')].statItemList[?(@.code=='tpwkt_login_cnt')].value",
+      "format": "###"
+    },
+    {
+      "header": "微课堂使用率",
+      "path": "$.appSummary[?(@.appCode=='tpwkt')].statItemList[?(@.code=='tpwkt_usage')].value",
+      "format": "###.#####"
+    },
+    {
+      "header": "微课堂登录排名",
+      "path": "$.appSummary[?(@.appCode=='tpwkt')].statItemList[?(@.code=='tpwkt_login_cnt_rank')].value",
+      "format": "###"
+    },
+    {
+      "header": "产品通登录人数",
+      "path": "$.appSummary[?(@.appCode=='tpcpt')].statItemList[?(@.code=='tpcpt_login_cnt')].value",
+      "format": "###"
+    },
+    {
+      "header": "产品通使用率",
+      "path": "$.appSummary[?(@.appCode=='tpcpt')].statItemList[?(@.code=='tpcpt_usage')].value",
+      "format": "###.#####"
+    },
+    {
+      "header": "产品通登录排名",
+      "path": "$.appSummary[?(@.appCode=='tpcpt')].statItemList[?(@.code=='tpcpt_login_cnt_rank')].value",
+      "format": "###"
+    },
+    {
+      "header": "惠汇登录人数",
+      "path": "$.appSummary[?(@.appCode=='tphh')].statItemList[?(@.code=='tphh_login_cnt')].value",
+      "format": "###"
+    },
+    {
+      "header": "惠汇使用率",
+      "path": "$.appSummary[?(@.appCode=='tphh')].statItemList[?(@.code=='tphh_usage')].value",
+      "format": "###.#####"
+    },
+    {
+      "header": "惠汇登录排名",
+      "path": "$.appSummary[?(@.appCode=='tphh')].statItemList[?(@.code=='tphh_login_cnt_rank')].value",
+      "format": "###"
+    },
+    {
+      "header": "保宝登录人数",
+      "path": "$.appSummary[?(@.appCode=='tpbb')].statItemList[?(@.code=='tpbb_login_cnt')].value",
+      "format": "###"
+    },
+    {
+      "header": "保宝使用率",
+      "path": "$.appSummary[?(@.appCode=='tpbb')].statItemList[?(@.code=='tpbb_usage')].value",
+      "format": "###.#####"
+    },
+    {
+      "header": "保宝登录排名",
+      "path": "$.appSummary[?(@.appCode=='tpbb')].statItemList[?(@.code=='tpbb_login_cnt_rank')].value",
+      "format": "###"
+    },
+    {
+      "header": "空中职场登录人数",
+      "path": "$.appSummary[?(@.appCode=='tpkzzc')].statItemList[?(@.code=='tpkzzc_login_cnt')].value",
+      "format": "###"
+    },
+    {
+      "header": "空中职场使用率",
+      "path": "$.appSummary[?(@.appCode=='tpkzzc')].statItemList[?(@.code=='tpkzzc_usage')].value",
+      "format": "###.#####"
+    },
+    {
+      "header": "空中职场登录排名",
+      "path": "$.appSummary[?(@.appCode=='tpkzzc')].statItemList[?(@.code=='tpkzzc_login_cnt_rank')].value",
+      "format": "###"
+    }
+  ]
+}
