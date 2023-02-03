@@ -37,8 +37,8 @@
         <deps.apache.flink.version>1.6.2</deps.apache.flink.version>
         <deps.apache.jxpath.version>1.3</deps.apache.jxpath.version>
         <deps.cglib.version>3.3.0</deps.cglib.version>
-        <deps.elastic.version>6.6.0</deps.elastic.version>
-        <deps.elastic.rest.client.version>6.6.0</deps.elastic.rest.client.version>
+        <deps.elastic.version>7.9.0</deps.elastic.version>
+        <deps.elastic.rest.client.version>7.9.0</deps.elastic.rest.client.version>
         <deps.google.guava.version>23.2-jre</deps.google.guava.version>
         <deps.google.protobuf.java.version>3.13.0</deps.google.protobuf.java.version>
         <deps.hadoop.verison>2.7.3</deps.hadoop.verison>

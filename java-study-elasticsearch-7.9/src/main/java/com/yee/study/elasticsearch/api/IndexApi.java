@@ -5,6 +5,7 @@ import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,7 @@ public class IndexApi {
      * @throws IOException
      */
     public static void indexSync(RestHighLevelClient client) throws IOException {
+        CreateIndexRequest req;
         IndexRequest request = new IndexRequest("posts");
         request.id("1");
         request.type("post");
@@ -35,6 +37,7 @@ public class IndexApi {
                 "\"postDate\":\"2013-01-30\"," +
                 "\"message\":\"trying out Elasticsearch\"" +
                 "}";
+        request
         request.source(jsonString, XContentType.JSON);
         client.index(request, RequestOptions.DEFAULT);
         logger.info("create index sync successfully.");
