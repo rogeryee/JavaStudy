@@ -1,0 +1,20 @@
+{
+  "rowConfig": {
+    "path": "$.hits.hits[*]._source"
+  },
+  "columnConfig": [
+    {
+      "header": "ID",
+      "path": "$.id"
+    },
+    {
+      "header": "机构",
+      "path": "$.organ_name"
+    },
+    {
+      "header": "直播人数",
+      "path": "$.live_hk_num",
+      "format": "###"
+    }
+  ]
+}

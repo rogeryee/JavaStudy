@@ -1,0 +1,775 @@
+{
+  "took": 6,
+  "timed_out": false,
+  "_shards": {
+    "total": 3,
+    "successful": 3,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 42,
+      "relation": "eq"
+    },
+    "max_score": 1.0,
+    "hits": [
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "stream#101",
+        "_score": 1.0,
+        "_source": {
+          "id": "stream#101",
+          "organ_id": "101",
+          "organ_id_st": 101,
+          "organ_name": "上海",
+          "organ_level": "2",
+          "live_hk_num": 1,
+          "live_org_rank": 1,
+          "kms_act_cnt": null,
+          "kms_hk_num": null,
+          "up_ts": "2023-07-06 17:29:25"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "stream#108",
+        "_score": 1.0,
+        "_source": {
+          "id": "stream#108",
+          "organ_id": "108",
+          "organ_id_st": 108,
+          "organ_name": "山东",
+          "organ_level": "2",
+          "live_hk_num": 1,
+          "live_org_rank": 2,
+          "kms_act_cnt": null,
+          "kms_hk_num": null,
+          "up_ts": "2023-07-06 17:29:25"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "stream#1",
+        "_score": 1.0,
+        "_source": {
+          "id": "stream#1",
+          "organ_id": "1",
+          "organ_id_st": 1,
+          "organ_name": "总公司",
+          "organ_level": "1",
+          "live_hk_num": 6,
+          "live_org_rank": 1,
+          "kms_act_cnt": 56,
+          "kms_hk_num": 1038,
+          "up_ts": "2023-07-06 17:29:25"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#136",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#136",
+          "organ_id": "136",
+          "organ_id_st": 136,
+          "organ_name": "青海",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#136"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#129",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#129",
+          "organ_id": "129",
+          "organ_id_st": 129,
+          "organ_name": "吉林",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#129"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#138",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#138",
+          "organ_id": "138",
+          "organ_id_st": 138,
+          "organ_name": "宁夏",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#138"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#104",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#104",
+          "organ_id": "104",
+          "organ_id_st": 104,
+          "organ_name": "四川",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#104"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#117",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#117",
+          "organ_id": "117",
+          "organ_id_st": 117,
+          "organ_name": "天津",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#117"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#102",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#102",
+          "organ_id": "102",
+          "organ_id_st": 102,
+          "organ_name": "北京",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#102"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#128",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#128",
+          "organ_id": "128",
+          "organ_id_st": 128,
+          "organ_name": "云南",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#128"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#134",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#134",
+          "organ_id": "134",
+          "organ_id_st": 134,
+          "organ_name": "内蒙古",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#134"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#130",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#130",
+          "organ_id": "130",
+          "organ_id_st": 130,
+          "organ_name": "广西",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#130"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#133",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#133",
+          "organ_id": "133",
+          "organ_id_st": 133,
+          "organ_name": "甘肃",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#133"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#124",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#124",
+          "organ_id": "124",
+          "organ_id_st": 124,
+          "organ_name": "重庆",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#124"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#125",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#125",
+          "organ_id": "125",
+          "organ_id_st": 125,
+          "organ_name": "湖南",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#125"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#131",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#131",
+          "organ_id": "131",
+          "organ_id_st": 131,
+          "organ_name": "新疆",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#131"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#107",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#107",
+          "organ_id": "107",
+          "organ_id_st": 107,
+          "organ_name": "江苏",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#107"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#110",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#110",
+          "organ_id": "110",
+          "organ_id_st": 110,
+          "organ_name": "辽宁",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#110"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#114",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#114",
+          "organ_id": "114",
+          "organ_id_st": 114,
+          "organ_name": "大连",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#114"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#111",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#111",
+          "organ_id": "111",
+          "organ_id_st": 111,
+          "organ_name": "宁波",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#111"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#116",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#116",
+          "organ_id": "116",
+          "organ_id_st": 116,
+          "organ_name": "苏州",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#116"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#126",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#126",
+          "organ_id": "126",
+          "organ_id_st": 126,
+          "organ_name": "陕西",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#126"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#105",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#105",
+          "organ_id": "105",
+          "organ_id_st": 105,
+          "organ_name": "河北",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#105"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#112",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#112",
+          "organ_id": "112",
+          "organ_id_st": 112,
+          "organ_name": "深圳",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#112"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#118",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#118",
+          "organ_id": "118",
+          "organ_id_st": 118,
+          "organ_name": "湖北",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#118"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#115",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#115",
+          "organ_id": "115",
+          "organ_id_st": 115,
+          "organ_name": "佛山",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#115"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#127",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#127",
+          "organ_id": "127",
+          "organ_id_st": 127,
+          "organ_name": "山西",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#127"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#135",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#135",
+          "organ_id": "135",
+          "organ_id_st": 135,
+          "organ_name": "海南",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#135"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "stream#127",
+        "_score": 1.0,
+        "_source": {
+          "id": "stream#127",
+          "organ_id": "127",
+          "organ_id_st": 127,
+          "organ_name": "山西",
+          "organ_level": "2",
+          "live_hk_num": 4,
+          "live_org_rank": 3,
+          "kms_act_cnt": null,
+          "kms_hk_num": null,
+          "up_ts": "2023-07-06 17:29:25"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#121",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#121",
+          "organ_id": "121",
+          "organ_id_st": 121,
+          "organ_name": "黑龙江",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#121"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#132",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#132",
+          "organ_id": "132",
+          "organ_id_st": 132,
+          "organ_name": "贵州",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#132"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#119",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#119",
+          "organ_id": "119",
+          "organ_id_st": 119,
+          "organ_name": "安徽",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#119"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#109",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#109",
+          "organ_id": "109",
+          "organ_id_st": 109,
+          "organ_name": "浙江",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#109"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#101",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#101",
+          "organ_id": "101",
+          "organ_id_st": 101,
+          "organ_name": "上海",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#101"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#113",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#113",
+          "organ_id": "113",
+          "organ_id_st": 113,
+          "organ_name": "青岛",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#113"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#108",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#108",
+          "organ_id": "108",
+          "organ_id_st": 108,
+          "organ_name": "山东",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#108"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#1",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#1",
+          "organ_id": "1",
+          "organ_id_st": 1,
+          "organ_name": "总公司",
+          "organ_level": 1,
+          "live_hk_num": 2,
+          "kms_act_cnt": 36,
+          "kms_hk_num": 2576,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#1"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#103",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#103",
+          "organ_id": "103",
+          "organ_id_st": 103,
+          "organ_name": "广东",
+          "organ_level": 2,
+          "live_hk_num": 2,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#103"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#106",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#106",
+          "organ_id": "106",
+          "organ_id_st": 106,
+          "organ_name": "河南",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#106"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#122",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#122",
+          "organ_id": "122",
+          "organ_id_st": 122,
+          "organ_name": "江西",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#122"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "batch#120",
+        "_score": 1.0,
+        "_source": {
+          "id": "batch#120",
+          "organ_id": "120",
+          "organ_id_st": 120,
+          "organ_name": "福建",
+          "organ_level": 2,
+          "live_hk_num": 0,
+          "kms_act_cnt": 0,
+          "kms_hk_num": 0,
+          "up_ts": "2023-07-10 17:17:53",
+          "es_mapping_id": "batch#120"
+        }
+      },
+      {
+        "_index": "hdpt-tpact_kf_kpi_q3_live_stream_v2",
+        "_type": "_doc",
+        "_id": "stream#103",
+        "_score": 1.0,
+        "_source": {
+          "id": "stream#103",
+          "organ_id": "103",
+          "organ_id_st": 103,
+          "organ_name": "广东",
+          "organ_level": "2",
+          "live_hk_num": 2310,
+          "live_org_rank": 1,
+          "kms_act_cnt": null,
+          "kms_hk_num": null,
+          "up_ts": "2023-07-10 17:37:25"
+        }
+      }
+    ]
+  }
+}

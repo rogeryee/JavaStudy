@@ -19,6 +19,11 @@
       "trim": "太平人寿,分公司"
     },
     {
+      "header": "上级机构ID",
+      "path": "$.parentOrganId",
+      "trim": "太平人寿,分公司"
+    },
+    {
       "header": "机构活跃人数",
       "path": "$.agentActiveCount",
       "format": "###"

@@ -13,7 +13,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author Roger.Yi
@@ -43,8 +42,8 @@ public class Json2Csv {
         rows.forEach(row -> {
             String rowJson = JSON.getDefault().toJSONString(row);
             List<String> oneRow = columnConfigList.stream()
-                    .map(columnConfig -> buildColumn(rowJson, columnConfig))
-                    .collect(Collectors.toList());
+                                                  .map(columnConfig -> buildColumn(rowJson, columnConfig))
+                                                  .collect(Collectors.toList());
             result.add(String.join(",", oneRow) + "\n");
         });
     }
@@ -87,9 +86,9 @@ public class Json2Csv {
 
     private void buildHeader(List<ColumnConfig> columnConfigList, List<String> result) {
         result.add(String.join(",",
-                columnConfigList.stream()
-                        .map(ColumnConfig::getHeader)
-                        .collect(Collectors.toList())) + "\n");
+                               columnConfigList.stream()
+                                               .map(ColumnConfig::getHeader)
+                                               .collect(Collectors.toList())) + "\n");
     }
 
     private JSONArray getRows(String data, RowConfig rowConfig) {
@@ -126,6 +125,9 @@ public class Json2Csv {
 
     public static void main(String[] args) throws Exception {
         Json2Csv json2Csv = new Json2Csv();
-        json2Csv.generate("json/csv_setting.json", "json/data.json", "/Users/cntp/Desktop/json2csv_result2.csv");
+        json2Csv.generate("json/csv_setting.json", "json/data_organ_2.json", "/Users/cntp/Desktop/data_organ_2.csv");
+        json2Csv.generate("json/csv_setting.json", "json/data_organ_3.json", "/Users/cntp/Desktop/data_organ_3.csv");
+//        json2Csv.generate("json/csv_setting.json", "json/a.json", "/Users/cntp/Desktop/json2csv_result2.csv");
+//        json2Csv.generate("json/tpt_setting.json", "json/tpt.json", "/Users/cntp/Desktop/tpt.csv");
     }
 }
